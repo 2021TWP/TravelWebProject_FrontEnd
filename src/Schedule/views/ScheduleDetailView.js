@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ScheduleListView extends Component {
+class ScheduleDetailView extends Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class ScheduleListView extends Component {
   }
 }
 
-export default ScheduleListView;
+export default ScheduleDetailView;
