@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-
+function headerCheck() {
+    axios.defaults.headers = {Authorization: `${localStorage.getItem('Authorization')}`}
+}
 
 class AccountApi {
     URL = '/api/accountInfo/'
@@ -22,6 +24,17 @@ class AccountApi {
                     .catch(error => error.response.data)
     }
 
+    test() {
+        return axios.post(this.URL + 'test/', headerCheck())
+                    .then(response => response.data)
+                    .catch(error => error.response.data)
+    }
+
+    groupCreate(group) {
+        return axios.post(this.URL + 'group/create/', group)
+                    .then(response => response.data)
+                    .catch(error => error.response.data)
+    }
 }
 
 export default new AccountApi();

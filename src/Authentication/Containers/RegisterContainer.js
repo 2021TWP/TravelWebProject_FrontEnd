@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react'
-import RegisterView from '../../Views/AccountViews/RegisterView';
-import AccountStore from '../../Stores/AccountStore';
+import RegisterView from '../Views/RegisterView';
+import AccountStore from '../Stores/AccountStore';
 
 class RegisterContainer extends Component {
     accountStore = AccountStore

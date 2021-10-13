@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import LoginContainer from './Containers/AccountsContainers/LoginContainer';
-import RegisterContainer from './Containers/AccountsContainers/RegisterContainer';
+import GroupContainer from './Authentication/Containers/GroupContainer';
+import LoginContainer from './Authentication/Containers/LoginContainer';
+import RegisterContainer from './Authentication/Containers/RegisterContainer';
+
 
 class App extends Component {
   render() {
     return (
       <div>
-        <header></header>
+        <header>
+        </header>
         <body>
           <RegisterContainer/>
           <br/>
@@ -14,6 +17,11 @@ class App extends Component {
           <br/>
           <br/>
           <LoginContainer/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <GroupContainer/>
         </body>
         <footer></footer>
       </div>

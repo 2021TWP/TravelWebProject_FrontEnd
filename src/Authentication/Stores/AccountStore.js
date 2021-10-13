@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import accountApi from '../api/AccountApi'
 import { runInAction } from 'mobx'
-import CSRFToken from '../utility/csrftoken'
+import CSRFToken from '../../utility/csrftoken'
 
 //Model
 class AccountStore {
@@ -13,6 +13,11 @@ class AccountStore {
         name: "",  
     }
     
+    group = {
+        groupName: "",
+        pin: "",
+    }
+
     error_message = {
         username: null,
         password1: null,
@@ -21,30 +26,24 @@ class AccountStore {
         name: null,
     };
     
+    token_header = {}
 
     csrftoken = CSRFToken
-    message = ""
+    
+
+
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind:true})
     }
-
-    // Action
-    // async handleLoginButton() {
-    //     try {
-    //         await accountApi.loginCheck(this.user);
-    //     }catch(error) {
-    //         console.log(error);
-    //         runInAction(this.message = error.message)
-    //     }
-    // }
 
 
     async handleRegisterSubmit() {
         try {
             const data = await accountApi.userCreate(this.user);
             if ('key' in data){
-                console.log("registered sucessfully")
+                alert("회원가입 완료")
+                await accountApi.logout();
             }else {
                 runInAction(()=>this.error_message = {...this.error_message, ...data})
             }
@@ -60,9 +59,10 @@ class AccountStore {
         try{
             const data = await accountApi.login(this.user);
             if ('key' in data){
-                console.log("registered sucessfully")
+                localStorage.setItem(`Authorization`, `Token ${data.key}`)
+                runInAction(() => this.token_header = {'Authorization': `Token ${data.key}`})
             }else {
-                runInAction(()=>this.error_message = {...this.error_message, ...data})
+                runInAction(() => this.error_message = {...this.error_message, ...data})
             }
         }catch(error) {
             runInAction(() => this.message = error.message)
@@ -73,10 +73,28 @@ class AccountStore {
     async handleLogoutSubmit() {
         try {
             await accountApi.logout();
+            localStorage.removeItem('Authorization')
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
     }
+
+    async testAccount() {
+        try {
+            await accountApi.test();
+        }catch(error) {
+            runInAction(() => this.message = error.message)
+        }
+    }
+
+    async createGroup() {
+        try {
+            await accountApi.groupCreate(this.group);
+        }catch(error) {
+            runInAction(() => this.message = error.message)
+        }
+    }
+
 
 
     async onClickEvent(name) {
@@ -85,8 +103,13 @@ class AccountStore {
     }
 
     async setProps(name, value) {
-        this.user = {...this.user, [name]: value};
-        console.log(name, value)
+        if (name === 'groupName' || name === 'pin') {
+            runInAction(() => this.group = {...this.group, [name]: value});
+        } else {
+            runInAction(() => this.user = {...this.user, [name]: value});
+            console.log(name, value)
+        }
+        
     }
 
 

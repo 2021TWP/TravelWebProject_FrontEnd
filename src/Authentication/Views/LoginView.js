@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class LoginView extends Component {
     render() {
-        const { user, setProps, handleLoginSubmit, message, onClickEvent, handleLogoutSubmit  } = this.props
+        const { user, setProps, handleLoginSubmit, message, onClickEvent, handleLogoutSubmit, test  } = this.props
         return (
             <div>
                 <input type="text" name="username" placeholder="아이디" value={user.username} onChange={(e)=>setProps(e.target.name, e.target.value)}/>
@@ -12,6 +12,7 @@ export default class LoginView extends Component {
                 <button onClick={()=>handleLoginSubmit()}>로그인</button>
                 <button>회원 가입</button>
                 <a onClick={()=>handleLogoutSubmit()}>로그아웃</a>
+                <button onClick={()=>{test()}}>테스트</button>
             </div>
         )
     }
