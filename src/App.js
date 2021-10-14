@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import GroupContainer from './Authentication/Containers/GroupContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer';
 import RegisterContainer from './Authentication/Containers/RegisterContainer';
+import BoardInputContainer from './Board/Containers/BoardInputContainer';
 
 
 class App extends Component {
@@ -22,6 +23,11 @@ class App extends Component {
           <br/>
           <br/>
           <GroupContainer/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <BoardInputContainer />
         </body>
         <footer></footer>
       </div>
