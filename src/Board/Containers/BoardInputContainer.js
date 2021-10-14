@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {observer} from 'mobx-react'
 import boardStore from '../Stores/BoardStore';
 import BoardInputView from '../Views/BoardInputView';
 
@@ -6,7 +7,7 @@ class BoardInputContainer extends Component {
 
     render() {
         const {board, boardAdd, boardRemove, boardModify, boardSetProps} = boardStore;
-        
+
         return (
             <div>
                 <BoardInputView 
@@ -20,4 +21,4 @@ class BoardInputContainer extends Component {
     }
 }
 
-export default BoardInputContainer;
+export default observer(BoardInputContainer);

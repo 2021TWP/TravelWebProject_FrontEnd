@@ -73,4 +73,4 @@ class BoardStore {
 
 }
 
-export default BoardStore;
+export default new BoardStore();
