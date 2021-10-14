@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import GroupContainer from './Authentication/Containers/GroupContainer';
+import LoginContainer from './Authentication/Containers/LoginContainer';
+import RegisterContainer from './Authentication/Containers/RegisterContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <header>
+        </header>
+        <body>
+          <RegisterContainer/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <LoginContainer/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <GroupContainer/>
+        </body>
+        <footer></footer>
+      </div>
+    )
+  }
 }
-
 export default App;
