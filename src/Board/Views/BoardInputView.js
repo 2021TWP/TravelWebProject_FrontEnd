@@ -5,12 +5,12 @@ class BoardInputView extends Component {
         const {board, boardAdd, boardChange} = this.props;
         return (
             <div>
-                <select>
-                    <option value={board.category_id}></option>
-                    <option value={board.category_id}></option>
-                    <option value={board.category_id}></option>
+                <select onChange={(e)=>boardChange(e.target.name, e.target.value)}>
+                    <option name="category_id" value="1">자유 게시판</option>
+                    <option name="category_id" value="2">여행 일지</option>
+                    <option name="category_id" value="3">번개 모임</option>
                 </select>
-                
+
                 <input
                     type="text" 
                     name="title"
