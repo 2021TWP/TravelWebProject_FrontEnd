@@ -6,7 +6,6 @@ class BoardDetailView extends Component {
 
         return (
             <div>
-                <br/> <br/>
                 {board.category_id} &nbsp;&nbsp;
                 {board.title} &nbsp;&nbsp;
                 {board.schedule_id} &nbsp;&nbsp;

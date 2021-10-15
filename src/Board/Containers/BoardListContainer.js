@@ -19,6 +19,7 @@ class BoardListContainer extends Component {
         });
         return (
             <div>
+                <h3>게시글 목록</h3>
                 {boardList}
             </div>
         );

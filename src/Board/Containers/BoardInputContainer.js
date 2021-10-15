@@ -10,6 +10,7 @@ class BoardInputContainer extends Component {
 
         return (
             <div>
+                <h3>게시글 입력</h3>
                 <BoardInputView 
                 board={board}
                 boardAdd={boardAdd}

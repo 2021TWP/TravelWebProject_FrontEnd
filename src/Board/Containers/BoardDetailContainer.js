@@ -10,6 +10,7 @@ class BoardDetailContainer extends Component {
         const {board, boardRemove} = this.boardStore;
         return (
             <div>
+                <h3>게시글 상세</h3>
                 <BoardDetailView 
                 board={board}
                 boardRemove={boardRemove} />

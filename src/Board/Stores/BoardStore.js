@@ -2,8 +2,7 @@ import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
 class BoardStore {
-    board = {id:"", user_id:"", schedule_id:"", category_id:"", 
-            title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""};
+    board = {};
     boards = [];
 
     constructor(){
