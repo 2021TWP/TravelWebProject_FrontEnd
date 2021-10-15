@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange} = this.props;
+        const {board, boardAdd, boardChange, boardModify} = this.props;
         return (
             <div>
                 <select onChange={(e)=>boardChange(e.target.name, e.target.value)}>
@@ -33,6 +33,7 @@ class BoardInputView extends Component {
                     placeholder="사진"/><br/>
 
                 <button onClick={()=>boardAdd()}>ADD</button>
+                <button onClick={()=>boardModify()}>MODIFY</button>
             </div>
         );
     }

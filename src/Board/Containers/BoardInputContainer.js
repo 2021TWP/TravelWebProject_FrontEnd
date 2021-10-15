@@ -6,13 +6,14 @@ import BoardInputView from '../Views/BoardInputView';
 class BoardInputContainer extends Component {
 
     render() {
-        const {board, boardAdd, boardSetProps} = boardStore;
+        const {board, boardAdd, boardModify, boardSetProps} = boardStore;
 
         return (
             <div>
                 <BoardInputView 
                 board={board}
                 boardAdd={boardAdd}
+                boardModify={boardModify}
                 boardChange={boardSetProps}/>
             </div>
         );

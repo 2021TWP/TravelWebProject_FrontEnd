@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class BoardDetailView extends Component {
     render() {
-        const {board, boardModify, boardRemove} = this.props;
+        const {board, boardRemove} = this.props;
 
         return (
             <div>
@@ -17,7 +17,7 @@ class BoardDetailView extends Component {
                 {board.hit} &nbsp;&nbsp;
                 {board.like} &nbsp;&nbsp;
 
-                <button onClick={()=>boardModify()}>MODIFY</button>
+                <button>MODIFY</button>
                 <button onClick={()=>boardRemove()}>REMOVE</button> 
             </div>
         );
