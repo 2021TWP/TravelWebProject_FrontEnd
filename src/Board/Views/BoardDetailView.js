@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 
 class BoardDetailView extends Component {
     render() {
-        const {board} = this.props;
+        const {board, boardModify, boardRemove} = this.props;
 
         return (
             <div>
-                {board.category_id}
-                {board.title}
-                {board.schedule_id}
-                {board.imgUrl}
-                {board.user_id}
-                {board.date} 
-                {board.board_content}
-                {board.hit}
-                {board.like}
+                <br/> <br/>
+                {board.category_id} &nbsp;&nbsp;
+                {board.title} &nbsp;&nbsp;
+                {board.schedule_id} &nbsp;&nbsp;
+                {board.imgUrl} &nbsp;&nbsp;
+                {board.user_id} &nbsp;&nbsp;
+                {board.date} &nbsp;&nbsp;
+                {board.board_content} &nbsp;&nbsp;
+                {board.hit} &nbsp;&nbsp;
+                {board.like} &nbsp;&nbsp;
+
+                <button onClick={()=>boardModify()}>MODIFY</button>
+                <button onClick={()=>boardRemove()}>REMOVE</button> 
             </div>
         );
     }

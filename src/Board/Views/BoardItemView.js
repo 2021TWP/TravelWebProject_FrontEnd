@@ -4,12 +4,14 @@ class BoardItemView extends Component {
     render() {
         const {board, onSelect} = this.props;
         return (
-            <div onClick={()=>onSelect(board)}>
-                {board.title}
-                {board.user_id}
-                {board.date}
-                {board.hit}
+            <div>
+                <div onClick={()=>onSelect(board)}>
+                {board.title} &nbsp; &nbsp;
+                {board.user_id} &nbsp; &nbsp;
+                {board.date} &nbsp; &nbsp;
+                {board.hit} &nbsp; &nbsp;
                 {board.like}
+                </div>
             </div>
         );
     }

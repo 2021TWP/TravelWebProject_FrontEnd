@@ -7,10 +7,13 @@ import CommentListView from '../Views/CommentListView';
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;
     render() {
-        const {board} = this.boardStore;
+        const {board, boardModify, boardRemove} = this.boardStore;
         return (
             <div>
-                <BoardDetailView board={board} />
+                <BoardDetailView 
+                board={board}
+                boardModify={boardModify}
+                boardRemove={boardRemove} />
                 <CommentListView />
             </div>
         );

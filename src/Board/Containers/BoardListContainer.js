@@ -14,7 +14,7 @@ class BoardListContainer extends Component {
         const {boards, selectBoard} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <BoardItemView key={board.id} book={board} onSelect={selectBoard}/>
+                <BoardItemView key={board.id} board={board} onSelect={selectBoard}/>
             )
         });
         return (
