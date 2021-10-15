@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange, boardModify} = this.props;
+        const {board, boardAdd, boardChange, boardModify , init} = this.props;
         return (
             <div>
                 <select onChange={(e)=>boardChange(e.target.name, e.target.value)}>
-                    <option name="category_id" value="1">자유 게시판</option>
-                    <option name="category_id" value="2">여행 일지</option>
-                    <option name="category_id" value="3">번개 모임</option>
+                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>자유 게시판</option>
+                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>여행 일지</option>
+                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>번개 모임</option>
                 </select>
 
                 <input
@@ -34,6 +34,7 @@ class BoardInputView extends Component {
 
                 <button onClick={()=>boardAdd()}>ADD</button>
                 <button onClick={()=>boardModify()}>MODIFY</button>
+                <button onClick={()=>init()}>초기화</button>
             </div>
         );
     }

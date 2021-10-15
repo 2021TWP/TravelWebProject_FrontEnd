@@ -2,9 +2,19 @@ import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
 class BoardStore {
-    board = {};
-    boards = [];
+    board = {id:"",
+            user_id:"", 
+            schedule_id:"", 
+            category_id:"", 
+            title:"", 
+            imgUrl:"", 
+            date:"",
+            board_content:"", 
+            hit:"", 
+            like:""};
 
+    boards = [];
+    board_date = ""
     constructor(){
         makeAutoObservable(this, {}, {autoBind:true})
     }
@@ -39,7 +49,7 @@ class BoardStore {
 
     async boardAdd() {
         try{
-            await boardApi.bookCreate(this.board);
+            await boardApi.boardCreate(this.board);
             this.selectAll();
         }catch(error){
             console.log(error);
