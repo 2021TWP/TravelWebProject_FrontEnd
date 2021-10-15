@@ -21,7 +21,8 @@ class BoardApi{
             schedule_id: `${board.schedule_id}`,
             imgUrl: `${board.imgUrl}`,
             title:`${board.title}`,
-            date: `${board.date}`,
+            // date: `${board.date}`,
+            date : Date.now(),
             board_content: `${board.board_content}`,
             hit: `${board.hit}`,
             like: `${board.like}`

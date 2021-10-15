@@ -14,11 +14,12 @@ class BoardListContainer extends Component {
         const {boards, selectBoard} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <BoardItemView key={board.id} book={board} onSelect={selectBoard}/>
+                <BoardItemView key={board.id} board={board} onSelect={selectBoard}/>
             )
         });
         return (
             <div>
+                <h3>게시글 목록</h3>
                 {boardList}
             </div>
         );
