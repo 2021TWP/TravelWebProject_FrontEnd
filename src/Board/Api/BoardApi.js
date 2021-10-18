@@ -38,7 +38,7 @@ class BoardApi{
             schedule_id: `${board.schedule_id}`,
             imgUrl: `${board.imgUrl}`,
             title:`${board.title}`,
-            date: `${board.date}`,
+            date : Date.now(),
             board_content: `${board.board_content}`,
             hit: `${board.hit}`,
             like: `${board.like}`
@@ -62,7 +62,8 @@ class BoardApi{
             board_id: `${comment.board_id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
-            comment_date: `${comment.comment_date}`
+            // comment_date: `${comment.comment_date}`
+            comment_date: Date.now(),
         })
                 .then((response)=>response.data);
     }
