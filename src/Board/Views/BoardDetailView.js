@@ -3,7 +3,7 @@ import moment from 'moment';
 
 class BoardDetailView extends Component {
     render() {
-        const {board, boardRemove, boardLike} = this.props;
+        const {board, boardRemove} = this.props;
         let board_date = this.props.board.date;
         let category_id = this.props.board.category_id
         return (
@@ -23,7 +23,8 @@ class BoardDetailView extends Component {
                 {board.board_content} &nbsp;&nbsp;
                 조회수 {board.hit} &nbsp;&nbsp;
 
-                <button onClick={()=>boardLike()}>좋아요 {board.like} </button>  &nbsp;&nbsp;
+                <button>좋아요 {board.like} </button>  &nbsp;&nbsp;
+                {/* onClick={()=>boardLike()} */}
 
                 <button>MODIFY</button>
                 <button onClick={()=>boardRemove()}>REMOVE</button> 

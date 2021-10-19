@@ -31,12 +31,13 @@ class BoardStore {
     //action
     async selectBoard(board){
         try{
-            // this.boardHit();
             const result = await boardApi.boardDetail(board.id);
             runInAction(()=>this.board = result);
         }catch(error){
             console.log(error);
         }
+
+        // this.boardHit();
     }
 
     async selectAll(){
@@ -48,23 +49,23 @@ class BoardStore {
         }
     }
 
-    // async boardHit(){
-    //     try{
-    //         const result = await boardApi.boardHit();
-    //         runInAction(()=>this.board = result);
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
+    async boardHit(){
+        try{
+            const result = await boardApi.boardHit(this.board.id);
+            runInAction(()=>this.board = result);
+        }catch(error){
+            console.log(error);
+        }
+    }
 
-    // async boardLike(){
-    //     try{
-    //         const result = await boardApi.boardLike();
-    //         runInAction(()=>this.board = result);
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
+    async boardLike(){
+        try{
+            const result = await boardApi.boardLike(this.board.id);
+            runInAction(()=>this.board = result);
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     async boardAdd() {
         try{

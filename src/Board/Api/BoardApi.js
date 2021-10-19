@@ -46,15 +46,15 @@ class BoardApi{
                 .then((response)=>response.data)
     }
 
-    // boardHit(id){
-    //     return axios.put()
-    //             .then((response)=>response.data)
-    // }
+    boardHit(id){
+        return axios.put(this.URL+`update/hit/${id}/`)
+                .then((response)=>response.data)
+    }
 
-    // boardLike(id){
-    //     return axios.put()
-    //             .then((response)=>response.data)
-    // }
+    boardLike(id){
+        return axios.put(this.URL+`update/like/${id}/`)
+                .then((response)=>response.data)
+    }
 
     commentList(){
         return axios.get(this.URL+'comment/')
