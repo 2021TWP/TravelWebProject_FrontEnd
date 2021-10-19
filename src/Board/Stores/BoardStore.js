@@ -17,7 +17,8 @@ class BoardStore {
     board_date = ""
 
 
-    comment = {board_id : "",
+    comment = {id: "",
+               board_id : "",
                user_id : "",
                comment_content : "",
                comment_date : ""};
@@ -42,6 +43,7 @@ class BoardStore {
         try{
             const result = await boardApi.boardDetail(board.id);
             runInAction(()=>this.board = result);
+            this.selectBoardComment()
         }catch(error){
             console.log(error);
         }
@@ -109,7 +111,7 @@ class BoardStore {
 
 async selectComment(comment){
     try{
-        const result = await boardApi.commentList(comment.id);   // boardDetail 맞는지 확인 
+        const result = await boardApi.commentDetail(comment.id);   //
         runInAction(()=>this.comment = result);
     }catch(error){
         console.log(error);
@@ -120,7 +122,7 @@ async selectComment(comment){
 async commentAdd() {
     try{
         await boardApi.commentCreate(this.comment);
-        this.selectAll();
+        this.selectBoardComment();
     }catch(error){
         console.log(error);
         runInAction(this.message = error.message);
@@ -132,7 +134,8 @@ async commentAdd() {
 async commentRemove() {
     try{
         await boardApi.commentDelete(this.comment.id);
-        this.selectAll();
+        this.selectBoardComment();
+   
     }catch(error){
         this.message = error.message;
     }
@@ -143,7 +146,7 @@ async commentRemove() {
 async commentModify() {
     try{
         await boardApi.commentUpdate(this.comment.id, this.comment);
-        this.selectAll();
+        this.selectBoardComment();
     }catch(error){
         this.message = error.message;
     }
@@ -152,7 +155,8 @@ async commentModify() {
 }
 
 comment_init = () => {
-    this.comment = {board_id : "",
+    this.comment = {id : "",
+                    board_id : "",
                     user_id : "",
                     comment_content : "",
                     comment_date : ""} 
@@ -167,6 +171,16 @@ async selectCommentAll(){
     }
 }
 
+async selectBoardComment(){
+    try{
+        console.log(this.board.id);
+        const results = await boardApi.commentList(this.board.id);
+        console.log(results);
+        runInAction(()=>this.comments = results);
+    }catch(error){
+        console.log(error);
+    }
+}
 
 }
 

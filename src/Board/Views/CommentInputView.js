@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
+import BoardStore from '../Stores/BoardStore';
 
 class CommentInputView extends Component {
   render() {
-    const {comment, commentAdd, commentModify, commentChange, commentRemove, init} = this.props;
+    const {board} = BoardStore
+    const {comment, commentAdd, commentModify, commentChange, init} = this.props;
     return (
       <div>
                 <input
@@ -16,7 +18,7 @@ class CommentInputView extends Component {
 
                 <button onClick={()=>commentAdd()}>ADD</button>
                 <button onClick={()=>commentModify()}>MODIFY</button>
-                <button onClick={()=>commentRemove()}>REMOVE</button> 
+                {/* <button onClick={()=>commentRemove()}>REMOVE</button>  */}
                 <button onClick={()=>init()}>초기화</button>
       </div>
     );

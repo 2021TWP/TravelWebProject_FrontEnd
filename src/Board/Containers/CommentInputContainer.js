@@ -8,7 +8,7 @@ class CommentInputContainer extends Component {
     const {comment, commentAdd, commentModify, commentSetProps, comment_init , commentRemove } = BoardStore;
     return (
       <div>
-          <h3>댓글 입력</h3>
+          <h5>댓글 입력</h5>
           <CommentInputView comment= {comment} 
                             commentAdd={commentAdd} 
                             commentModify={commentModify} 

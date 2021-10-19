@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
 import BoardItemView from '../Views/BoardItemView';
+import BoardDetailContainer from './BoardDetailContainer';
 
 class BoardListContainer extends Component {
     boardStore = BoardStore;
@@ -19,8 +20,13 @@ class BoardListContainer extends Component {
         });
         return (
             <div>
+            <div>
                 <h3>게시글 목록</h3>
                 {boardList}
+            </div>
+            <div>
+                {(this.boardStore.board.id !== undefined && this.boardStore.board.id > 0) && <BoardDetailContainer/>}
+            </div>
             </div>
         );
     }

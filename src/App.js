@@ -27,8 +27,6 @@ class App extends Component {
 
       <BoardListContainer />
 
-      <BoardDetailContainer />
-
     </div>
   
   // <Router>
