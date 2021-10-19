@@ -12,7 +12,7 @@ class BoardStore {
             board_content:"", 
             hit:0, 
             like:0};
-    
+
     boards = [];
     board_date = ""
 
@@ -25,9 +25,14 @@ class BoardStore {
 
     comments = []
 
+    checked = {id : "" , checked :  "false"}
+
     constructor(){
         makeAutoObservable(this, {}, {autoBind:true})
     }
+
+    // onCheckToggle = (id) => {this.boards.map(board =>(board.id === id) ? {...board, checked : !this.checked } : board ) }
+     onCheckToggle = (id) => {this.checked = "false" ? !this.checked : this.checked}
 
     init = () => {
         this.board = {id:"", user_id:"", schedule_id:"", category_id:"", 

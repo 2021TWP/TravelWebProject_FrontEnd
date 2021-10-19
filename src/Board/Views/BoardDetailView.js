@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import BoardStore from '../Stores/BoardStore';
+import {BsHandThumbsUp , BsHandThumbsUpFill} from 'react-icons/bs'
 
 class BoardDetailView extends Component {
     render() {
-        const {board, boardRemove, boardModify} = this.props;
+        const {board, boardRemove, boardModify } = this.props;
+        const {onCheckToggle , checked} = BoardStore
         let board_date = this.props.board.date;
         let category_id = this.props.board.category_id
         return (
@@ -24,7 +27,7 @@ class BoardDetailView extends Component {
                 {moment(board_date).format(('YYYY년 MM월 DD일'))} &nbsp;&nbsp;
                 {board.board_content} &nbsp;&nbsp;
                 {board.hit} &nbsp;&nbsp;
-                {board.like} &nbsp;&nbsp;
+                {checked === "false" ? board.like : board.like  + Number(checked==="false")} &nbsp;&nbsp; <span>{ checked ? <BsHandThumbsUp onClick={()=>{onCheckToggle()}}/> : <BsHandThumbsUpFill onClick={()=>{onCheckToggle()}}/> }</span>
 
                 <button onClick={()=>boardModify()}>MODIFY</button>
                 <button onClick={()=>boardRemove()}>REMOVE</button> 

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import BoardStore from '../Stores/BoardStore';
 
 class BoardItemView extends Component {
     render() {
         const {board, onSelect} = this.props; 
+
         let board_date = this.props.board.date;
         return (
             <div>

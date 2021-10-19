@@ -12,10 +12,10 @@ class BoardListContainer extends Component {
     }
 
     render() {
-        const {boards, selectBoard} = this.boardStore;
+        const {boards, selectBoard , checked} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <BoardItemView key={board.id} board={board} onSelect={selectBoard}/>
+                <BoardItemView key={board.id} board={board} checked= {checked} checked_id = {checked.id} onSelect={selectBoard}/>
             )
         });
         return (
