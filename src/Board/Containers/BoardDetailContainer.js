@@ -13,7 +13,8 @@ class BoardDetailContainer extends Component {
                 <h3>게시글 상세</h3>
                 <BoardDetailView 
                 board={board}
-                boardRemove={boardRemove} />
+                boardRemove={boardRemove}
+                 />
                 <CommentListView />
             </div>
         );

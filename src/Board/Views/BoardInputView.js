@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange, boardModify , init} = this.props;
+        const {board, boardAdd, boardChange, boardModify, init} = this.props;
+        board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19); 
+        board.user_id = 1
         return (
             <div>
-                <select onChange={(e)=>boardChange(e.target.name, e.target.value)}>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>자유 게시판</option>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>여행 일지</option>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>번개 모임</option>
+                <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>
+                    <option value="1">자유 게시판</option>
+                    <option value="2">여행 일지</option>
+                    <option value="3">번개 모임</option>
                 </select>
 
                 <input
@@ -31,6 +33,7 @@ class BoardInputView extends Component {
                     value={board.imgUrl} 
                     onChange={(e)=>boardChange(e.target.name, e.target.value)}
                     placeholder="사진"/><br/>
+                
 
                 <button onClick={()=>boardAdd()}>ADD</button>
                 <button onClick={()=>boardModify()}>MODIFY</button>

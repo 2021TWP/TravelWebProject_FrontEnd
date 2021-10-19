@@ -21,11 +21,8 @@ class BoardApi{
             schedule_id: `${board.schedule_id}`,
             imgUrl: `${board.imgUrl}`,
             title:`${board.title}`,
-            // date: `${board.date}`,
-            date : Date.now(),
-            board_content: `${board.board_content}`,
-            hit: `${board.hit}`,
-            like: `${board.like}`
+            date: `${board.date}`,
+            board_content: `${board.board_content}`
         })
                 .then((response)=>response.data);
     }
@@ -39,9 +36,7 @@ class BoardApi{
             imgUrl: `${board.imgUrl}`,
             title:`${board.title}`,
             date: `${board.date}`,
-            board_content: `${board.board_content}`,
-            hit: `${board.hit}`,
-            like: `${board.like}`
+            board_content: `${board.board_content}`
         })
                 .then((response)=>response.data);
     }
@@ -50,6 +45,16 @@ class BoardApi{
         return axios.delete(this.URL+`delete/${id}/`)
                 .then((response)=>response.data)
     }
+
+    // boardHit(id){
+    //     return axios.put()
+    //             .then((response)=>response.data)
+    // }
+
+    // boardLike(id){
+    //     return axios.put()
+    //             .then((response)=>response.data)
+    // }
 
     commentList(){
         return axios.get(this.URL+'comment/')
