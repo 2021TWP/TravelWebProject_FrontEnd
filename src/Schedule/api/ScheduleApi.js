@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class ScheduleApi{
-  URL ='/api/schedule/';
+  URL ='/api/travel/';
 
   scheduleList(){
     return axios.get(this.URL)
@@ -15,6 +15,7 @@ class ScheduleApi{
 
   scheduleCreate(scheduleInfo){
     const schedule ={...scheduleInfo};
+    //josn api stream 변환하는거...
     return axios.post(this.URL + 'create/',schedule)
                 .then((response)=>response.data);
   }
@@ -28,20 +29,32 @@ class ScheduleApi{
     return axios.put(this.URL + `update/${id}/`,modInfo);
   }
 
+  contentDetail(id){
+    
+    return axios.get(this.URL+`content/detail/${id}/`)
+                .then((response)=>response.data)
+  }
+
   contentCreate(contentInfo){
     const content = {...contentInfo};
-    return axios.post(this.URL+'create/',content)
+    return axios.post(this.URL+'content/create/',content)
                 .then((response)=>response.data);
   }
 
   contentUpdate(contentInfo,id){
     const modInfo ={...contentInfo};
-    return axios.put(this.URL+`update/${id}/`,modInfo);
+    return axios.put(this.URL+`content/update/${id}/`,modInfo);
   }
 
   contentDelete(id){
-    return axios.delete(this.URL+`delete/${id}/`)
+    return axios.delete(this.URL+`content/delete/${id}/`)
                 .then((response)=>response.data);
+  }
+
+  contentList(s_id){
+    // return axios.get(this.URL+`content/${s_id}`)
+    return axios.get(this.URL+`content/${s_id}/`)
+                .then((response) => response.data);
   }
 
 
