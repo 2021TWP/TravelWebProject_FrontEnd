@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 class BoardInputView extends Component {
     render() {
         const {board, boardAdd, boardChange, boardModify, init} = this.props;
-        board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19); 
-        board.user_id = 1
         return (
             <div>
                 <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>

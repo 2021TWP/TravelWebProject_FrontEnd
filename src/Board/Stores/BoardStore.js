@@ -33,11 +33,12 @@ class BoardStore {
         try{
             const result = await boardApi.boardDetail(board.id);
             runInAction(()=>this.board = result);
+            this.boardHit();
+
         }catch(error){
             console.log(error);
         }
 
-        // this.boardHit();
     }
 
     async selectAll(){
@@ -51,24 +52,30 @@ class BoardStore {
 
     async boardHit(){
         try{
-            const result = await boardApi.boardHit(this.board.id);
+            runInAction(()=>this.board.hit += 1)
+            const result = await boardApi.boardHit(this.board);
             runInAction(()=>this.board = result);
+            console.log(this.board.id)
+            this.selectAll();
         }catch(error){
             console.log(error);
         }
     }
 
-    async boardLike(){
-        try{
-            const result = await boardApi.boardLike(this.board.id);
-            runInAction(()=>this.board = result);
-        }catch(error){
-            console.log(error);
-        }
-    }
+    // async boardLike(){
+    //     try{
+    //         // runInAction(()=>this.board.like += 1)
+    //         const result = await boardApi.boardLike(this.board);
+    //         runInAction(()=>this.board = result);
+    //         // this.selectAll();
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
 
     async boardAdd() {
         try{
+            this.board.date = new Date()
             await boardApi.boardCreate(this.board);
             this.selectAll();
             console.log(this.board);
@@ -93,6 +100,8 @@ class BoardStore {
   
     async boardModify() {
         try{
+            console.log(this.board.id)
+            this.board.date = new Date()
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
         }catch(error){

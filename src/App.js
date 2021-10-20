@@ -11,7 +11,7 @@ import BoardInputContainer from './Board/Containers/BoardInputContainer';
 
 import BoardListContainer from './Board/Containers/BoardListContainer';
 import BoardDetailContainer from './Board/Containers/BoardDetailContainer';
-
+import LoginContainer from './Authentication/Containers/LoginContainer'
 //----------------------------------
 
 
@@ -20,6 +20,7 @@ class App extends Component {
     return (
       <div>
   {/* <MyPageListContainer/>  */}
+      <LoginContainer/>
 
       <BoardInputContainer />
 

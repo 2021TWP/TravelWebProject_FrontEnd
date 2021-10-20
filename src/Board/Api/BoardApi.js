@@ -9,12 +9,12 @@ class BoardApi{
     }
 
     boardDetail(id){
-        return axios.get(this.URL+`${id}`)
+        return axios.get(this.URL+`${id}/`)
                 .then((response)=>response.data);
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/',
+        return axios.post(this.URL+'create/', 
         {
             user_id: `${board.user_id}`,
             category_id: `${board.category_id}`,
@@ -28,16 +28,7 @@ class BoardApi{
     }
 
     boardUpdate(id, board){
-        return axios.put(this.URL+`update/${id}/`, 
-        {
-            user_id: `${board.user_id}`,
-            category_id: `${board.category_id}`,
-            schedule_id: `${board.schedule_id}`,
-            imgUrl: `${board.imgUrl}`,
-            title:`${board.title}`,
-            date: `${board.date}`,
-            board_content: `${board.board_content}`
-        })
+        return axios.put(this.URL+`update/${id}/`, board)
                 .then((response)=>response.data);
     }
 
@@ -46,15 +37,15 @@ class BoardApi{
                 .then((response)=>response.data)
     }
 
-    boardHit(id){
-        return axios.put(this.URL+`update/hit/${id}/`)
+    boardHit(board){
+        return axios.put(this.URL+`update/hit/${board.id}/`, board)
                 .then((response)=>response.data)
     }
 
-    boardLike(id){
-        return axios.put(this.URL+`update/like/${id}/`)
-                .then((response)=>response.data)
-    }
+    // boardLike(board){
+    //     return axios.put(this.URL+`update/like/${board.id}/`, board)
+    //             .then((response)=>response.data)
+    // }
 
     commentList(){
         return axios.get(this.URL+'comment/')
