@@ -9,7 +9,7 @@ class CommentListView extends Component {
             <div>
                 <div onClick={()=>onSelect(comment)}>
                     {comment.comment_content} &nbsp; &nbsp;
-                    {moment(comment_date).format(('YYYY년 MM월 DD일'))} &nbsp; &nbsp;
+                    {moment(comment_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;
                     {comment.user_id}
                 {/* {board.id === comment.board_id ? comment.comment_content : ""} &nbsp; &nbsp;
                 {board.id === comment.board_id ? moment(comment_date).format(('YYYY년 MM월 DD일')) : ""} &nbsp; &nbsp;
