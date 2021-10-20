@@ -15,12 +15,16 @@ import { withRouter } from 'react-router-dom';
 import BoardListContainer from './Board/Containers/BoardListContainer';
 import BoardDetailContainer from './Board/Containers/BoardDetailContainer';
 import home from './layout/home';
-
+import BoardItemView from './Board/Views/BoardItemView';
+import BoardDetailPage from './Board/Views/BoardDetailPage';
+import SeperateBoardList from './Board/Views/SeperateBoardList';
 //---------------------------------
   
 
   class App extends Component {
+
     render() {
+    
       return (
 
 //         <div>
@@ -33,18 +37,12 @@ import home from './layout/home';
   <Router>
     <Switch>
       <Route exact path="/" component={home}/>
+      <Route exact path="/board/list/" component={BoardListContainer}/>
+      <Route exact path="/board/create/" component={BoardInputContainer}/>
+      <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
+
     </Switch>
   </Router>
-        // <Router>
-          
-        //  {/* <Link to='/schedules/'>  */}
-        //     <Switch>
-        //       <Route exact path="/schedules" component={ScheduleMainPage}/>
-        //       <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
-        //       <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-        //     </Switch>
-          
-        // </Router>
       )
     }
   }

@@ -5,10 +5,10 @@ class BoardInputView extends Component {
         const {board, boardAdd, boardChange, boardModify , init} = this.props;
         return (
             <div>
-                <select onChange={(e)=>boardChange(e.target.name, e.target.value)}>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>자유 게시판</option>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>여행 일지</option>
-                    <option name="category_id" value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>번개 모임</option>
+                <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>
+                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>자유 게시판</option>
+                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>여행 일지</option>
+                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>번개 모임</option>
                 </select>
 
                 <input
