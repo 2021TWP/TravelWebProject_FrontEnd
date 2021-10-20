@@ -64,6 +64,7 @@ class AccountStore {
                 sessionStorage.setItem('name', `${userData.name}`)
                 sessionStorage.setItem('id', `${userData.id}`)
                 sessionStorage.setItem('email', `${userData.email}`)
+                sessionStorage.setItem('username', `${userData.username}`)
                 window.location.href='/'
             }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
