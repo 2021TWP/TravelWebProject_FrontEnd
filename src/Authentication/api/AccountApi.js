@@ -5,7 +5,7 @@ function headerCheck() {
 }
 
 class AccountApi {
-    URL = '/api/accountInfo/'
+    URL = '/api/authentication/'
     userCreate(user) {
         return axios.post(this.URL + 'signup/', user)
                     .then((response)=>response.data)
