@@ -38,7 +38,6 @@ class App extends Component {
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-          <Route exact path="/" component={home}/>
           <Route exact path="/board/list/" component={BoardListContainer}/>
           <Route exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
