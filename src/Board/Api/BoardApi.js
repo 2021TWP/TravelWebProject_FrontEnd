@@ -53,7 +53,7 @@ class BoardApi{
 
     commentCreate(comment){
         return axios.post(this.URL+'comment/create/',
-        {   id : `${comment.id}`,
+        {   
             board_id: `${comment.board_id}`,
             id : `${comment.id}`,
             user_id: `${comment.user_id}`,
