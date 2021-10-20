@@ -66,22 +66,26 @@ class BoardApi{
         return axios.post(this.URL+'comment/create/',
         {
             board_id: `${comment.board_id}`,
+            id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
             // comment_date: `${comment.comment_date}`
-            comment_date: Date.now(),
+            comment_date: new Date(),
         })
                 .then((response)=>response.data);
     }
 
     commentUpdate(id, comment){
-        return axios.put(this.URL+`update/${id}/`, 
+        console.log(comment.board_id, comment.comment_content)
+        return axios.put(this.URL+`comment/update/${id}/`, 
         {
             board_id: `${comment.board_id}`,
+            id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
             // comment_date: `${comment.comment_date}`
-            comment_date: Date.now(),
+            // comment_date: Date.now(),
+            comment_date: new Date(),
         })
                 .then((response)=>response.data);
     }

@@ -178,9 +178,9 @@ async selectCommentAll(){
 
 async selectBoardComment(){
     try{
-        console.log(this.board.id);
+        // console.log(this.board.id);
         const results = await boardApi.commentList(this.board.id);
-        console.log(results);
+        // console.log(results);
         runInAction(()=>this.comments = results);
     }catch(error){
         console.log(error);
