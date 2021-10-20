@@ -7,10 +7,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './Header2';
 
 import Footer from './Footer';
+import BoardInputView from '../Board/Views/BoardInputView';
 
 const sections = [
   { title: '여행일정', url: '#' },
-  { title: '게시판', url: '#' },
+  { title: '게시판', url: '/board/list/' },
   { title: '마이페이지', url: '#' },
 
 ];
