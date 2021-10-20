@@ -29,9 +29,9 @@ class ScheduleApi{
     return axios.put(this.URL + `update/${id}/`,modInfo);
   }
 
-  contentDetail(contentInfo,id){
-    const content = {...contentInfo};
-    return axios.get(this.URL+`content/${id}/`)
+  contentDetail(id){
+    
+    return axios.get(this.URL+`content/detail/${id}/`)
                 .then((response)=>response.data)
   }
 
@@ -51,9 +51,9 @@ class ScheduleApi{
                 .then((response)=>response.data);
   }
 
-  contentList(){
+  contentList(s_id){
     // return axios.get(this.URL+`content/${s_id}`)
-    return axios.get(this.URL+'content/')
+    return axios.get(this.URL+`content/${s_id}/`)
                 .then((response) => response.data);
   }
 

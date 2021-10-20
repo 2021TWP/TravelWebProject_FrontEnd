@@ -21,11 +21,11 @@ class ScheduleUpdateView extends Component {
   scheduleStore = ScheduleStore;
   componentDidMount(){
     this.scheduleStore.selectSchedule(this.props.match.params.id);//라우터에서 포함을 하고 있기 때문에(상위 컴포넌트가 router이기 떄문에.)
-    this.scheduleStore.selectAll_content();
+    this.scheduleStore.selectAll_content(this.props.match.params.id);
   }
   
   render() {
-    const {schedule,contentList, content,handlerSetProps_schedule,
+    const {schedule,contentList, content,handlerSetProps_schedule,handlerSetProps_content,
       selectAll_content, addContent,deleteContent,updateContent,
       selectContent,addSchedule,updateSchedule}=this.scheduleStore;
     
@@ -36,7 +36,7 @@ class ScheduleUpdateView extends Component {
         InputProps={{
           readOnly: true,
         }}
-        onClick={()=>selectContent}/>
+        onClick={()=>selectContent(content.id)}/>
       )
     });
 
@@ -139,7 +139,7 @@ class ScheduleUpdateView extends Component {
               
               />
             
-            <IconButton onClick={()=>addContent()} sx={{ p: '10px' }} aria-label="search">
+            <IconButton onClick={()=>addContent(schedule.id)} sx={{ p: '10px' }} aria-label="search">
               <ControlPointIcon />
             </IconButton>
             <IconButton onClick={()=>deleteContent()} sx={{ p: '10px' }} aria-label="search">
