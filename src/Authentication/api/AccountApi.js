@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 function headerCheck() {
-    axios.defaults.headers = {Authorization: `${localStorage.getItem('Authorization')}`}
+    axios.defaults.headers = {Authorization: `${sessionStorage.getItem('Authorization')}`}
 }
 
 class AccountApi {
-    URL = '/api/accountInfo/'
+    URL = '/api/authentication/'
     userCreate(user) {
         return axios.post(this.URL + 'signup/', user)
                     .then((response)=>response.data)
@@ -32,6 +32,18 @@ class AccountApi {
 
     groupCreate(group) {
         return axios.post(this.URL + 'group/create/', group)
+                    .then(response => response.data)
+                    .catch(error => error.response.data)
+    }
+
+    getUser() {
+        return axios.get(this.URL + `userinfo/`)
+                    .then(response => response.data)
+                    .catch(error => error.response.data)
+    }
+
+    resetPw(email) {
+        return axios.post(this.URL+ `password/reset/`, {email: email})
                     .then(response => response.data)
                     .catch(error => error.response.data)
     }

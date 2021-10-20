@@ -28,7 +28,7 @@ export default class LoginView extends Component {
           
         const theme = createTheme();
         
-        const { user, setProps, handleLoginSubmit, message, onClickEvent, handleLogoutSubmit, test  } = this.props
+        const { user, setProps, message, onClickEvent, handlePasswordResetSubmit} = this.props
         return (
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -45,60 +45,32 @@ export default class LoginView extends Component {
               <LockOutlinedIcon onClick={()=>window.location.href="/"}/>
             </Avatar>
             <Typography component="h1" variant="h5">
-              로그인
+              비밀번호 초기화
             </Typography>
             <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="아이디"
-                name="username"
-                autoComplete="email"
-                value={user.username} 
+                name="email"
+                label="이메일 주소"
+                type="email"
+                id="email"
+                value={user.email} 
                 onChange={(e)=>setProps(e.target.name, e.target.value)}
                 onClick={(e)=>onClickEvent(e.target.name)}
               />
-              {(message.username !== "")
-                ? message.username
-                : null }
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password1"
-                label="비밀번호"
-                type="password"
-                id="password1"
-                autoComplete="current-password"
-                value={user.password1} 
-                onChange={(e)=>setProps(e.target.name, e.target.value)}
-                onClick={(e)=>onClickEvent('password')}
-              />
-                {(message.password !== "")
-                ? message.password
+                {(message.email !== "")
+                ? message.email
                 : null }
               <Button
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={()=>handleLoginSubmit()}
+                onClick={()=>handlePasswordResetSubmit()}
               >
-                로그인
+                이메일 보내기
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    비밀번호 찾기
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/authentication/signup" variant="body2">
-                    {"회원가입"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />

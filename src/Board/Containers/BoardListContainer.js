@@ -5,7 +5,6 @@ import BoardItemView from '../Views/BoardItemView';
 import BoardDetailContainer from './BoardDetailContainer';
 
 
-
 function seperateBoard(id) {
     console.log(id);
     window.location.href =
@@ -39,6 +38,10 @@ class BoardListContainer extends Component {
                     <h3>게시글 목록</h3>
                     {boardList}
                     <button type="button" onClick={() => createBoard()}>게시글 생성</button>
+                </div>
+            
+                <div>
+                    {(this.boardStore.board.id !== undefined && this.boardStore.board.id > 0) && <BoardDetailContainer/>}
                 </div>
             </div>
         );
