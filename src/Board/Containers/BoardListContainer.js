@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
 import BoardItemView from '../Views/BoardItemView';
+import BoardDetailContainer from './BoardDetailContainer';
 
 class BoardListContainer extends Component {
     boardStore = BoardStore;
@@ -11,15 +12,21 @@ class BoardListContainer extends Component {
     }
 
     render() {
-        const {boards, selectBoard} = this.boardStore;
+        const {boards, selectBoard , checked} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <BoardItemView key={board.id} book={board} onSelect={selectBoard}/>
+                <BoardItemView key={board.id} board={board} checked= {checked} checked_id = {checked.id} onSelect={selectBoard}/>
             )
         });
         return (
             <div>
+            <div>
+                <h3>게시글 목록</h3>
                 {boardList}
+            </div>
+            <div>
+                {(this.boardStore.board.id !== undefined && this.boardStore.board.id > 0) && <BoardDetailContainer/>}
+            </div>
             </div>
         );
     }
