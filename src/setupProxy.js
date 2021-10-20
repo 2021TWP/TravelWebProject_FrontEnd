@@ -10,14 +10,21 @@ module.exports = function(app) {
     //     })
     // );
 
+    // app.use(
+    //   '/api/accountInfo/',
+    //   createProxyMiddleware({
+    //     target: 'http://127.0.0.1:8000',
+    //     changeOrigin: true,
+    //   })
+    // );
+
     app.use(
-      '/api/authentication/',
+      '/api/travel/',
       createProxyMiddleware({
         target: 'http://127.0.0.1:8000',
         changeOrigin: true,
       })
-    );
-
+  );
   
 }
 

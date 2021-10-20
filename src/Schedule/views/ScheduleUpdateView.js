@@ -1,6 +1,8 @@
-import React, { useEffect, Component } from 'react';
+import { TextField } from '@material-ui/core';
+import React, { Component } from 'react';
+import {observer} from 'mobx-react';
 import MapContainer from '../../Map/MapContainer';
-import { Paper, Box, InputBase, Grid, Input, TextField, Stack, InputAdornment, IconButton } from '@material-ui/core'
+import { Button, Paper, Box, InputBase, Grid, Input,  Stack, InputAdornment, IconButton } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import { getPlaceData } from '../api/getApi'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -11,41 +13,24 @@ import ScheduleStore from '../stores/ScheduleStore';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import {observer} from 'mobx-react';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-// scheduleStore = ScheduleStore;
-
-// function nextSchedule(e) {
-//   constscheduleStore = ScheduleStore;
-//   this.scheduleStore.addSchedule();
-//   window.location.href =`/schedules/update/${this.schduleStore.schedule.id}`
-// }
-
-class ScheduleInputView extends Component {
-
-  scheduleStore = ScheduleStore;
-  nextSchedule(e) {
-    this.scheduleStore.addSchedule();
-    window.location.href =`/schedules/update/${this.schduleStore.schedule.id}`
-  }
-//생성자 오버라이딩 해서 state this.state = 
-constructor(){
-  super();
-  this.state ={
-    st_date : new Date(),
-    ed_date : new Date()
-  };
+function createSchedule(e){
+  window.location.href ="/schedules/create/"
 }
-
+class ScheduleUpdateView extends Component {
+  scheduleStore = ScheduleStore;
+  componentDidMount(){
+    this.scheduleStore.selectSchedule(this.props.match.params.id);//라우터에서 포함을 하고 있기 때문에(상위 컴포넌트가 router이기 떄문에.)
+    this.scheduleStore.selectAll_content();
+  }
+  
   render() {
-    const {st_date,ed_date} = this.state;
-    const {schedule,contentList, content,handlerSetProps_schedule,handlerSetProps_content,
+    const {schedule,contentList, content,handlerSetProps_schedule,
       selectAll_content, addContent,deleteContent,updateContent,
-      selectContent,addSchedule } = this.scheduleStore;
-    schedule.start_date = st_date;
-    schedule.end_date = ed_date;
+      selectContent,addSchedule,updateSchedule}=this.scheduleStore;
+    
     const contents = contentList.map(content =>{
+      console.log(content.id);
       return(
         <TextField key ={content.id} value={content.content} 
         InputProps={{
@@ -54,33 +39,14 @@ constructor(){
         onClick={()=>selectContent}/>
       )
     });
-    
+
     return (
       <div>
-{/* 여긴 지도 부르는 부분 */}
+        <Button onClick={createSchedule}>create</Button>
+        <Button onClick={updateSchedule}>modify</Button>
         <MapContainer />
 
-        {/* 이부분은 나중에  api 연동이 필요할거임 지도 위치 검색하는거 때문에 -> 유튜브 보고 참고해야지 */}
-        <Stack
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="baseline"
-          spacing={2}
-        >
-
-          <Paper
-            component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              style={{ width: '40%' }}
-              placeholder="Search..." />
-            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </Paper>
-        </Stack>
+        
 
 {/* 여긴 날짜 갖고 오는 부분 */}
         <Stack
@@ -92,8 +58,9 @@ constructor(){
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+              readOnly
               label="start_date"
-              value ={st_date}
+              value ={schedule.start_date}
               // value={schedule.start_date}
               onChange={st_date => {
                 this.setState({ st_date });
@@ -104,8 +71,8 @@ constructor(){
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="end_date"
-              
-              value ={ed_date}
+              readOnly
+              value ={schedule.end_date}
               // value={schedule.end_date}
               onChange={ed_date => {
                 this.setState({ ed_date });
@@ -156,7 +123,7 @@ constructor(){
         />
           
         
-          {/* <Paper
+          <Paper
             component="form"
             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
           >
@@ -181,12 +148,12 @@ constructor(){
             <IconButton onClick={()=>updateContent()} sx={{ p: '10px' }} aria-label="search">
               <SecurityUpdateGoodIcon />
             </IconButton>
-          </Paper> */}
+          </Paper>
 
-          
+          {contents}
 
-              <IconButton onClick={()=> this.nextSchedule()}>
-                <NavigateNextIcon/>
+              <IconButton onClick={()=> addSchedule()}>
+                <SaveOutlinedIcon/>
               </IconButton>
 
         </Stack>
@@ -196,4 +163,4 @@ constructor(){
   }
 }
 
-export default observer(ScheduleInputView);
+export default observer(ScheduleUpdateView);

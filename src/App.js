@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import BoardInputContainer from './Board/Containers/BoardInputContainer';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ScheduleMainPage from './Schedule/page/ScheduleMainPage';
+import ScheduleInputContainer from './Schedule/containers/ScheduleInputContainer';
+import ScheduleDetailView from './Schedule/views/ScheduleIDetailView';
+
 import Header from './Header'
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
@@ -11,9 +15,6 @@ import PasswordResetContainer from './Authentication/Containers/PasswordResetCon
 // import mypage_info from './mypage/pages/MyPage_Info';
 // import MyPageListContainer from './mypage/Containers/MyPageListContainer';
 import RegisterContainer from './Authentication/Containers/RegisterContainer';
-import ScheduleDetailView from './Schedule/views/ScheduleDetailView';
-import ScheduleInputContainer from './Schedule/containers/ScheduleInputContainer';
-// import ScheduleMainPage from './Schedule/'
 import BoardListContainer from './Board/Containers/BoardListContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer'
 import home from './layout/home';
@@ -25,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+
         {window.location.href !== 'http://localhost:3000/authentication/login' && window.location.href !=="http://localhost:3000/authentication/signup"
         && window.location.href !== 'http://localhost:3000/authentication/login/' && window.location.href !=="http://localhost:3000/authentication/signup/"
         ? <Header/> 
@@ -38,6 +40,7 @@ class App extends Component {
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
+            {/* <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} /> */}
           <Route exact path="/" component={home}/>
           <Route exact path="/board/list/" component={BoardListContainer}/>
           <Route exact path="/board/create/" component={BoardInputContainer}/>
@@ -47,5 +50,4 @@ class App extends Component {
     )
   }
 }
-  export default App;
-  
+export default App;

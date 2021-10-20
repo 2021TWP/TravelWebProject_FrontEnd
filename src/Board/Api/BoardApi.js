@@ -9,7 +9,7 @@ class BoardApi{
     }
 
     boardDetail(id){
-        return axios.get(this.URL+`${id}/`)
+        return axios.get(this.URL+`${id}`)
                 .then((response)=>response.data);
     }
 
@@ -28,7 +28,18 @@ class BoardApi{
     }
 
     boardUpdate(id, board){
-        return axios.put(this.URL+`update/${id}/`, board)
+        return axios.put(this.URL+`update/${id}/`, 
+        {
+            user_id: `${board.user_id}`,
+            category_id: `${board.category_id}`,
+            schedule_id: `${board.schedule_id}`,
+            imgUrl: `${board.imgUrl}`,
+            title:`${board.title}`,
+            date: `${board.date}`,
+            board_content: `${board.board_content}`,
+            hit: `${board.hit}`,
+            like: `${board.like}`
+        })
                 .then((response)=>response.data);
     }
 
@@ -76,20 +87,25 @@ class BoardApi{
         return axios.put(this.URL+`comment/update/${id}/`, 
         {
             board_id: `${comment.board_id}`,
-            id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
-            // comment_date: `${comment.comment_date}`
-            // comment_date: Date.now(),
-            comment_date: new Date(),
+            comment_date: `${comment.comment_date}`
         })
                 .then((response)=>response.data);
     }
 
-    commentDelete(id){
-        return axios.delete(this.URL+`comment/delete/${id}/`)
-                .then((response)=>response.data)
-    }
+    // commentUpdate(id, comment){
+    //     return axios.put(this.URL+`update/${id}/`, 
+    //     {
+
+    //     })
+    //             .then((response)=>response.data);
+    // }
+
+//     commentDelete(id){
+//         return axios.delete(this.URL+`comment/delete/${id}/`)
+//                 .then((response)=>response.data)
+//     }
 }
 
 export default new BoardApi();

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import moment from 'moment';
 
 class BoardDetailView extends Component {
@@ -26,8 +27,17 @@ class BoardDetailView extends Component {
                 <button>좋아요 {board.like} </button>  &nbsp;&nbsp;
                 {/* onClick={()=>boardLike()} */}
 
-                <button onClick={()=>boardModify()}>MODIFY</button>
-                <button onClick={()=>boardRemove()}>REMOVE</button> 
+        return (
+            <div>
+                {board.category_id}
+                {board.title}
+                {board.schedule_id}
+                {board.imgUrl}
+                {board.user_id}
+                {board.date} 
+                {board.board_content}
+                {board.hit}
+                {board.like}
             </div>
         );
     }

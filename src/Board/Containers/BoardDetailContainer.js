@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react'
 import BoardStore from '../Stores/BoardStore';
 import BoardDetailView from '../Views/BoardDetailView';
-import CommentInputContainer from './CommentInputContainer';
-import CommentListContainer from './CommentListContainer';
+import CommentListView from '../Views/CommentListView';
 
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;
@@ -21,6 +20,7 @@ class BoardDetailContainer extends Component {
                 {/* {comment.length > 0 && <CommentListContainer />} */}
                 {/* {board.id === comment.board_id ? <CommentListContainer /> : ""} */}
                 <CommentListContainer />
+
             </div>
         );
     }

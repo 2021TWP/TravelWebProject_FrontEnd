@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
 import BoardItemView from '../Views/BoardItemView';
+
 import BoardDetailContainer from './BoardDetailContainer';
 
 
@@ -20,20 +21,20 @@ function createBoard(e) {
 class BoardListContainer extends Component {
     boardStore = BoardStore;
 
-    componentDidMount() {
+    componentDidMount(){
         this.boardStore.selectAll();
     }
 
     render() {
-        const { boards, selectBoard, checked } = this.boardStore;
+        const {boards, selectBoard} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <span onClick={() => seperateBoard(board.id)}><BoardItemView key={board.id} board={board} checked={checked} checked_id={checked.id} onSelect={()=>selectBoard(board.id)} /></span>
+                <BoardItemView key={board.id} book={board} onSelect={selectBoard}/>
             )
         });
-
         return (
             <div>
+
                 <div>
                     <h3>게시글 목록</h3>
                     {boardList}
@@ -47,7 +48,5 @@ class BoardListContainer extends Component {
         );
     }
 }
-
-
 
 export default observer(BoardListContainer);

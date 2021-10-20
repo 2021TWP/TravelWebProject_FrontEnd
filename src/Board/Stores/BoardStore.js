@@ -2,18 +2,9 @@ import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
 class BoardStore {
-    board = {id:"",
-            user_id:"", 
-            schedule_id:"", 
-            category_id:"1", 
-            title:"", 
-            imgUrl:"", 
-            date:"",
-            board_content:"", 
-            hit:0, 
-            like:0};
-
+    board = {};
     boards = [];
+
 
     comment = {id: "",
                board_id : "",
@@ -29,9 +20,6 @@ class BoardStore {
         makeAutoObservable(this, {}, {autoBind:true})
     }
 
-    // onCheckToggle = (id) => {this.boards.map(board =>(board.id === id) ? {...board, checked : !this.checked } : board ) }
-     onCheckToggle = (id) => {this.checked = "false" ? !this.checked : this.checked}
-
     init = () => {
         this.board = {id:"", user_id:"", schedule_id:"", category_id:"1", 
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
@@ -42,11 +30,11 @@ class BoardStore {
     }
 
     //action
-    async selectBoard(id){
+    async selectBoard(board){
         try{
-            const result = await boardApi.boardDetail(id);
-            console.log(id);
+            const result = await boardApi.boardDetail(board.id);
             runInAction(()=>this.board = result);
+
             
             this.boardHit();
             this.selectBoardComment(id)
@@ -125,98 +113,6 @@ class BoardStore {
 
         this.init();
     }
-
- //comment
-
- commentSetProps = (name, value) => {
-    this.comment = {...this.comment, [name]:value}
-}
-
-
-// async selectComment(comment){
-//     try{
-//         const result = await boardApi.boardDetail(comment.id);   // boardDetail 맞는지 확인 
-//         runInAction(()=>this.comment = result);
-//     }catch(error){
-//         console.log(error);
-//     }
-// }
-
-
-async selectComment(comment){
-    try{
-        const result = await boardApi.commentDetail(comment.id);   //
-        runInAction(()=>this.comment = result);
-    }catch(error){
-        console.log(error);
-    }
-}
-
-
-async commentAdd() {
-    try{
-        this.comment.comment_date = new Date();
-        await boardApi.commentCreate({...this.comment}, this.comment.comment_date );
-        // this.selectBoardComment();
-    }catch(error){
-        console.log(error);
-        runInAction(this.message = error.message);
-    }
-
-    this.comment_init();
-}
-
-async commentRemove() {
-    try{
-        await boardApi.commentDelete(this.comment.id);
-        this.selectBoardComment(this.board.id);
-   
-    }catch(error){
-        this.message = error.message;
-    }
-
-      this.comment_init();
-  }
-
-async commentModify() {
-    try{
-        await boardApi.commentUpdate(this.comment.id, this.comment);
-        this.selectBoardComment(this.board.id);
-    }catch(error){
-        this.message = error.message;
-    }
-
-    this.comment_init();
-}
-
-comment_init = () => {
-    this.comment = {id : "",
-                    board_id : "",
-                    user_id : "",
-                    comment_content : "",
-                    comment_date : ""} 
-}
-
-async selectCommentAll(){
-    try{
-        const results = await boardApi.commentList();
-        runInAction(()=>this.comments = results);
-    }catch(error){
-        console.log(error);
-    }
-}
-
-async selectBoardComment(id){
-    //일단 아이디를 인자로 주었기 떄문에 호출 되는 다른 부분들에선 this.board.id로 호출하게 함 문제생김 여기서 해결해야함.
-    try{
-        // console.log(this.board.id);
-        const results = await boardApi.commentList(id);
-        // console.log(results);
-        runInAction(()=>this.comments = results);
-    }catch(error){
-        console.log(error);
-    }
-}
 
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class BoardInputView extends Component {
     render() {
+
         const {board, boardAdd, boardChange, boardModify, init} = this.props;
         return (
             <div>
@@ -34,8 +35,6 @@ class BoardInputView extends Component {
                 
 
                 <button onClick={()=>boardAdd()}>ADD</button>
-                <button onClick={()=>boardModify()}>MODIFY</button>
-                <button onClick={()=>init()}>초기화</button>
             </div>
         );
     }

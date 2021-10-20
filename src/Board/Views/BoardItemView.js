@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+
 import moment from 'moment';
 
 class BoardItemView extends Component {
-    
     render() {
         const {board, selectBoard} = this.props; 
         let board_date = this.props.board.date;
@@ -20,4 +20,4 @@ class BoardItemView extends Component {
     }
 }
 
-export default BoardItemView;;
+export default BoardItemView;

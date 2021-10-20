@@ -10,7 +10,7 @@ class AccountStore {
         password1: "",
         password2: "",
         email: "",
-        name: "", 
+        name: "",  
     }
     
     group = {
@@ -41,9 +41,9 @@ class AccountStore {
     async handleRegisterSubmit() {
         try {
             const data = await accountApi.userCreate(this.user);
-            if ('detail' in data){
-                alert("이메일 인증 후 로그인 가능합니다.")
-                window.location.href='/'
+            if ('key' in data){
+                alert("회원가입 완료")
+                await accountApi.logout();
             }else {
                 runInAction(()=>this.error_message = {...this.error_message, ...data})
             }
@@ -59,12 +59,8 @@ class AccountStore {
         try{
             const data = await accountApi.login(this.user);
             if ('key' in data){
-                sessionStorage.setItem(`Authorization`, `Token ${data.key}`)
-                const userData = await accountApi.getUser()
-                sessionStorage.setItem('name', `${userData.name}`)
-                sessionStorage.setItem('id', `${userData.id}`)
-                sessionStorage.setItem('email', `${userData.email}`)
-                window.location.href='/'
+                localStorage.setItem(`Authorization`, `Token ${data.key}`)
+                runInAction(() => this.token_header = {'Authorization': `Token ${data.key}`})
             }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
@@ -73,20 +69,11 @@ class AccountStore {
         }
     }
 
-    async handlePasswordResetSubmit() {
-        try {
-            console.log(this.user.email)
-            await accountApi.resetPw(this.user.email);
-        }catch(error) {
-            runInAction(() => this.message = error.message)
-        }
-    }
 
     async handleLogoutSubmit() {
         try {
             await accountApi.logout();
-            sessionStorage.clear()
-            window.location.href='/'
+            localStorage.removeItem('Authorization')
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
