@@ -5,12 +5,23 @@ class BoardStore {
     board = {};
     boards = [];
 
+
+    comment = {id: "",
+               board_id : "",
+               user_id : "",
+               comment_content : "",
+               comment_date : ""};
+
+    comments = []
+
+    checked = {id : "" , checked :  "false"}
+
     constructor(){
         makeAutoObservable(this, {}, {autoBind:true})
     }
 
     init = () => {
-        this.board = {id:"", user_id:"", schedule_id:"", category_id:"", 
+        this.board = {id:"", user_id:"", schedule_id:"", category_id:"1", 
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
     }
 
@@ -23,9 +34,14 @@ class BoardStore {
         try{
             const result = await boardApi.boardDetail(board.id);
             runInAction(()=>this.board = result);
+
+            
+            this.boardHit();
+            this.selectBoardComment(id)
         }catch(error){
             console.log(error);
         }
+
     }
 
     async selectAll(){
@@ -37,13 +53,38 @@ class BoardStore {
         }
     }
 
-    async boardAdd() {
+    async boardHit(){
         try{
-            await boardApi.bookCreate(this.board);
+            runInAction(()=>this.board.hit += 1)
+            const result = await boardApi.boardHit(this.board);
+            runInAction(()=>this.board = result);
+            console.log(this.board.id)
             this.selectAll();
         }catch(error){
             console.log(error);
-            runInAction(this.message = error.message);
+        }
+    }
+
+    // async boardLike(){
+    //     try{
+    //         // runInAction(()=>this.board.like += 1)
+    //         const result = await boardApi.boardLike(this.board);
+    //         runInAction(()=>this.board = result);
+    //         // this.selectAll();
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+
+    async boardAdd() {
+        try{
+            this.board.date = new Date()
+            await boardApi.boardCreate(this.board);
+            this.selectAll();
+            console.log(this.board);
+        }catch(error){
+            console.log(error);
+            this.message = error.message;
         }
 
         this.init();
@@ -62,6 +103,8 @@ class BoardStore {
   
     async boardModify() {
         try{
+            console.log(this.board.id)
+            this.board.date = new Date()
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
         }catch(error){
