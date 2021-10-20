@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react'
 import BoardStore from '../Stores/BoardStore';
 import BoardDetailView from '../Views/BoardDetailView';
-import CommentListView from '../Views/CommentListView';
+import CommentInputContainer from '../Containers/CommentInputContainer';
+import CommentListContainer from '../Containers/CommentListContainer';
 
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;

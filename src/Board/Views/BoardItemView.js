@@ -8,7 +8,7 @@ class BoardItemView extends Component {
         let board_date = this.props.board.date;
         return (
             <div>
-                <div onClick={()=>selectBoard(board)}>
+                <div onClick={()=>selectBoard(board.id)}>
                 {board.title} &nbsp; &nbsp;
                 {board.user_id} &nbsp; &nbsp;
                 {moment(board_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;

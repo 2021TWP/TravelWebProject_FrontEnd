@@ -30,9 +30,9 @@ class BoardStore {
     }
 
     //action
-    async selectBoard(board){
+    async selectBoard(id){
         try{
-            const result = await boardApi.boardDetail(board.id);
+            const result = await boardApi.boardDetail(id);
             runInAction(()=>this.board = result);
 
             

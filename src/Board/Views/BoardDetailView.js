@@ -15,7 +15,8 @@ class BoardDetailView extends Component {
                   if (category_id === 3) return ("번개모임");
                 })()
                 
-              } &nbsp;&nbsp;
+              } 
+              &nbsp;&nbsp;
                 {board.title} &nbsp;&nbsp;
                 {board.schedule_id} &nbsp;&nbsp;
                 {board.imgUrl} &nbsp;&nbsp;
@@ -25,19 +26,9 @@ class BoardDetailView extends Component {
                 조회수 {board.hit} &nbsp;&nbsp;
 
                 <button>좋아요 {board.like} </button>  &nbsp;&nbsp;
+                <button onClick={()=>boardModify()}>Modify</button>
+                <button onClick={()=>boardRemove()}>Remove</button>
                 {/* onClick={()=>boardLike()} */}
-
-        return (
-            <div>
-                {board.category_id}
-                {board.title}
-                {board.schedule_id}
-                {board.imgUrl}
-                {board.user_id}
-                {board.date} 
-                {board.board_content}
-                {board.hit}
-                {board.like}
             </div>
         );
     }

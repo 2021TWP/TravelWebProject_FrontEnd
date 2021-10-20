@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class BoardInputView extends Component {
     render() {
 
-        const {board, boardAdd, boardChange, boardModify, init} = this.props;
+        const {board, boardAdd, boardChange, boardModify} = this.props;
         return (
             <div>
                 <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>
@@ -35,6 +35,7 @@ class BoardInputView extends Component {
                 
 
                 <button onClick={()=>boardAdd()}>ADD</button>
+                <button onClick={()=>boardModify()}>Modify</button>
             </div>
         );
     }
