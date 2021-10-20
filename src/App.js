@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
 import BoardInputContainer from './Board/Containers/BoardInputContainer';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './Header'
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 // import mypage_plan from './mypage/pages/MyPage_Plan';
 // import mypage_scrap from './mypage/pages/MyPage_Scrap';
 // import mypage_group from './mypage/pages/MyPage_Group';
 // import mypage_info from './mypage/pages/MyPage_Info';
 // import MyPageListContainer from './mypage/Containers/MyPageListContainer';
-
+import RegisterContainer from './Authentication/Containers/RegisterContainer';
+import ScheduleDetailView from './Schedule/views/ScheduleDetailView';
+import ScheduleInputContainer from './Schedule/containers/ScheduleInputContainer';
+// import ScheduleMainPage from './Schedule/'
 import BoardListContainer from './Board/Containers/BoardListContainer';
-import BoardDetailContainer from './Board/Containers/BoardDetailContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer'
-//----------------------------------
 import home from './layout/home';
+import SeperateBoardList from './Board/Views/SeperateBoardList';
+
 
 
 class App extends Component {
@@ -35,7 +38,14 @@ class App extends Component {
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-
+          <Route exact path="/" component={home}/>
+          <Route exact path="/board/list/" component={BoardListContainer}/>
+          <Route exact path="/board/create/" component={BoardInputContainer}/>
+          <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
+        </Switch>
+      </Router>
+    )
   }
+}
   export default App;
   

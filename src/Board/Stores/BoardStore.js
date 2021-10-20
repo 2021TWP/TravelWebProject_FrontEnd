@@ -15,7 +15,6 @@ class BoardStore {
 
     boards = [];
 
-
     comment = {id: "",
                board_id : "",
                user_id : "",
@@ -43,13 +42,14 @@ class BoardStore {
     }
 
     //action
-    async selectBoard(board){
+    async selectBoard(id){
         try{
-            const result = await boardApi.boardDetail(board.id);
+            const result = await boardApi.boardDetail(id);
+            console.log(id);
             runInAction(()=>this.board = result);
             
             this.boardHit();
-            this.selectBoardComment()
+            this.selectBoardComment(id)
         }catch(error){
             console.log(error);
         }
@@ -155,8 +155,9 @@ async selectComment(comment){
 
 async commentAdd() {
     try{
-        await boardApi.commentCreate(this.comment);
-        this.selectBoardComment();
+        this.comment.comment_date = new Date();
+        await boardApi.commentCreate({...this.comment}, this.comment.comment_date );
+        // this.selectBoardComment();
     }catch(error){
         console.log(error);
         runInAction(this.message = error.message);
@@ -168,7 +169,7 @@ async commentAdd() {
 async commentRemove() {
     try{
         await boardApi.commentDelete(this.comment.id);
-        this.selectBoardComment();
+        this.selectBoardComment(this.board.id);
    
     }catch(error){
         this.message = error.message;
@@ -180,7 +181,7 @@ async commentRemove() {
 async commentModify() {
     try{
         await boardApi.commentUpdate(this.comment.id, this.comment);
-        this.selectBoardComment();
+        this.selectBoardComment(this.board.id);
     }catch(error){
         this.message = error.message;
     }
@@ -205,10 +206,11 @@ async selectCommentAll(){
     }
 }
 
-async selectBoardComment(){
+async selectBoardComment(id){
+    //일단 아이디를 인자로 주었기 떄문에 호출 되는 다른 부분들에선 this.board.id로 호출하게 함 문제생김 여기서 해결해야함.
     try{
         // console.log(this.board.id);
-        const results = await boardApi.commentList(this.board.id);
+        const results = await boardApi.commentList(id);
         // console.log(results);
         runInAction(()=>this.comments = results);
     }catch(error){

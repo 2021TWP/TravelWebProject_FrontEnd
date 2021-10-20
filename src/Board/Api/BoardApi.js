@@ -36,11 +36,6 @@ class BoardApi{
         return axios.delete(this.URL+`delete/${id}/`)
                 .then((response)=>response.data)
     }
-// board id에 해당하는 comment목록 호출 
-    commentList(bid){
-        return axios.get(this.URL+`comment/list/${bid}/`)
-                .then((response)=>response.data);
-    }
 
     boardHit(board){
         return axios.put(this.URL+`update/hit/${board.id}/`, board)
@@ -52,9 +47,13 @@ class BoardApi{
     //             .then((response)=>response.data)
     // }
 
-    commentList(){
-        return axios.get(this.URL+'comment/')
-// comment id에 해당하는 comment 상세보기 
+    // board id에 해당하는 comment목록 호출 
+    commentList(bid){
+        return axios.get(this.URL+`comment/list/${bid}/`)
+                .then((response)=>response.data);
+    }
+    
+    // comment id에 해당하는 comment 상세보기 
     commentDetail(id){
         return axios.get(this.URL+`comment/${id}/`)
                 .then((response)=>response.data);
@@ -62,13 +61,12 @@ class BoardApi{
 
     commentCreate(comment){
         return axios.post(this.URL+'comment/create/',
-        {
+        {   id : `${comment.id}`,
             board_id: `${comment.board_id}`,
-            id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
             // comment_date: `${comment.comment_date}`
-            comment_date: new Date(),
+            comment_date: `${comment.comment_date}`,
         })
                 .then((response)=>response.data);
     }
