@@ -8,14 +8,15 @@ import CommentListContainer from './CommentListContainer';
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;
     render() {
-        const {board, boardRemove , boardModify} = this.boardStore;
+        const {board, boardRemove, boardLike} = this.boardStore;
         return (
             <div>
                 <h3>게시글 상세</h3>
                 <BoardDetailView 
                 board={board}
-                boardModify = {boardModify}
-                boardRemove={boardRemove} />
+                boardRemove={boardRemove}
+                boardLike={boardLike} />
+
                 <CommentInputContainer/>
                 {/* {comment.length > 0 && <CommentListContainer />} */}
                 {/* {board.id === comment.board_id ? <CommentListContainer /> : ""} */}

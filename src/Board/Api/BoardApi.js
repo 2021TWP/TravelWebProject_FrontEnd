@@ -14,18 +14,15 @@ class BoardApi{
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/',
+        return axios.post(this.URL+'create/', 
         {
             user_id: `${board.user_id}`,
             category_id: `${board.category_id}`,
             schedule_id: `${board.schedule_id}`,
             imgUrl: `${board.imgUrl}`,
             title:`${board.title}`,
-            // date: `${board.date}`,
-            date : Date.now(),
-            board_content: `${board.board_content}`,
-            hit: `${board.hit}`,
-            like: `${board.like}`
+            date: `${board.date}`,
+            board_content: `${board.board_content}`
         })
                 .then((response)=>response.data);
     }
@@ -39,13 +36,24 @@ class BoardApi{
         return axios.delete(this.URL+`delete/${id}/`)
                 .then((response)=>response.data)
     }
-// board id에 해당하는 comment목록 호출 
+
+    boardHit(board){
+        return axios.put(this.URL+`update/hit/${board.id}/`, board)
+                .then((response)=>response.data)
+    }
+
+    // boardLike(board){
+    //     return axios.put(this.URL+`update/like/${board.id}/`, board)
+    //             .then((response)=>response.data)
+    // }
+
+    // board id에 해당하는 comment목록 호출 
     commentList(bid){
         return axios.get(this.URL+`comment/list/${bid}/`)
                 .then((response)=>response.data);
     }
-
-// comment id에 해당하는 comment 상세보기 
+    
+    // comment id에 해당하는 comment 상세보기 
     commentDetail(id){
         return axios.get(this.URL+`comment/${id}/`)
                 .then((response)=>response.data);
@@ -55,7 +63,6 @@ class BoardApi{
         return axios.post(this.URL+'comment/create/',
         {   id : `${comment.id}`,
             board_id: `${comment.board_id}`,
-            id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
             // comment_date: `${comment.comment_date}`

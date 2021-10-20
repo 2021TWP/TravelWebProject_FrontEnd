@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange, boardModify , init} = this.props;
+        const {board, boardAdd, boardChange, boardModify, init} = this.props;
         return (
             <div>
                 <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>
-                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>자유 게시판</option>
-                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>여행 일지</option>
-                    <option  value={board.category_id} onChange={(e)=>boardChange(e.target.name, e.target.value)}>번개 모임</option>
+                    <option value="1">자유 게시판</option>
+                    <option value="2">여행 일지</option>
+                    <option value="3">번개 모임</option>
                 </select>
 
                 <input
@@ -31,6 +31,7 @@ class BoardInputView extends Component {
                     value={board.imgUrl} 
                     onChange={(e)=>boardChange(e.target.name, e.target.value)}
                     placeholder="사진"/><br/>
+                
 
                 <button onClick={()=>boardAdd()}>ADD</button>
                 <button onClick={()=>boardModify()}>MODIFY</button>
