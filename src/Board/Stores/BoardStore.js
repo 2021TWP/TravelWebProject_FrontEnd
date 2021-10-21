@@ -41,11 +41,12 @@ class BoardStore {
         this.board = {...this.board, [name]:value}
     }
 
+
+
     //action
     async selectBoard(id){
         try{
             const result = await boardApi.boardDetail(id);
-            console.log(id);
             runInAction(()=>this.board = result);
             
             this.boardHit();
@@ -155,9 +156,12 @@ async selectComment(comment){
 
 async commentAdd() {
     try{
-        this.comment.comment_date = new Date();
+        this.comment.comment_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
+        ;
         this.comment.board_id = this.board.id;
-        await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
+        this.comment.user_id = sessionStorage.getItem("name")
+        // await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
+        await boardApi.commentCreate(this.comment);
         // this.selectBoardComment();
     }catch(error){
         console.log(error);

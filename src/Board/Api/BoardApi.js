@@ -59,17 +59,25 @@ class BoardApi{
                 .then((response)=>response.data);
     }
 
+    // commentCreate(comment){
+    //     return axios.post(this.URL+'comment/create/',
+    //     {   
+    //         board_id: `${comment.board_id}`,
+    //         user_id: `${comment.user_id}`,
+    //         comment_content: `${comment.comment_content}`,
+    //         // comment_date: `${comment.comment_date}`
+    //         comment_date: `${comment.comment_date}`,
+    //         // comment_date: new Date(),
+    //     })
+    //             .then((response)=>response.data);
+    // }
+
     commentCreate(comment){
-        return axios.post(this.URL+'comment/create/',
-        {   
-            board_id: `${comment.board_id}`,
-            user_id: `${comment.user_id}`,
-            comment_content: `${comment.comment_content}`,
-            // comment_date: `${comment.comment_date}`
-            comment_date: `${comment.comment_date}`,
-        })
+        return axios.post(this.URL+'comment/create/', comment)
                 .then((response)=>response.data);
     }
+
+
 
     commentUpdate(id, comment){
         console.log(comment.board_id, comment.comment_content)

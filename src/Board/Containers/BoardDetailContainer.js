@@ -5,10 +5,15 @@ import BoardDetailView from '../Views/BoardDetailView';
 import CommentInputContainer from './CommentInputContainer';
 import CommentListContainer from './CommentListContainer';
 
+function GoBoardList(e) {
+    window.location.href = '/board/list/';
+}
+
+
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;
     render() {
-        const {board, boardRemove, boardLike ,  boardModify} = this.boardStore;
+        const {board, boardRemove, boardLike ,  boardModify , boardSetProps} = this.boardStore;
         return (
             <div>
                 <h3>게시글 상세</h3>
@@ -16,12 +21,15 @@ class BoardDetailContainer extends Component {
                 board={board}
                 boardModify = {boardModify}
                 boardRemove={boardRemove}
-                boardLike={boardLike} />
+                boardLike={boardLike} 
+                boardSetProps={boardSetProps}/>
 
                 <CommentInputContainer/>
                 {/* {comment.length > 0 && <CommentListContainer />} */}
                 {/* {board.id === comment.board_id ? <CommentListContainer /> : ""} */}
-                <CommentListContainer />
+                <CommentListContainer /> <br/>
+
+                <button type="button" onClick={() => GoBoardList()}>목록으로</button>
             </div>
         );
     }

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import BoardStore from '../Stores/BoardStore';
+
+
+function updateBoard(id) {
+  window.location.href = `/board/update/${id}`;
+}
+
 
 class BoardDetailView extends Component {
+
     render() {
-        const {board, boardRemove, boardModify } = this.props;
+        const {board, boardRemove, boardModify , boardSetProps } = this.props;
         let board_date = this.props.board.date;
         let category_id = this.props.board.category_id
         return (
@@ -26,7 +34,9 @@ class BoardDetailView extends Component {
                 <button>좋아요 {board.like} </button>  &nbsp;&nbsp;
                 {/* onClick={()=>boardLike()} */}
 
-                <button onClick={()=>boardModify()}>MODIFY</button>
+                {/* <button onClick={()=>boardModify()}>MODIFY</button> */}
+                <button type="button" onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board} >수정</button>
+
                 <button onClick={()=>boardRemove()}>REMOVE</button> 
             </div>
         );
