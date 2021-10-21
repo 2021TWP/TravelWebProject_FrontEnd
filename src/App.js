@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BoardInputContainer from './Board/Containers/BoardInputContainer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from './Header'
+import Header from './header';
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
 // import { withRouter } from 'react-router-dom';
@@ -13,12 +13,12 @@ import PasswordResetContainer from './Authentication/Containers/PasswordResetCon
 import RegisterContainer from './Authentication/Containers/RegisterContainer';
 import ScheduleDetailView from './Schedule/views/ScheduleDetailView';
 import ScheduleInputContainer from './Schedule/containers/ScheduleInputContainer';
-// import ScheduleMainPage from './Schedule/'
+import ScheduleMainPage from './Schedule/page/ScheduleMainPage';
 import BoardListContainer from './Board/Containers/BoardListContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer'
 import home from './layout/home';
 import SeperateBoardList from './Board/Views/SeperateBoardList';
-
+import ScheduleUpdateView from './Schedule/views/ScheduleUpdateView';
 
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-          <Route exact path="/" component={home}/>
+          <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} />
           <Route exact path="/board/list/" component={BoardListContainer}/>
           <Route exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>

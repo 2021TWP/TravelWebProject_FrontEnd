@@ -156,7 +156,8 @@ async selectComment(comment){
 async commentAdd() {
     try{
         this.comment.comment_date = new Date();
-        await boardApi.commentCreate({...this.comment}, this.comment.comment_date );
+        this.comment.board_id = this.board.id;
+        await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
         // this.selectBoardComment();
     }catch(error){
         console.log(error);

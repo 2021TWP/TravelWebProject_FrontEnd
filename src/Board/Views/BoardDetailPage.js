@@ -8,7 +8,7 @@ class BoardDetailPage extends Component {
 
     render() {
     
-        const {board, onSelect} = this.props; 
+        const {board, selectBoard} = this.props; 
 
        
         return (
