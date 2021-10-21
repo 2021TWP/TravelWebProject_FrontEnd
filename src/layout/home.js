@@ -6,7 +6,7 @@ import Header from './Header2';
 import Footer from './Footer';
 
 const sections = [
-  { title: '여행일정', url: '#' },
+  { title: '여행일정', url: '/schedules/' },
   { title: '게시판', url: '/board/list/' },
   { title: '마이페이지', url: '#' },
 

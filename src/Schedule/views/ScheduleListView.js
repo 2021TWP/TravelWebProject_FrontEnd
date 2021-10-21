@@ -4,7 +4,6 @@ import {observer} from 'mobx-react';
 // import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -18,7 +17,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ScheduleStore from '../stores/ScheduleStore';
+
 
 
 function Copyright() {
@@ -34,41 +33,35 @@ function Copyright() {
   );
 }
 
-// function detailSchedule(id){
-//   console.log(id);
-//   window.location.href =`/schedules/detail/${id}`;
-// }
-
-//props history =>
-//route id
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
 
-
 class ScheduleListView extends Component {
-  scheduleStore = ScheduleStore;
+  
   
   componentDidMount(){
-    this.scheduleStore.selectAll();
+    this.props.selectAll();
   }
 
   detailSchedule(id){
     console.log(id);
     window.location.href =`/schedules/detail/${id}`;
   }
-
+  createSchedule(e){
+    window.location.href ="/schedules/create/"
+  }
 //해야할일 클릭하면 디테일로 넘어가는거 해보기...
   render() {
-    const {scheduleList,selectSchedule} =this.scheduleStore;
+    const {scheduleList,selectSchedule} =this.props;
     console.log(scheduleList);
     const schedules = scheduleList.map(schedule =>{
       return ( <Grid item key={schedule.id} xs={12} sm={6} md={4}>
         <Card
-        onSelect={selectSchedule(schedule.id)}
+        onSelect={()=>selectSchedule(schedule.id)}
           sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-          <CardMedia
+          <CardMedia 
             component="img"
             sx={{
               // 16:9
@@ -76,7 +69,7 @@ class ScheduleListView extends Component {
             }}
             image=""
           />
-          <CardContent sx={{ flexGrow: 1 }}>
+          <CardContent onClick={()=>console.log(schedule.id)}  sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
               {schedule.title}
             </Typography>
@@ -97,7 +90,8 @@ class ScheduleListView extends Component {
       <AppBar position="relative">
         <Toolbar background ="#BEDDBF">
           <Typography variant="h6" color="inherit" noWrap>
-             Schedule 여긴 홈 이름 ~ 나중에 테마도 입혀야한다니~
+          <Button color='inherit' onClick={()=>this.createSchedule()}>create</Button>
+            
           </Typography>
         </Toolbar>
       </AppBar>
@@ -120,7 +114,7 @@ class ScheduleListView extends Component {
             >
               Schedule List
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+           <Typography variant="h5" align="center" color="text.secondary" paragraph>
              {/* 페이지에대한 설명...??? */}
             </Typography>
             <Stack
