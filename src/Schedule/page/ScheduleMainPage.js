@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ScheduleListContainer from '../containers/ScheduleListContainer';
 import { Grid,Button,Container } from '@mui/material';
 // import Button from '@mui/material/Button';
-import MapContainer from '../../Map/MapContainer';
 import ScheduleInputContainer from '../containers/ScheduleInputContainer';
 
 function createSchedule(e){
