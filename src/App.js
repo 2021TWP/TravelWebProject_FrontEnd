@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BoardInputContainer from './Board/Containers/BoardInputContainer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from './Header'
+import Header from './header';
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
 // import { withRouter } from 'react-router-dom';
