@@ -19,7 +19,7 @@ import BoardListContainer from './Board/Containers/BoardListContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer'
 import home from './layout/home';
 import SeperateBoardList from './Board/Views/SeperateBoardList';
-
+import ScheduleUpdateView from './Schedule/views/ScheduleUpdateView';
 
 
 class App extends Component {
@@ -40,8 +40,7 @@ class App extends Component {
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-            {/* <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} /> */}
-          <Route exact path="/" component={home}/>
+          <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} />
           <Route exact path="/board/list/" component={BoardListContainer}/>
           <Route exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>

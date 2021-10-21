@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
 import BoardItemView from '../Views/BoardItemView';
-
 import BoardDetailContainer from './BoardDetailContainer';
 
 
@@ -29,7 +28,9 @@ class BoardListContainer extends Component {
         const {boards, selectBoard} = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <BoardItemView key={board.id} book={board} onSelect={selectBoard}/>
+                <span onClick={() => seperateBoard(board.id)}>
+                <BoardItemView key={board.id} board={board} selectBoard={()=>selectBoard(board.id)}/>
+                </span>
             )
         });
         return (
