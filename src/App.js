@@ -13,7 +13,7 @@ import PasswordResetContainer from './Authentication/Containers/PasswordResetCon
 import RegisterContainer from './Authentication/Containers/RegisterContainer';
 import ScheduleDetailView from './Schedule/views/ScheduleDetailView';
 import ScheduleInputContainer from './Schedule/containers/ScheduleInputContainer';
-// import ScheduleMainPage from './Schedule/'
+import ScheduleMainPage from './Schedule/page/ScheduleMainPage';
 import BoardListContainer from './Board/Containers/BoardListContainer';
 import LoginContainer from './Authentication/Containers/LoginContainer'
 import home from './layout/home';

@@ -4,11 +4,11 @@ import moment from 'moment';
 class BoardItemView extends Component {
     
     render() {
-        const {board, onSelect} = this.props; 
+        const {board, selectBoard} = this.props; 
         let board_date = this.props.board.date;
         return (
             <div>
-                <div onClick={()=>onSelect(board.id)}>
+                <div onClick={()=>selectBoard(board.id)}>
                 {board.title} &nbsp; &nbsp;
                 {board.user_id} &nbsp; &nbsp;
                 {moment(board_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;
