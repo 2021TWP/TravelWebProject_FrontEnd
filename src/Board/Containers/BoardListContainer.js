@@ -28,7 +28,7 @@ class BoardListContainer extends Component {
         const { boards, selectBoard, checked } = this.boardStore;
         const boardList = boards.map(board => {
             return (
-                <span onClick={() => seperateBoard(board.id)}><BoardItemView key={board.id} board={board} checked={checked} checked_id={checked.id} onSelect={()=>selectBoard(board.id)} /></span>
+                <span onClick={() => seperateBoard(board.id)}><BoardItemView key={board.id} board={board} checked={checked} checked_id={checked.id} selectBoard={()=>selectBoard(board.id)} /></span>
             )
         });
 
