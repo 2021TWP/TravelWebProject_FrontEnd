@@ -66,6 +66,38 @@ class BoardStore {
         }
     }
 
+    async selectFree(){
+        try{
+            const results = await boardApi.boardFree();
+            // console.log(results)
+            runInAction(()=>this.boards = results);
+            console.log(this.boards)
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+    async selectReview(){
+        try{
+            const results = await boardApi.boardReview();
+            runInAction(()=>this.boards = results);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+
+    async selectImpromptu(){
+        try{
+            const results = await boardApi.boardImpromptu();
+            runInAction(()=>this.boards = results);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     async boardHit(){
         try{
             runInAction(()=>this.board.hit += 1)
@@ -91,7 +123,8 @@ class BoardStore {
 
     async boardAdd() {
         try{
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19);
+            this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
             this.selectAll();
             console.log(this.board);
@@ -99,7 +132,7 @@ class BoardStore {
             console.log(error);
             this.message = error.message;
         }
-
+        this.selectAll();
         this.init();
     }
 
@@ -110,7 +143,7 @@ class BoardStore {
         }catch(error){
             this.message = error.message;
         }
-  
+        this.selectAll();
           this.init();
       }
   
@@ -159,7 +192,7 @@ async commentAdd() {
         this.comment.comment_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
         ;
         this.comment.board_id = this.board.id;
-        this.comment.user_id = sessionStorage.getItem("name")
+        this.comment.user_id = sessionStorage.getItem("id")
         // await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
         await boardApi.commentCreate(this.comment);
         // this.selectBoardComment();
@@ -167,8 +200,8 @@ async commentAdd() {
         console.log(error);
         runInAction(this.message = error.message);
     }
-
-    this.comment_init();
+    this.selectBoardComment(this.board.id);
+    // this.comment_init();
 }
 
 async commentRemove() {
@@ -179,7 +212,7 @@ async commentRemove() {
     }catch(error){
         this.message = error.message;
     }
-
+    this.selectBoardComment(this.board.id)
       this.comment_init();
   }
 

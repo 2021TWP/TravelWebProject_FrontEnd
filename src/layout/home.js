@@ -8,7 +8,7 @@ import Footer from './Footer';
 const sections = [
   { title: '여행일정', url: '#' },
   { title: '게시판', url: '/board/list/' },
-  { title: '마이페이지', url: '#' },
+  { title: '마이페이지', url: '/mypage/list/' },
 
 ];
 

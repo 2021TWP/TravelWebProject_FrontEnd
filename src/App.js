@@ -20,6 +20,10 @@ import home from './layout/home';
 import SeperateBoardList from './Board/Views/SeperateBoardList';
 import ScheduleUpdateView from './Schedule/views/ScheduleUpdateView';
 import BoardUpdateView from './Board/Views/BoardUpdateView';
+import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
+import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
+import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
+import mypage_tabBar from './mypage/layout/mypage_tabBar';
 
 
 class App extends Component {
@@ -44,7 +48,10 @@ class App extends Component {
           <Route exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
           <Route exact path="/board/update/:id" component={BoardUpdateView}/>
-
+          <Route exact path="/board/free/" component={BoardFreeListContainer}/>
+          <Route exact path="/board/review/" component={BoardReviewListContainer}/>
+          <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
+          <Route exact path="/mypage/list/" component={mypage_tabBar}/>  {/* 임시 */}
         </Switch>
       </Router>
     )
