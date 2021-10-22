@@ -42,20 +42,16 @@ const CustomButtonRoot = styled('span')(`
   cursor: pointer;
   box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
   border: none;
-
   &:hover {
     background-color: #0059b2;
   }
-
   &.${buttonUnstyledClasses.active} {
     background-color: #004386;
   }
-
   &.${buttonUnstyledClasses.focusVisible} {
     box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
     outline: none;
   }
-
   &.${buttonUnstyledClasses.disabled} {
     opacity: 0.5;
     cursor: not-allowed;
@@ -107,6 +103,7 @@ class BoardListContainer extends Component {
               key={board.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => seperateBoard(board.id)}>
               <TableCell component="th" scope="row" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.title}</TableCell>
+              {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell> */}
               <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell>
               <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
               <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.hit}</TableCell>

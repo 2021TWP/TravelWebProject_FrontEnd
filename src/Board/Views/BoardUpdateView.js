@@ -63,8 +63,9 @@ class BoardUpdateView extends Component {
   componentDidMount(){
     // console.log(this.props.match.params.id)
     // this.boardStore.selectBoard(this.props.match.params.id);
-    this.boardStore.boardSetProps(this.props.match.params.id);
-    console.log(this.boardStore.board.id)
+    this.boardStore.boardSetProps("id", this.props.match.params.id);
+    this.boardStore.selectBoard(this.props.match.params.id);
+    console.log(this.boardStore.board.board_content)
 }
   
   render() {

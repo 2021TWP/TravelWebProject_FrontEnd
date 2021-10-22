@@ -1,6 +1,11 @@
 import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
+function GoBoardList(e) {
+    window.location.href = '/board/list/';
+}
+
+
 class BoardStore {
     board = {id:"",
             user_id:"", 
@@ -25,6 +30,7 @@ class BoardStore {
 
     checked = {id : "" , checked :  "false"}
 
+
     constructor(){
         makeAutoObservable(this, {}, {autoBind:true})
     }
@@ -42,19 +48,16 @@ class BoardStore {
     }
 
 
-
     //action
     async selectBoard(id){
         try{
             const result = await boardApi.boardDetail(id);
             runInAction(()=>this.board = result);
-            
             this.boardHit();
             this.selectBoardComment(id)
         }catch(error){
             console.log(error);
         }
-
     }
 
     async selectAll(){
@@ -133,6 +136,7 @@ class BoardStore {
             this.message = error.message;
         }
         this.selectAll();
+        GoBoardList()
         this.init();
     }
 
@@ -144,7 +148,8 @@ class BoardStore {
             this.message = error.message;
         }
         this.selectAll();
-          this.init();
+        this.init();
+        GoBoardList()
       }
   
     async boardModify() {

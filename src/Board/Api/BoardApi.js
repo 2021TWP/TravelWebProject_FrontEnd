@@ -30,17 +30,17 @@ class BoardApi{
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/', 
-        {
-            user_id: `${board.user_id}`,
-            category_id: `${board.category_id}`,
-            schedule_id: `${board.schedule_id}`,
-            imgUrl: `${board.imgUrl}`,
-            title:`${board.title}`,
-            date: `${board.date}`,
-            board_content: `${board.board_content}`
-        })
-                .then((response)=>response.data);
+        return axios.post(this.URL+'create/', board
+        // {
+        //     user_id: `${board.user_id}`,
+        //     category_id: `${board.category_id}`,
+        //     schedule_id: `${board.schedule_id}`,
+        //     imgUrl: `${board.imgUrl}`,
+        //     title:`${board.title}`,
+        //     date: `${board.date}`,
+        //     board_content: `${board.board_content}`
+        // })
+    )  .then((response)=>response.data);
     }
 
     boardUpdate(id, board){
