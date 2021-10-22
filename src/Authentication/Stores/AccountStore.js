@@ -22,8 +22,13 @@ class AccountStore {
         username: null,
         password1: null,
         password2: null,
+        new_password1: null,
+        new_password2: null,
+        token: null,
+        uid: null,
         email: null,
         name: null,
+        token: null
     };
     
     token_header = {}
@@ -64,6 +69,7 @@ class AccountStore {
                 sessionStorage.setItem('name', `${userData.name}`)
                 sessionStorage.setItem('id', `${userData.id}`)
                 sessionStorage.setItem('email', `${userData.email}`)
+                sessionStorage.setItem('username', `${userData.username}`)
                 window.location.href='/'
             }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
@@ -76,10 +82,37 @@ class AccountStore {
     async handlePasswordResetSubmit() {
         try {
             console.log(this.user.email)
-            await accountApi.resetPw(this.user.email);
+            const data = await accountApi.resetPw(this.user.email);
+            if ('detail' in data){
+                alert(data.detail)
+            }
+            else {
+                runInAction(() => this.error_message = {...this.error_message, ...data})
+            }
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
+    }
+
+    async handlePasswordResetConfirmSubmit(uid, token) {
+        try {
+            const data = await accountApi.resetPwConfirm(this.user, uid, token);
+            if ('detail' in data){
+                alert(data.detail, "창은 자동으로 종료됩니다.");
+                window.close();
+            }
+            else {
+                runInAction(() => this.error_message = {...this.error_message, ...data})
+                if (this.error_message.uid || this.error_message.token) {
+                    alert("잘못된 접근입니다. 다시 시도 부탁드립니다.")
+                    window.close();
+                }
+            }
+        }catch(error) {
+            runInAction(() => this.message = error.message)
+            alert(this.message)
+        }
+        console.log(this.error_message.password1)
     }
 
     async handleLogoutSubmit() {
