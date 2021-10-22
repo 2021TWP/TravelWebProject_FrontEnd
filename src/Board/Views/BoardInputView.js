@@ -50,123 +50,91 @@ function CustomButton(props) {
     window.location.href = '/board/list/';
 }
 
-
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange, boardModify, init} = this.props;
+        const {board, boardAdd, boardChange} = this.props;
+
         return (
-            <div>
+        <div>
 
-    <Box sx={{ minWidth: 50}}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">category</InputLabel>
-        <Select 
-        name="category_id"
-        onChange={(e)=>boardChange(e.target.name, e.target.value)}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="category"
-        >
-          <MenuItem value="1">자유 게시판</MenuItem>
-          <MenuItem value="2">여행 일지</MenuItem>
-          <MenuItem value="3">번개 모임</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-
-
+            <Box sx={{ minWidth: 50}}>
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">category</InputLabel>
+                <Select 
+                name="category_id"
+                onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="category"
+                >
+                <MenuItem value="1">자유 게시판</MenuItem>
+                <MenuItem value="2">여행 일지</MenuItem>
+                <MenuItem value="3">번개 모임</MenuItem>
+                </Select>
+            </FormControl>
+            </Box>
 
 
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '50ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    > <br/> 
-      <TextField
-        id="outlined-name"
-        name="title"
-        value={board.title} 
-        onChange={(e)=>boardChange(e.target.name, e.target.value)}
-        label="제목"/> <br/>
 
-    </Box>
 
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '100ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-        id="outlined-uncontrolled"
-        name="board_content"
-        value={board.board_content} 
-        onChange={(e)=>boardChange(e.target.name, e.target.value)}
-        label="내용"/> <br/>
-    </Box>
-    
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '100ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-        id="outlined-uncontrolled"
-        name="imgUrl"
-        value={board.imgUrl} 
-        onChange={(e)=>boardChange(e.target.name, e.target.value)}
-        label="사진"/> 
-    </Box>
+            <Box
+            component="form"
+            sx={{
+                '& > :not(style)': { m: 1, width: '50ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            > <br/> 
+            <TextField
+                id="outlined-name"
+                name="title"
+                value={board.title} 
+                onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                label="제목"/> <br/>
 
-    <Stack spacing={2} direction="row">
-        <CustomButton onClick={()=>boardAdd()}>ADD</CustomButton>
-        {/* <CustomButton onClick={()=>boardModify()}>MODIFY</CustomButton> */}
-        <CustomButton onClick={()=>init()}>초기화</CustomButton>
-        <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
+            </Box>
 
-    </Stack>
-        <br/><br/><br/><br/>
+            <Box
+            component="form"
+            sx={{
+                '& > :not(style)': { m: 1, width: '100ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            >
+            <TextField
+                id="outlined-uncontrolled"
+                name="board_content"
+                value={board.board_content} 
+                onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                label="내용"/> <br/>
+            </Box>
+            
+            <Box
+            component="form"
+            sx={{
+                '& > :not(style)': { m: 1, width: '100ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            >
+            <TextField
+                id="outlined-uncontrolled"
+                name="imgUrl"
+                value={board.imgUrl} 
+                onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                label="사진"/> 
+            </Box>
 
-                {/* <select name="category_id" onChange={(e)=>boardChange(e.target.name, e.target.value)}>
-                    <option value="1">자유 게시판</option>
-                    <option value="2">여행 일지</option>
-                    <option value="3">번개 모임</option>
-                </select> */}
+            <Stack spacing={2} direction="row">
+                <CustomButton onClick={()=>boardAdd()}>ADD</CustomButton>
+                {/* <CustomButton onClick={()=>init()}>초기화</CustomButton> */}
+                <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
 
-                {/* <input
-                    type="text" 
-                    name="title"
-                    value={board.title} 
-                    onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                    placeholder="제목"/><br/>
+            </Stack>
+            <br/><br/><br/><br/>
 
-                <input
-                    type="text" 
-                    name="board_content"
-                    value={board.board_content} 
-                    onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                    placeholder="내용"/><br/>
-
-                <input
-                    type="text" 
-                    name="imgUrl"
-                    value={board.imgUrl} 
-                    onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                    placeholder="사진"/><br/>
-                
-
-                <button onClick={()=>boardAdd()}>ADD</button>
-                <button onClick={()=>boardModify()}>MODIFY</button>
-                <button onClick={()=>init()}>초기화</button> */}
-            </div>
+        </div>
         );
     }
 }

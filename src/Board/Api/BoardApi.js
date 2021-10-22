@@ -39,8 +39,9 @@ class BoardApi{
         //     title:`${board.title}`,
         //     date: `${board.date}`,
         //     board_content: `${board.board_content}`
-        // })
-    )  .then((response)=>response.data);
+        // }
+        )
+      .then((response)=>response.data);
     }
 
     boardUpdate(id, board){

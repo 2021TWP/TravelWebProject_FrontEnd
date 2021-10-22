@@ -1,7 +1,7 @@
 import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
-function GoBoardList(e) {
+function goBoardList(e) {
     window.location.href = '/board/list/';
 }
 
@@ -46,7 +46,6 @@ class BoardStore {
     boardSetProps = (name, value) => {
         this.board = {...this.board, [name]:value}
     }
-
 
     //action
     async selectBoard(id){
@@ -130,34 +129,33 @@ class BoardStore {
             this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
             this.selectAll();
+            goBoardList();
             console.log(this.board);
         }catch(error){
             console.log(error);
             this.message = error.message;
         }
-        this.selectAll();
-        GoBoardList()
-        this.init();
+
     }
 
     async boardRemove() {
         try{
             await boardApi.boardDelete(this.board.id);
             this.selectAll();
+            goBoardList();
         }catch(error){
             this.message = error.message;
         }
-        this.selectAll();
-        this.init();
-        GoBoardList()
+
       }
   
     async boardModify() {
         try{
             console.log(this.board.id)
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
+            // goBoardList();
         }catch(error){
             this.message = error.message;
         }
