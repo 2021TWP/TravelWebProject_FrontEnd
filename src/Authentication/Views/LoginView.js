@@ -28,7 +28,7 @@ export default class LoginView extends Component {
           
         const theme = createTheme();
         
-        const { user, setProps, handleLoginSubmit, message, onClickEvent, handleLogoutSubmit, test  } = this.props
+        const { user, setProps, handleLoginSubmit, message, onClickEvent } = this.props
         return (
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -89,7 +89,7 @@ export default class LoginView extends Component {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/authentication/password/reset" variant="body2">
                     비밀번호 찾기
                   </Link>
                 </Grid>
