@@ -8,23 +8,40 @@ class BoardApi{
                 .then((response)=>response.data);
     }
 
+    boardFree(){
+        return axios.get(this.URL +'free/')
+                .then((response)=>response.data);
+    }
+
+    boardReview(){
+        return axios.get(this.URL +'review/')
+                .then((response)=>response.data);
+    }
+
+    boardImpromptu(){
+        return axios.get(this.URL +'impromptu/')
+                .then((response)=>response.data);
+    }
+
+
     boardDetail(id){
         return axios.get(this.URL+`${id}/`)
                 .then((response)=>response.data);
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/', 
-        {
-            user_id: `${board.user_id}`,
-            category_id: `${board.category_id}`,
-            schedule_id: `${board.schedule_id}`,
-            imgUrl: `${board.imgUrl}`,
-            title:`${board.title}`,
-            date: `${board.date}`,
-            board_content: `${board.board_content}`
-        })
-                .then((response)=>response.data);
+        return axios.post(this.URL+'create/', board
+        // {
+        //     user_id: `${board.user_id}`,
+        //     category_id: `${board.category_id}`,
+        //     schedule_id: `${board.schedule_id}`,
+        //     imgUrl: `${board.imgUrl}`,
+        //     title:`${board.title}`,
+        //     date: `${board.date}`,
+        //     board_content: `${board.board_content}`
+        // }
+        )
+      .then((response)=>response.data);
     }
 
     boardUpdate(id, board){
@@ -60,16 +77,16 @@ class BoardApi{
     }
 
     commentCreate(comment){
-        return axios.post(this.URL+'comment/create/',
-        {   
-            board_id: `${comment.board_id}`,
-            user_id: `${comment.user_id}`,
-            comment_content: `${comment.comment_content}`,
-            // comment_date: `${comment.comment_date}`
-            comment_date: `${comment.comment_date}`,
-        })
+        return axios.post(this.URL+'comment/create/', comment)
                 .then((response)=>response.data);
     }
+
+    // commentCreate(comment){
+    //     return axios.post(this.URL+'comment/create/', comment)
+    //             .then((response)=>response.data);
+    // }
+
+
 
     commentUpdate(id, comment){
         console.log(comment.board_id, comment.comment_content)

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import BoardStore from '../Stores/BoardStore';
 
 
+
+
 class BoardDetailPage extends Component {
     boardStore = BoardStore
 

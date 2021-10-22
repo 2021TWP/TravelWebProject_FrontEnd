@@ -1,6 +1,11 @@
 import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
+function goBoardList(e) {
+    window.location.href = '/board/list/';
+}
+
+
 class BoardStore {
     board = {id:"",
             user_id:"", 
@@ -25,6 +30,7 @@ class BoardStore {
 
     checked = {id : "" , checked :  "false"}
 
+
     constructor(){
         makeAutoObservable(this, {}, {autoBind:true})
     }
@@ -45,20 +51,49 @@ class BoardStore {
     async selectBoard(id){
         try{
             const result = await boardApi.boardDetail(id);
-            console.log(id);
             runInAction(()=>this.board = result);
-            
             this.boardHit();
             this.selectBoardComment(id)
         }catch(error){
             console.log(error);
         }
-
     }
 
     async selectAll(){
         try{
             const results = await boardApi.boardList();
+            runInAction(()=>this.boards = results);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    async selectFree(){
+        try{
+            const results = await boardApi.boardFree();
+            // console.log(results)
+            runInAction(()=>this.boards = results);
+            console.log(this.boards)
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+    async selectReview(){
+        try{
+            const results = await boardApi.boardReview();
+            runInAction(()=>this.boards = results);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+
+    async selectImpromptu(){
+        try{
+            const results = await boardApi.boardImpromptu();
             runInAction(()=>this.boards = results);
         }catch(error){
             console.log(error);
@@ -90,35 +125,37 @@ class BoardStore {
 
     async boardAdd() {
         try{
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19);
+            this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
             this.selectAll();
+            goBoardList();
             console.log(this.board);
         }catch(error){
             console.log(error);
             this.message = error.message;
         }
 
-        this.init();
     }
 
     async boardRemove() {
         try{
             await boardApi.boardDelete(this.board.id);
             this.selectAll();
+            goBoardList();
         }catch(error){
             this.message = error.message;
         }
-  
-          this.init();
+
       }
   
     async boardModify() {
         try{
             console.log(this.board.id)
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
+            // goBoardList();
         }catch(error){
             this.message = error.message;
         }
@@ -155,16 +192,19 @@ async selectComment(comment){
 
 async commentAdd() {
     try{
-        this.comment.comment_date = new Date();
+        this.comment.comment_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
+        ;
         this.comment.board_id = this.board.id;
-        await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
+        this.comment.user_id = sessionStorage.getItem("id")
+        // await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
+        await boardApi.commentCreate(this.comment);
         // this.selectBoardComment();
     }catch(error){
         console.log(error);
         runInAction(this.message = error.message);
     }
-
-    this.comment_init();
+    this.selectBoardComment(this.board.id);
+    // this.comment_init();
 }
 
 async commentRemove() {
@@ -175,7 +215,7 @@ async commentRemove() {
     }catch(error){
         this.message = error.message;
     }
-
+    this.selectBoardComment(this.board.id)
       this.comment_init();
   }
 
