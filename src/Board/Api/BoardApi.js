@@ -14,7 +14,7 @@ class BoardApi{
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/', 
+        return axios.post(this.URL+'create/',
         {
             user_id: `${board.user_id}`,
             category_id: `${board.category_id}`,
@@ -23,7 +23,8 @@ class BoardApi{
             title:`${board.title}`,
             date: `${board.date}`,
             board_content: `${board.board_content}`
-        })
+        }
+        )
                 .then((response)=>response.data);
     }
 

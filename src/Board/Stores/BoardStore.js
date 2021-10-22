@@ -41,6 +41,10 @@ class BoardStore {
         this.board = {...this.board, [name]:value}
     }
 
+    goList = (e) => {
+        window.location.href = '/board/list/';
+    }
+
     //action
     async selectBoard(id){
         try{
@@ -90,9 +94,11 @@ class BoardStore {
 
     async boardAdd() {
         try{
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
+            this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
             this.selectAll();
+            // this.goList();
             console.log(this.board);
         }catch(error){
             console.log(error);
@@ -106,6 +112,7 @@ class BoardStore {
         try{
             await boardApi.boardDelete(this.board.id);
             this.selectAll();
+            this.goList();
         }catch(error){
             this.message = error.message;
         }
@@ -116,9 +123,10 @@ class BoardStore {
     async boardModify() {
         try{
             console.log(this.board.id)
-            this.board.date = new Date()
+            this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
+            // this.goList();
         }catch(error){
             this.message = error.message;
         }
