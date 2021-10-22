@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
 import PasswordResetConfirmContainer from './Authentication/Containers/PasswordResetConfirmContainer';
+import GroupContainer from './Authentication/Containers/GroupContainer';
 // import { withRouter } from 'react-router-dom';
 // import mypage_plan from './mypage/pages/MyPage_Plan';
 // import mypage_scrap from './mypage/pages/MyPage_Scrap';
@@ -30,6 +31,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import BoardStore from './Board/Stores/BoardStore';
 
 import MypageListContainer from './mypage/Containers/MyPageListContainer' 
+import PasswordChangeContainer from './Authentication/Containers/PasswordChangeContainer';
 
 class App extends Component {
   boardStore = BoardStore
@@ -57,7 +59,9 @@ class App extends Component {
           <Route exact path="/authentication/signup/" component={RegisterContainer}/>
           <Route exact path="/authentication/emailconfirmed/" component={EmailConfirmedContainer}/>
           <Route exact path="/authentication/password/reset/" component={PasswordResetContainer} />
-          <Route exact path="/authentication/password/reset/:uid/:token" component={PasswordResetConfirmContainer} />
+          <Route exact path="/authentication/password/reset/:uid/:token/" component={PasswordResetConfirmContainer} />
+          <Route exact path="/authentication/password/change/" component={PasswordChangeContainer}/>
+          <Route exact path="/authentication/group/create/" component={GroupContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
