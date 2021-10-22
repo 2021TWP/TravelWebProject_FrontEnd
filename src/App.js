@@ -34,6 +34,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 //////////////////////////////////////////////////////
 import BoardStore from './Board/Stores/BoardStore';
 
+
 import MypageListContainer from './mypage/Containers/MyPageListContainer' 
 
 class App extends Component {
@@ -75,6 +76,7 @@ class App extends Component {
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
           <Route exact path="/mypage/list/" component={mypage_tabBar}/>  {/* 임시 */}
+          
 
         </Switch>
         <Footer

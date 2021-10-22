@@ -9,7 +9,9 @@ class ScheduleStore {
     title: "",
     description: "",
     start_date: "",
-    end_date: ""
+    end_date: "",
+    lat:"",
+    lng:""
   };
   scheduleList = [];
   content = { id: "", schedule_id: "", content: "" };
@@ -151,7 +153,7 @@ class ScheduleStore {
       console.log(error);
     }
   }
-  // location받는 부분
+
 
 }
 
