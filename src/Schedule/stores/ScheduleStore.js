@@ -31,9 +31,7 @@ class ScheduleStore {
 
   async selectSchedule(id) {
     try {
-      // console.log(id);
       const result = await ScheduleApi.scheduleDetail(id);
-      // console.log(result);
       runInAction(() => this.schedule = result);
 
 
@@ -54,8 +52,6 @@ class ScheduleStore {
     try {
       const data = await ScheduleApi.scheduleCreate(this.schedule);
       if ('id' in data) {
-        console.log(data);
-        console.log("success");
         runInAction(() => this.schedule = data);
       }
       else {
@@ -93,23 +89,18 @@ class ScheduleStore {
 
 
   handlerSetProps_schedule(name, value) {
-    // console.log(name, value);
     this.schedule = { ...this.schedule, [name]: value }
-    // console.log(value) //기존 properties에 name:value만 수정
   }
 
   handlerSetProps_content(name, value) {
-    // console.log(name, value);
     this.content = { ...this.content, [name]: value };
-    // console.log(this.content.content); //기존 properties에 name:value만 수정
   }
 
   async selectAll_content(s_id) {
     try {
       const result = await ScheduleApi.contentList(s_id);
       runInAction(() => this.contentList = result);
-      console.log(result);
-      console.log(this.contentList);
+      
     } catch (error) {
       console.log(error);
     }
@@ -118,10 +109,7 @@ class ScheduleStore {
     try {
       this.content.schedule_id = s_id;
       
-      console.log(this.content); 
       await ScheduleApi.contentCreate(this.content);
-      // console.log(this.content.content)
-      // this.selectAll_content();
       console.log("add test", this.content.content);
     } catch (error) {
       console.log(error)
