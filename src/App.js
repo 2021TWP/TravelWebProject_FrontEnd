@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import BoardInputContainer from './Board/Containers/BoardInputContainer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from './header';
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
+import PasswordResetConfirmContainer from './Authentication/Containers/PasswordResetConfirmContainer';
 // import { withRouter } from 'react-router-dom';
 // import mypage_plan from './mypage/pages/MyPage_Plan';
 // import mypage_scrap from './mypage/pages/MyPage_Scrap';
@@ -25,21 +25,44 @@ import BoardReviewListContainer from './Board/Containers/BoardReviewListContaine
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
 import mypage_tabBar from './mypage/layout/mypage_tabBar';
 
+///////////////Header, Footer/////////////////////////
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+//////////////////////////////////////////////////////
+import BoardStore from './Board/Stores/BoardStore';
+
+import MypageListContainer from './mypage/Containers/MyPageListContainer' 
 
 class App extends Component {
+  boardStore = BoardStore
   render() {
+    const sections = [
+      { title: '여행일정', url: '/travel/' },
+      { title: '게시판', url: '/board/list/' },
+      { title: '마이페이지', url: '/mypage/' },    
+    ];
+    const theme = createTheme();
+    // const {board} = this.boardStore
     return (
       <Router>
-        {window.location.href !== 'http://localhost:3000/authentication/login' && window.location.href !=="http://localhost:3000/authentication/signup"
-        && window.location.href !== 'http://localhost:3000/authentication/login/' && window.location.href !=="http://localhost:3000/authentication/signup/"
-        ? <Header/> 
-        : null}
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="lg">
+        {window.location.href.includes('authentication')
+        ? null
+        : <Header title="Travel" sections={sections}/> }
+        </Container>
+
         <Switch>
           <Route exact path="/" component={home}/>    
           <Route exact path="/authentication/login/" component={LoginContainer}/>
           <Route exact path="/authentication/signup/" component={RegisterContainer}/>
           <Route exact path="/authentication/emailconfirmed/" component={EmailConfirmedContainer}/>
           <Route exact path="/authentication/password/reset/" component={PasswordResetContainer} />
+          <Route exact path="/authentication/password/reset/:uid/:token" component={PasswordResetConfirmContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
@@ -52,7 +75,13 @@ class App extends Component {
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
           <Route exact path="/mypage/list/" component={mypage_tabBar}/>  {/* 임시 */}
+
         </Switch>
+        <Footer
+        title="Footer"
+        description="Something here to give the footer a purpose!"
+      />
+    </ThemeProvider>
       </Router>
     )
   }
