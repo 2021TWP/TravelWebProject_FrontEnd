@@ -9,13 +9,15 @@ class AccountStore {
         username: "",
         password1: "",
         password2: "",
+        old_password: "",
         email: "",
         name: "", 
     }
     
     group = {
-        groupName: "",
+        group_name: "",
         pin: "",
+        schedules: [],
     }
 
     error_message = {
@@ -24,11 +26,11 @@ class AccountStore {
         password2: null,
         new_password1: null,
         new_password2: null,
+        old_password: null,
         token: null,
         uid: null,
         email: null,
         name: null,
-        token: null
     };
     
     token_header = {}
@@ -52,7 +54,6 @@ class AccountStore {
             }else {
                 runInAction(()=>this.error_message = {...this.error_message, ...data})
             }
-            console.log(this.error_message.username[0])              
         }catch(error) {
             runInAction(() => this.message = error.message)
             // console.log(this.message)
@@ -115,6 +116,17 @@ class AccountStore {
         console.log(this.error_message.password1)
     }
 
+    async handlePasswordChangeSubmit() {
+        try {
+            const data = await accountApi.changePassword(this.user)
+            alert(data)
+        }catch(error) {
+            runInAction(() => this.message = error.message)
+            alert(this.message)
+        }
+        console.log(this.error_message.password1)
+    }
+
     async handleLogoutSubmit() {
         try {
             await accountApi.logout();
@@ -149,13 +161,13 @@ class AccountStore {
     }
 
     async setProps(name, value) {
-        if (name === 'groupName' || name === 'pin') {
+        if (name === 'group_name' || name === 'pin') {
             runInAction(() => this.group = {...this.group, [name]: value});
         } else {
             runInAction(() => this.user = {...this.user, [name]: value});
             console.log(name, value)
         }
-        
+        console.log(name, value)
     }
 
 
