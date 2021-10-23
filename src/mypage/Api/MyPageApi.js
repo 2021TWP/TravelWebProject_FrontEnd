@@ -2,7 +2,7 @@ import axios from "axios";
 
 class MyPageApi{
 
-  URL = 'api/mypage/'
+  URL = '/api/mypage/'
 
   mypageList(id){ // user id 물어보기 
     return axios.get(this.URL).then((response)=>response.data)
@@ -56,7 +56,9 @@ class MyPageApi{
   // mypagePlanDelete(id,pk){
   //   return axios.put(this.URL + `${id}/plan/delete/${pk}/`).then((response)=>response.data)
   // }
-
+  getAuthor(user_id) {
+    return axios.get(this.URL + `getusername/${user_id}`).then((response)=>response.data)
+  }
 }
 
 export default new MyPageApi();

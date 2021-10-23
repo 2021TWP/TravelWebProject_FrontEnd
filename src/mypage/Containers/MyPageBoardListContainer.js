@@ -18,13 +18,16 @@ class MyPageBoardListContainer extends Component {
     // }
 
     render() {
-        const { boards, selectBoard, checked, selectAll } = this.boardStore;
-        const {selectMypageAll} = this.mypageStore
+        const {selectBoard, checked, selectAll } = this.boardStore;
+        const {user, boards,selectMypageAll, getAuthor} = this.mypageStore
         return(
         <MyPageBoardListView boards={boards}
                             selectBoard={selectBoard}
                             selectAll={selectAll}
-                            selectMypageAll={selectMypageAll}/>
+                            selectMypageAll={selectMypageAll}
+                            boardStore = {this.boardStore}
+                            user = {user}
+                            getAuthor = {getAuthor}/>
                             );
       
 

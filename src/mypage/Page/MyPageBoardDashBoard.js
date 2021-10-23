@@ -17,7 +17,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems , thirdListItems } from '../layout/listItems';
+import { mainListItems, secondaryListItems , thirdListItems, HomeItems } from '../layout/listItems';
 import MyPageBoardContainer from '../Containers/MyPageBoardListContainer';
 import BoardListContainer from '../../Board/Containers/BoardListContainer'
 
@@ -118,7 +118,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+             {sessionStorage.getItem("username")}의 MY PAGE
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -143,10 +143,13 @@ function DashboardContent() {
           <Divider />
           {/* <List>{mainListItems}</List> */}
           {/* <Divider /> */}
-          <List>{secondaryListItems}</List> 
-          <Divider />
           <List>{thirdListItems}</List>
+          <Divider />
+          <List>{secondaryListItems}</List> 
 
+          <List>{HomeItems}</List>
+
+          
         </Drawer>
         <Box
           component="main"

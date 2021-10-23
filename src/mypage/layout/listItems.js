@@ -20,6 +20,10 @@ function GoMyPageList(e) {
   window.location.href = '/mypage/list/';
 }
 
+function GoHome(e) {
+  window.location.href = '/';
+}
+
 export const mainListItems = (
   <div>
       <ListSubheader inset>일정</ListSubheader>
@@ -108,3 +112,21 @@ export const thirdListItems = (
   </div>
 );
 
+
+export const HomeItems = (
+  <div>
+    <Divider />
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="홈"  onClick={() => GoHome()}/>
+    </ListItem>
+    {/* <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="내가 쓴 댓글" />
+    </ListItem> */}
+  </div>
+);
