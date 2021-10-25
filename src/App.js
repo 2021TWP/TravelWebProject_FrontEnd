@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EmailConfirmedContainer from './Authentication/Containers/EmailConfirmedContainer';
 import PasswordResetContainer from './Authentication/Containers/PasswordResetContainer';
 import PasswordResetConfirmContainer from './Authentication/Containers/PasswordResetConfirmContainer';
-import GroupContainer from './Authentication/Containers/GroupContainer';
+import GroupListContainer from './Authentication/Containers/GroupListContainer';
+import GroupCreateContainer from './Authentication/Containers/GroupCreateContainer';
 // import { withRouter } from 'react-router-dom';
 // import mypage_plan from './mypage/pages/MyPage_Plan';
 // import mypage_scrap from './mypage/pages/MyPage_Scrap';
@@ -62,11 +63,12 @@ class App extends Component {
           <Route exact path="/" component={home}/>    
           <Route exact path="/authentication/login/" component={LoginContainer}/>
           <Route exact path="/authentication/signup/" component={RegisterContainer}/>
-          <Route exact path="/authentication/emailconfirmed/" component={EmailConfirmedContainer}/>
+          <Route exact path="/authentication/emailconfirmed/:key/" component={EmailConfirmedContainer}/>
           <Route exact path="/authentication/password/reset/" component={PasswordResetContainer} />
           <Route exact path="/authentication/password/reset/:uid/:token/" component={PasswordResetConfirmContainer} />
           <Route exact path="/authentication/password/change/" component={PasswordChangeContainer}/>
-          <Route exact path="/authentication/group/create/" component={GroupContainer} />
+          <Route exact path="/group/" component={GroupListContainer} />
+          <Route exact path="/group/create/" component={GroupCreateContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
