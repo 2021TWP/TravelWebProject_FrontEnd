@@ -105,7 +105,7 @@ keywordChange = (e) =>{
             <div>
 
                 <h3>게시글 목록</h3>
-                {/* <Paper sx={{ width: '100%', overflow: 'hidden' }} > */}
+                <Paper sx={{ width: '100%', overflow: 'hidden' }} >
         <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -139,7 +139,7 @@ keywordChange = (e) =>{
         </TableBody>
         </Table>
             </TableContainer> <br/>
-            {/* <Stack spacing={1} alignItems= 'center' justify= 'center'>
+            <Stack spacing={1} alignItems= 'center' justify= 'center'>
       <Pagination  count={10} color="primary"  alignItems= 'center' justify= 'center'/>
     </Stack>
     <div>
@@ -153,10 +153,10 @@ keywordChange = (e) =>{
           label="검색"
           value={this.state.keyword}
           onChange = {this.keywordChange}
-        />  */}
+        /> 
           
- {/* </div> */}
-            {/* </Paper> */}
+ </div>
+            </Paper>
 <div>
 
 </div>

@@ -37,6 +37,7 @@ import BoardStore from './Board/Stores/BoardStore';
 import Dashboard from './mypage/layout/DashBoard';
 import MyPageBoardDashBoard from './mypage/Page/MyPageBoardDashBoard';
 import MyPageListDashBoard from './mypage/Page/MyPageListDashBoard';
+import MyPageGroupDashBoard from './mypage/Page/MyPageGroupDashBoard';
 
 
 class App extends Component {
@@ -79,6 +80,8 @@ class App extends Component {
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
           <Route exact path="/mypage/list/" component={MyPageListDashBoard}/>  
           <Route exact path="/mypage/myboard/" component={MyPageBoardDashBoard}/>
+          <Route exact path="/mypage/mygroup/" component={MyPageGroupDashBoard}/>
+
 
 
         </Switch>

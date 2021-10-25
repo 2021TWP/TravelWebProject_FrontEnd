@@ -24,6 +24,11 @@ function GoHome(e) {
   window.location.href = '/';
 }
 
+function GoGroup(e) {
+  window.location.href = '/mypage/mygroup/';
+}
+
+
 export const mainListItems = (
   <div>
       <ListSubheader inset>일정</ListSubheader>
@@ -68,7 +73,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="내 그룹" />
+      <ListItemText primary="내 그룹" onClick={() => GoGroup()} />
     </ListItem> <br/>
     {/* <ListItem button>
       <ListItemIcon>

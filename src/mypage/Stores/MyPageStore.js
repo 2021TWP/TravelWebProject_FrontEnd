@@ -21,9 +21,16 @@ class MyPageStore{
   like:0};
 
   boards = [];
+  
+  filterText = "";
 
 constructor(){
   makeAutoObservable(this,{},{autoBind:true})
+}
+
+
+handlerFilterTextChange(filterText){
+  this.filterText = filterText // argument로 들어온 filterText로 바꿔준다 
 }
 
 

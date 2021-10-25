@@ -19,7 +19,7 @@ class MyPageBoardListContainer extends Component {
 
     render() {
         const {selectBoard, checked, selectAll } = this.boardStore;
-        const {user, boards,selectMypageAll, getAuthor} = this.mypageStore
+        const {user, boards,selectMypageAll, getAuthor , handlerFilterTextChange , filterText} = this.mypageStore
         return(
         <MyPageBoardListView boards={boards}
                             selectBoard={selectBoard}
@@ -27,7 +27,9 @@ class MyPageBoardListContainer extends Component {
                             selectMypageAll={selectMypageAll}
                             boardStore = {this.boardStore}
                             user = {user}
-                            getAuthor = {getAuthor}/>
+                            getAuthor = {getAuthor}
+                            filterText={filterText}
+                            handlerFilterTextChange={handlerFilterTextChange}/>
                             );
       
 
