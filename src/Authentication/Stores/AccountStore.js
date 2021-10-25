@@ -21,10 +21,12 @@ class AccountStore {
         group_name: "",
         pin: "",
         schedules: [],
+        created_date: "",
     }
 
     groups = [];
 
+    myGroupsId = [];
     myGroups = [];
 
     error_message = {
@@ -44,7 +46,7 @@ class AccountStore {
 
     csrftoken = CSRFToken
     
-
+    search = "";
 
 
     constructor() {
@@ -71,7 +73,7 @@ class AccountStore {
         try {
             const data = await accountApi.emailConfirm(key);
             if ('detail' in data){
-                if (data.datail === "ok") {
+                if (data.detail === "ok") {
                 alert("이메일 인증 완료")
                 } else {
                     alert("잘못된 접근입니다. 다시 시도 부탁드립니다.")
@@ -171,6 +173,7 @@ class AccountStore {
 
     async handleCreateGroupSubmit() {
         try {
+            this.group.created_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19);
             await accountApi.groupCreate(this.group);
         }catch(error) {
             runInAction(() => this.message = error.message)
@@ -195,11 +198,12 @@ class AccountStore {
     async setProps(name, value) {
         if (name === 'group_name' || name === 'pin') {
             runInAction(() => this.group = {...this.group, [name]: value});
-        } else {
-            runInAction(() => this.user = {...this.user, [name]: value});
+        } else if (name === 'search') {
+            runInAction(() => this.search = value)
             console.log(name, value)
+        }else {
+            runInAction(() => this.user = {...this.user, [name]: value});
         }
-        console.log(name, value)
     }
 
     async showAllGroups() {
@@ -214,7 +218,8 @@ class AccountStore {
     async showMyGroups() {
         try {
             const data = await accountApi.myGroupList();
-            runInAction(() => this.myGroups = data)
+            runInAction(() => this.myGroupsId = data['id'])
+            runInAction(() => this.myGroups = data['groups'])
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
@@ -233,6 +238,7 @@ class AccountStore {
     async handleGroupJoinSubmit(g_id, pin) {
         try {
             const data = await accountApi.joinGroup(g_id, pin);
+            this.showMyGroups();
             if ('error' in data){
                 alert(data.error);
             }
@@ -247,6 +253,8 @@ class AccountStore {
     async handleGroupWithdrawlSubmit(g_id) {
         try{
             const data = await accountApi.withdrawGroup(g_id);
+            this.showAllGroups();
+            this.showMyGroups();
             if ('error' in data){
                 alert(data.error);
             }
