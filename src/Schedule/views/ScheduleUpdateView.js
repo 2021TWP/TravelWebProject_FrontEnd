@@ -2,7 +2,8 @@ import { TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import MapContainer from '../../Map/MapContainer';
-import { Button, Paper, Box, InputBase, Grid, Input, Stack, InputAdornment, IconButton } from '@material-ui/core'
+import { Button, Paper, Box, InputBase, Grid, Input, InputAdornment, IconButton } from '@material-ui/core'
+import Stack from '@mui/material/Stack';
 import SearchIcon from '@material-ui/icons/Search'
 import { getPlaceData } from '../api/getApi'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';

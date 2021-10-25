@@ -25,7 +25,6 @@ import BoardUpdateView from './Board/Views/BoardUpdateView';
 import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
 import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
-import mypage_tabBar from './mypage/layout/mypage_tabBar';
 
 ///////////////Header, Footer/////////////////////////
 import Header from './layout/Header';
@@ -35,9 +34,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //////////////////////////////////////////////////////
 import BoardStore from './Board/Stores/BoardStore';
-
-import MypageListContainer from './mypage/Containers/MyPageListContainer' 
+import Dashboard from './mypage/layout/DashBoard';
+import MyPageBoardDashBoard from './mypage/Page/MyPageBoardDashBoard';
+import MyPageListDashBoard from './mypage/Page/MyPageListDashBoard';
+import MyPageGroupDashBoard from './mypage/Page/MyPageGroupDashBoard';
 import PasswordChangeContainer from './Authentication/Containers/PasswordChangeContainer';
+
 
 class App extends Component {
   boardStore = BoardStore
@@ -45,7 +47,7 @@ class App extends Component {
     const sections = [
       { title: '여행일정', url: '/travel/' },
       { title: '게시판', url: '/board/list/' },
-      { title: '마이페이지', url: '/mypage/' },    
+      { title: '마이페이지', url: '/mypage/list/' },    
     ];
     const theme = createTheme();
     // const {board} = this.boardStore
@@ -54,7 +56,7 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth="lg">
-        {window.location.href.includes('authentication')
+        {window.location.href.includes('authentication') || window.location.href.includes('mypage')
         ? null
         : <Header title="Travel" sections={sections}/> }
         </Container>
@@ -80,7 +82,11 @@ class App extends Component {
           <Route exact path="/board/free/" component={BoardFreeListContainer}/>
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
-          <Route exact path="/mypage/list/" component={mypage_tabBar}/>  {/* 임시 */}
+          <Route exact path="/mypage/list/" component={MyPageListDashBoard}/>  
+          <Route exact path="/mypage/myboard/" component={MyPageBoardDashBoard}/>
+          <Route exact path="/mypage/mygroup/" component={MyPageGroupDashBoard}/>
+
+
 
         </Switch>
         <Footer
