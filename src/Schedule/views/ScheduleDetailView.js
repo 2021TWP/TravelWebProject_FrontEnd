@@ -1,19 +1,15 @@
 import { TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import MapContainer from '../../Map/MapContainer';
-import { Button, Paper, Box, InputBase, Grid, Input, InputAdornment, IconButton } from '@material-ui/core'
-import Stack from '@mui/material/Stack';
-import SearchIcon from '@material-ui/icons/Search'
-import { getPlaceData } from '../api/getApi'
+
+import MapView from '../../Map/MapView';
+import { Button, Paper, Box, Stack } from '@material-ui/core'
+
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePicker } from '@mui/lab';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ScheduleStore from '../stores/ScheduleStore';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+
 
 class ScheduleDetailView extends Component {
   scheduleStore = ScheduleStore;
@@ -38,15 +34,14 @@ class ScheduleDetailView extends Component {
   }
 
   render() {
-    const { schedule, contentList, content, handlerSetProps_schedule,
-      selectAll_content, addContent, deleteContent, updateContent,
-      selectContent, addSchedule } = this.scheduleStore;
-  
-
+    const { schedule, contentList, 
+      selectContent } = this.scheduleStore;
+    console.log("s_lat", schedule.lat);
+    console.log(schedule.lng);
     const contents = contentList.map(content => {
-      
+
       return (
-        <TextField key={content.id} value={content.content}
+        <TextField key={content.id} value={content.content} style={{ width: '40%' }}
           InputProps={{
             readOnly: true,
           }}
@@ -59,7 +54,8 @@ class ScheduleDetailView extends Component {
         <Button onClick={() => this.createSchedule()}>create</Button>
         <Button onClick={() => this.updateSchedule(schedule.id)}>modify</Button>
         <Button onClick={() => this.scheduleList()}>List</Button>
-        <MapContainer />
+
+        <MapView schedule={schedule} />
 
 
         <Stack
@@ -74,7 +70,6 @@ class ScheduleDetailView extends Component {
               readOnly
               label="start_date"
               value={schedule.start_date}
-              // value={schedule.start_date}
               onChange={st_date => {
                 this.setState({ st_date });
               }}
@@ -86,7 +81,6 @@ class ScheduleDetailView extends Component {
               label="end_date"
               readOnly
               value={schedule.end_date}
-              // value={schedule.end_date}
               onChange={ed_date => {
                 this.setState({ ed_date });
               }}
@@ -95,7 +89,6 @@ class ScheduleDetailView extends Component {
           </LocalizationProvider>
         </Stack>
 
-        {/* 여행 일정 추가 하는 부분 끝에 날짜 기록하면 좋을듯?? */}
         <Stack
           direction="column"
           justifyContent="flex-start"
@@ -105,42 +98,46 @@ class ScheduleDetailView extends Component {
           <TextField
             required
             id="outlined-required"
-            
+
             name='location'
             placeholder="location"
             value={schedule.location}
             InputProps={{
               readOnly: true,
-            }}style={{ width: '40%' }}
+            }} style={{ width: '40%' }}
           />
           <TextField
             required
             id="outlined-required"
-         
+
             name='title'
             placeholder="title"
             value={schedule.title}
             InputProps={{
               readOnly: true,
-            }}style={{ width: '40%' }}
+            }} style={{ width: '40%' }}
           />
           <TextField
             required
             id="outlined-required"
-            
             name='description'
             placeholder="description"
             value={schedule.description}
             InputProps={{
               readOnly: true,
-            }}style={{ width: '40%' }}
+            }} style={{ width: '40%' }}
             multiline
             rows={4}
           />
 
           {contents}
         </Stack>
-
+        <Box
+          sx={{
+            pt: 8,
+            pb: 6,
+          }}
+        ></Box>
 
       </div>
     );

@@ -1,11 +1,10 @@
 import { TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import MapContainer from '../../Map/MapContainer';
-import { Button, Paper, Box, InputBase, Grid, Input, InputAdornment, IconButton } from '@material-ui/core'
-import Stack from '@mui/material/Stack';
-import SearchIcon from '@material-ui/icons/Search'
-import { getPlaceData } from '../api/getApi'
+
+import MapView from '../../Map/MapView';
+import { Button, Paper, Box, InputBase, Grid, Input, Stack, InputAdornment, IconButton } from '@material-ui/core'
+
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePicker } from '@mui/lab';
@@ -13,7 +12,6 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ScheduleStore from '../stores/ScheduleStore';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 function createSchedule(e) {
   window.location.href = "/schedules/create/"
@@ -44,7 +42,7 @@ class ScheduleUpdateView extends Component {
       selectContent, addSchedule, updateSchedule, deleteSchedule } = this.scheduleStore;
 
     const contents = contentList.map(content => {
-      console.log(content.id);
+      
       return (
         <TextField key={content.id} value={content.content} style={{ width: '40%' }}
           InputProps={{
@@ -57,11 +55,8 @@ class ScheduleUpdateView extends Component {
     return (
       <div>
         <Button onClick={() => this.scheduleList()}>List</Button>
-        <MapContainer />
+        <MapView schedule={schedule}/>
 
-
-
-        {/* 여긴 날짜 갖고 오는 부분 */}
         <Stack
           direction="row"
           justifyContent="flex-end"
@@ -106,8 +101,6 @@ class ScheduleUpdateView extends Component {
             />
           </LocalizationProvider>
         </Stack>
-
-        {/* 여행 일정 추가 하는 부분 끝에 날짜 기록하면 좋을듯?? */}
         <Stack
           direction="column"
           justifyContent="flex-start"
@@ -179,7 +172,12 @@ class ScheduleUpdateView extends Component {
 
 
         </Stack>
-
+        <Box
+          sx={{
+            pt: 8,
+            pb: 6,
+          }}
+        ></Box>
       </div>
     );
   }

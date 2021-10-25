@@ -1,9 +1,10 @@
 import { TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import {observer} from 'mobx-react';
-import MapContainer from '../../Map/MapContainer';
-import { Button, Paper, Box, InputBase, Grid, Input,InputAdornment, IconButton } from '@material-ui/core'
-import Stack from '@mui/material/Stack';
+
+import MapView from '../../Map/MapView';
+import { Button, Paper, Box, InputBase, Grid, Input,  Stack, InputAdornment, IconButton } from '@material-ui/core'
+
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -12,7 +13,7 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+
 
 class ScheduleUpdateView extends Component {
   
@@ -30,7 +31,7 @@ class ScheduleUpdateView extends Component {
       const contents = contentList.map(content =>{
       
       return(
-        <TextField key ={content.id} value={content.content} 
+        <TextField key ={content.id} value={content.content} style={{ width: '40%' }}
         InputProps={{
           readOnly: true,
         }}
@@ -40,9 +41,9 @@ class ScheduleUpdateView extends Component {
 
     return (
       <div>
-        <MapContainer />
+        <MapView schedule={schedule}/>
 
-        
+        {console.log("create",schedule.lat)}
 
 {/* 여긴 날짜 갖고 오는 부분 */}
         <Stack
@@ -121,7 +122,7 @@ class ScheduleUpdateView extends Component {
         
           <Paper
             component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '40%' }}
           >
 
             <InputBase
@@ -152,7 +153,12 @@ class ScheduleUpdateView extends Component {
               <Button onClick={() =>  this.updateAndReturn()}>SAVE</Button>
 
         </Stack>
-
+        <Box
+          sx={{
+            pt: 8,
+            pb: 6,
+          }}
+        ></Box>
       </div>
     );
   }

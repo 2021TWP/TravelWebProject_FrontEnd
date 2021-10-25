@@ -41,6 +41,9 @@ import MyPageGroupDashBoard from './mypage/Page/MyPageGroupDashBoard';
 import PasswordChangeContainer from './Authentication/Containers/PasswordChangeContainer';
 
 
+
+import MypageListContainer from './mypage/Containers/MyPageListContainer' 
+
 class App extends Component {
   boardStore = BoardStore
   render() {
@@ -82,6 +85,7 @@ class App extends Component {
           <Route exact path="/board/free/" component={BoardFreeListContainer}/>
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
+
           <Route exact path="/mypage/list/" component={MyPageListDashBoard}/>  
           <Route exact path="/mypage/myboard/" component={MyPageBoardDashBoard}/>
           <Route exact path="/mypage/mygroup/" component={MyPageGroupDashBoard}/>
