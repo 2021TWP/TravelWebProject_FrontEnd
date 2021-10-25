@@ -90,7 +90,7 @@ class BoardApi{
 
     commentUpdate(id, comment){
         console.log(comment.board_id, comment.comment_content)
-        return axios.put(this.URL+`comment/update/${id}/`, 
+        return axios.put(this.URL+`comment/update/${id}/`,
         {
             board_id: `${comment.board_id}`,
             id : `${comment.id}`,
@@ -99,7 +99,8 @@ class BoardApi{
             // comment_date: `${comment.comment_date}`
             // comment_date: Date.now(),
             comment_date: new Date(),
-        })
+        }
+        )
                 .then((response)=>response.data);
     }
 

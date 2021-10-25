@@ -1,6 +1,8 @@
 import React, { useEffect, Component } from 'react';
+
 import MapView from '../../Map/MapView';
 import { Button, Paper, Box, InputBase, Grid, Input, TextField, Stack, InputAdornment, IconButton } from '@material-ui/core'
+
 import SearchIcon from '@material-ui/icons/Search'
 import { getPlaceData } from '../api/getApi'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
