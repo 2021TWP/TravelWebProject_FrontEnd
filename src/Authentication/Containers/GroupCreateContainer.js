@@ -7,10 +7,10 @@ import GroupCreateView from '../Views/GroupCreateView';
 class GroupCreateContainer extends Component {
     accountStore = AccountStore    
     render() {
-        const { createGroup, group, setProps} = this.accountStore;
+        const { handleCreateGroupSubmit, group, setProps} = this.accountStore;
         return (
             <div>
-                <GroupCreateView    createGroup={createGroup}
+                <GroupCreateView    handleCreateGroupSubmit={handleCreateGroupSubmit}
                                     group={group}
                                     setProps={setProps}/>
             </div>

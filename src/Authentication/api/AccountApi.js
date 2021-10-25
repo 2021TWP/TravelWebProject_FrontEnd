@@ -36,12 +36,6 @@ class AccountApi {
                     .catch(error => error.response.data)
     }
 
-    groupCreate(group) {
-        return axios.post(this.URL + 'group/create/', group)
-                    .then(response => response.data)
-                    .catch(error => error.response.data)
-    }
-
     getUser() {
         return axios.get(this.URL + `userinfo/`)
                     .then(response => response.data)
@@ -67,6 +61,12 @@ class AccountApi {
         return axios.post(this.URL + `password/change/`, {  new_password1: `${user.password1}`,
                                                             new_password2: `${user.password2}`,
                                                             old_password: `${user.old_password}` }, headerCheck())
+                    .then(response => response.data)
+                    .catch(error => error.response.data)
+    }
+
+    groupCreate(group) {
+        return axios.post(this.URL + 'group/create/', group)
                     .then(response => response.data)
                     .catch(error => error.response.data)
     }

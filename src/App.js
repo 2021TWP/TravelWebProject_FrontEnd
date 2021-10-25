@@ -50,6 +50,7 @@ class App extends Component {
     const sections = [
       { title: '여행일정', url: '/travel/' },
       { title: '게시판', url: '/board/list/' },
+      { title: '그룹', url: '/group/' },
       { title: '마이페이지', url: '/mypage/list/' },    
     ];
     const theme = createTheme();
@@ -73,6 +74,7 @@ class App extends Component {
           <Route exact path="/authentication/password/reset/:uid/:token/" component={PasswordResetConfirmContainer} />
           <Route exact path="/authentication/password/change/" component={PasswordChangeContainer}/>
           <Route exact path="/group/" component={GroupListContainer} />
+          <Route exact path="/group/create/" component={GroupCreateContainer} />
           <Route exact path="/group/create/" component={GroupCreateContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>

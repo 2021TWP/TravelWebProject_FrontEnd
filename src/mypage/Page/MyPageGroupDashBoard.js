@@ -20,6 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems , thirdListItems, HomeItems } from '../layout/listItems';
 import MyPageBoardContainer from '../Containers/MyPageBoardListContainer';
 import BoardListContainer from '../../Board/Containers/BoardListContainer'
+import GroupMyListContainer from '../Containers/GroupMyListContainer';
 
 
 function Copyright(props) {
@@ -166,7 +167,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
 
-그룹 들어갈 자리 !!!!!!!!!!!!!!!
+          <GroupMyListContainer />
 
             <Copyright sx={{ pt: 4 }} />
           </Container>

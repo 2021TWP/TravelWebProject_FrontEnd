@@ -10,15 +10,15 @@ import TableCell from '@mui/material/TableCell';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
 /////////////////////////////////Import Account///////////////////////////////////
-import AccountStore from '../Stores/AccountStore';
-import GroupListView from '../Views/GroupListView';
+import AccountStore from '../../Authentication/Stores/AccountStore';
+import GroupMyListView from '../Views/GroupMyListView';
+import GroupMySearchView from '../Views/GroupMySearchView';
 import axios from 'axios';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import GroupSearchView from '../Views/GroupSearchView';
 
 /////////////////////////////////////////Design Started/////////////////////////////////////
 function createBoard(e) {
@@ -65,31 +65,27 @@ function CustomButton(props) {
 
 ////////////////////////////////////Design End//////////////////////////////////////////////////
 
-class GroupListContainer extends Component {
+class GroupMyListContainer extends Component {
     componentDidMount() {
-      this.accountStore.showAllGroups();   // 모든 그룹
-      this.accountStore.showMyGroups();
+      this.accountStore.showMyGroups();   // 모든 그룹
     }
     
     accountStore = AccountStore
 
     render() {
         const rows = []
-        const {groups, showAllGroups, users, usersInGroup, handleGroupJoinSubmit, showMyGroups, myGroups, myGroupsId, handleGroupWithdrawlSubmit} = this.accountStore;
-        groups.forEach(group=>{
+        const {groups, showAllGroups, users, usersInGroup, handleGroupJoinSubmit, showMyGroups, myGroups, handleGroupWithdrawlSubmit} = this.accountStore;
+        myGroups.forEach(group=>{
           if (group.group_name.indexOf(this.accountStore.search) === -1 && group.id.toString().indexOf(this.accountStore.search) === -1) {
             return;
           }
           rows.push(
-            <GroupListView  group={group}
+            <GroupMyListView  group={group}
                             key={group.id}
-                            showAllGroups={showAllGroups}
                             usersInGroup={usersInGroup}
                             users={users}
-                            handleGroupJoinSubmit={handleGroupJoinSubmit}
                             showMyGroups={showMyGroups}
                             myGroups={myGroups}
-                            myGroupsId={myGroupsId}
                             handleGroupWithdrawlSubmit={handleGroupWithdrawlSubmit}/>
           )
         })
@@ -127,7 +123,7 @@ class GroupListContainer extends Component {
                         </TableBody>
                       </Table>
                     </TableContainer> <br/>
-                    <GroupSearchView  setProps={this.accountStore.setProps}
+                    <GroupMySearchView  setProps={this.accountStore.setProps}
                                       search={this.accountStore.search}/>
                   </div>
                 </Box>
@@ -137,4 +133,4 @@ class GroupListContainer extends Component {
     }
 }
 
-export default observer(GroupListContainer);
+export default observer(GroupMyListContainer);

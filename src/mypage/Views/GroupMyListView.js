@@ -42,12 +42,7 @@ function CustomButton(props) {
   }
 
 
-class GroupListView extends Component {  
-  joinGroup(g_id) {
-    const pin = prompt("pin을 입력해주세요")
-    this.props.handleGroupJoinSubmit(g_id, pin);
-  }
-
+class GroupMyListView extends Component {  
   withdrawGroup(g_id) {
     this.props.handleGroupWithdrawlSubmit(g_id);
   }
@@ -60,15 +55,13 @@ class GroupListView extends Component {
           <TableCell align="left">{this.props.group.id}</TableCell>
           <TableCell component="th" scope="row" align='left'>{this.props.group.group_name}</TableCell>
           <TableCell align="right">{moment(this.props.group.created_date).format(('YYYY. MM. DD.'))}</TableCell>
-            {this.props.myGroupsId.includes(this.props.group.id)
-            ? <TableCell align="right"><CustomButton onClick={()=>this.withdrawGroup(this.props.group.id)}>탈퇴</CustomButton></TableCell>
-            : <TableCell align="right"><CustomButton onClick={()=>this.joinGroup(this.props.group.id)}>가입</CustomButton></TableCell>}
+          <TableCell align="right"><CustomButton onClick={()=>this.withdrawGroup(this.props.group.id)}>탈퇴</CustomButton></TableCell>
           </TableRow>
       );
     }
 }
 
-export default GroupListView;
+export default GroupMyListView;
 
 
 // class MyPageBoardContainer extends Component {
