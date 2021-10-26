@@ -18,9 +18,10 @@ class CommentListView extends Component {
                 {board.id === comment.board_id ? comment.user_id : ""} */}
                 <BsPen onClick={()=>commentModify()}/> &nbsp;
                 {/* <button onClick={()=>commentModify()}>MODIFY</button> */}
-                <GrTrash onClick={()=>commentRemove()}/>
-                {/* <button onClick={()=>commentRemove()}>REMOVE</button>  */}
+                <GrTrash onClick={()=>commentRemove(comment.id)}/>
                 </div>
+                {/* <button onClick={()=>commentRemove()}>REMOVE</button>  */}
+    
             </div>
         );
     }
