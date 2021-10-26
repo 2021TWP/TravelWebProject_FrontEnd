@@ -1,5 +1,4 @@
 import {makeAutoObservable, runInAction} from 'mobx'
-// import Cookies from 'js-cookie';
 import boardApi from '../Api/BoardApi'
 
 function goBoardList(e) {
@@ -106,23 +105,11 @@ class BoardStore {
             runInAction(()=>this.board.hit += 1)
             const result = await boardApi.boardHit(this.board);
             runInAction(()=>this.board = result);
-            console.log(this.board.id)
             this.selectAll();
         }catch(error){
             console.log(error);
         }
     }
-
-    // async boardLike(){
-    //     try{
-    //         // runInAction(()=>this.board.like += 1)
-    //         const result = await boardApi.boardLike(this.board);
-    //         runInAction(()=>this.board = result);
-    //         // this.selectAll();
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
 
     async boardAdd() {
         try{

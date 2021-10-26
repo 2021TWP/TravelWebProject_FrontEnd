@@ -64,7 +64,7 @@ class BoardDetailView extends Component {
         let category_id = this.props.board.category_id
         return (
             <div> 
-              <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+              <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 <Box sx={{ m: 2 }}>
                   <Typography gutterBottom variant="h5" component="div">
                   {board.title}
