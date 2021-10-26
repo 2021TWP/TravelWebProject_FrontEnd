@@ -140,8 +140,6 @@ export default function MyPageGroupSchedule(props) {
             </IconButton>
           </Toolbar>
           <Divider />
-          {/* <List>{mainListItems}</List> */}
-          {/* <Divider /> */}
           <List>{thirdListItems}</List>
           <Divider />
           <List>{secondaryListItems}</List> 
@@ -175,8 +173,3 @@ export default function MyPageGroupSchedule(props) {
     </ThemeProvider>
   );
 }
-
-//link에서 state 바꾸기
-// export default function Dashboard() {
-//   return <DashboardContent />;
-// }
