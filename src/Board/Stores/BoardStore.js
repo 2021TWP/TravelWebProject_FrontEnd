@@ -44,11 +44,6 @@ class BoardStore {
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
     }
 
-
-    // isLogin = () => !!Cookies.get('token')
-    isLogin = () => !!sessionStorage.getItem('id')
-
-
     boardSetProps = (name, value) => {
         this.board = {...this.board, [name]:value}
     }
@@ -161,7 +156,7 @@ class BoardStore {
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
-            // goBoardList();
+            goBoardList();
         }catch(error){
             this.message = error.message;
         }

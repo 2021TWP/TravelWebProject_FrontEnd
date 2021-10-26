@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -152,4 +153,4 @@ class BoardUpdateView extends Component {
 }
 }
 
-export default BoardUpdateView;
+export default observer(BoardUpdateView);

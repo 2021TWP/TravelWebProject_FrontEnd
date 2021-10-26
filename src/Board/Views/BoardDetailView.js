@@ -100,30 +100,20 @@ class BoardDetailView extends Component {
                     <Typography variant="body1">
                     <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
                     </Typography>
+
+                    <div>
+                      <br/>
+                      {sessionStorage.getItem('id') == board.user_id ?
+                        (<Stack spacing={2} direction="row">
+                          <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
+                          <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
+                        </Stack>) : (<div></div>)
+                      }
+                    </div>
                 </Box>
               </Box>
 
-              <div>
-              {/* {function Greeting(props) {
-                const isLoggedIn = props.isLoggedIn;
-                if (isLoggedIn) {
-                  return <UserGreeting />;
-                }
-                return <GuestGreeting />;
-                }
-              } */}
-              {sessionStorage.getItem('id') == board.user_id ?
-                (<Stack spacing={2} direction="row">
-                  <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
-                  <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
-                </Stack>) : (<div></div>)
-              }
 
-{/* {(() => { if (isLogin) { 
-  return <UserGreeting />; } else { 
-    return <GeustGreeting />; } } ) 
-    } */}
-              </div>
             </div>
         );
     }
