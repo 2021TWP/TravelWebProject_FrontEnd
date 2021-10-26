@@ -89,11 +89,8 @@ keywordChange = (e) =>{
         this.props.selectMypageAll()   // id에 맞는 게시글만 가져오기 
   
     }
-    componentDidUpdate(prevProps) {
-      if (this.props.user !== prevProps.user) {
-        this.props.getAuthor(this.props.board.user_id);
-      }
-    }
+
+
 
 
     render() {
