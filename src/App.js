@@ -24,10 +24,13 @@ import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
 import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
 import mypage_tabBar from './mypage/layout/mypage_tabBar';
+import PrivateRoute from './PrivateRoute';
+
 
 
 class App extends Component {
   render() {
+    
     return (
       <Router>
         {window.location.href !== 'http://localhost:3000/authentication/login' && window.location.href !=="http://localhost:3000/authentication/signup"
@@ -45,7 +48,7 @@ class App extends Component {
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
           <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} />
           <Route exact path="/board/list/" component={BoardListContainer}/>
-          <Route exact path="/board/create/" component={BoardInputContainer}/>
+          <PrivateRoute exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
           <Route exact path="/board/update/:id" component={BoardUpdateView}/>
           <Route exact path="/board/free/" component={BoardFreeListContainer}/>

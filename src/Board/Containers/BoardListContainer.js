@@ -70,7 +70,7 @@ class BoardListContainer extends Component {
     }
 
     render() {
-        const { boards, selectBoard, checked } = this.boardStore;
+        const { boards, selectBoard, isLogin } = this.boardStore;
         // selectAll()
         
         // const boardList = boards.map(board => { 
@@ -103,9 +103,9 @@ class BoardListContainer extends Component {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => seperateBoard(board.id)}>
               <TableCell component="th" scope="row" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.title}</TableCell>
               {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell> */}
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell>
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.hit}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.user_id}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.hit}</TableCell>
               {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.like}</TableCell> */}
             </TableRow>
           ))}
@@ -120,8 +120,11 @@ class BoardListContainer extends Component {
                     {/* <h3>게시글 목록</h3> */}
                     {/* {boardList} */}
                     <Stack spacing={2} direction="row">
-                        <CustomButton onClick={() => createBoard()}>글쓰기</CustomButton> &nbsp; 
+                        <CustomButton onClick={() => createBoard()}>글쓰기</CustomButton> &nbsp;
+                        
+                        
                         <CustomButton onClick={() => GoHome()}>홈</CustomButton>
+                        
 
                     </Stack>
 

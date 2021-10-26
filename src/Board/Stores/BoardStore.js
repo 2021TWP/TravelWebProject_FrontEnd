@@ -1,4 +1,5 @@
 import {makeAutoObservable, runInAction} from 'mobx'
+// import Cookies from 'js-cookie';
 import boardApi from '../Api/BoardApi'
 
 function goBoardList(e) {
@@ -43,7 +44,10 @@ class BoardStore {
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
     }
 
-    
+
+    // isLogin = () => !!Cookies.get('token')
+    isLogin = () => !!sessionStorage.getItem('id')
+
 
     boardSetProps = (name, value) => {
         this.board = {...this.board, [name]:value}

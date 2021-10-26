@@ -21,6 +21,7 @@
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
     "http-proxy-middleware": "^2.0.1",
+    "js-cookie": "^3.0.1",
     "mobx": "^6.3.3",
     "mobx-react": "^7.2.0",
     "moment": "^2.29.1",

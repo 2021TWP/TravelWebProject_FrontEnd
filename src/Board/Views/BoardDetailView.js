@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
@@ -66,65 +65,51 @@ class BoardDetailView extends Component {
         return (
             <div> 
               <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <Box sx={{ my: 4, mx: 2 }}>
-                  <Grid container alignItems="center">
-                    <Grid item xs>
-                      <Typography gutterBottom variant="h5" component="div">
-                      {board.title}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography gutterBottom variant="h6" component="div">
-                      {
-                        (function() {
-                          if (category_id === 1) return ("자유게시판");
-                          if (category_id === 2) return ("여행 일지");
-                          if (category_id === 3) return ("번개모임");
-                        })
-                      } 
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid>
+                <Box sx={{ m: 2 }}>
+                  <Typography gutterBottom variant="h5" component="div">
+                  {board.title}
+                  </Typography>
+
+                  <Typography gutterBottom variant="h6" component="div">
+                  {function(){
+                    if (category_id === 1) return ("자유게시판");
+                    if (category_id === 2) return ("여행 일지");
+                    if (category_id === 3) return ("번개모임");
+                    }
+                  } 
+                  자유게시판
+                  </Typography>
+
                   <Typography variant="body1">
                   {board.user_id} 
                   </Typography>
-                  </Grid>
-                  <Grid>
+
                   <Typography color="text.secondary" variant="body2">
                   {moment(board_date).format(('YYYY. MM. DD. HH:mm'))} | 조회수 {board.hit}
                   </Typography>
-                  </Grid>
                 </Box>
+
                 <Divider variant="middle" />
-                <Box sx={{ my: 4, mx: 2 }}>
-                  {/* <Grid container alignItems="center"> */}
-                  <Stack
-  direction="column"
-  justifyContent="center"
-  alignItems="flex-start"
-  spacing={2}
->
-                      <Typography variant="body1">
-                      {/* {board.imgUrl} */}
-                      imagesss 
-                      </Typography>
+
+                <Box sx={{ m: 2 }}>
+                    <Typography variant="body1">
+                    {/* {board.imgUrl} */}
+                    imagesss 
+                    </Typography>
 
 
-                      <Typography variant="body1">
-                      <br/>
-                      {board.board_content}
-                      </Typography>
+                    <Typography variant="body1">
+                    <br/>
+                    {board.board_content}
+                    </Typography>
 
-                      <Typography variant="body1">
-                      <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄보기</Button>
-                      schedule_idddd
-                      </Typography>
-                      </Stack>
-
-                  {/* </Grid> */}
+                    <Typography variant="body1">
+                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄보기</Button>
+                    schedule_idddd
+                    </Typography>
                 </Box>
               </Box>
+
                 {
                 (function() {
                   if (category_id === 1) return ("자유게시판");
@@ -136,11 +121,20 @@ class BoardDetailView extends Component {
                 {/* <button>좋아요 {board.like} </button>  &nbsp;&nbsp; */}
                 {/* onClick={()=>boardLike()} */}
 
-              <Stack spacing={2} direction="row">
-                <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
-                {/* <CustomButton onClick={()=>init()}>초기화</CustomButton> */}
-                <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
-              </Stack>
+              <div>
+              {/* {function Greeting(props) {
+                const isLoggedIn = props.isLoggedIn;
+                if (isLoggedIn) {
+                  return <UserGreeting />;
+                }
+                return <GuestGreeting />;
+                }
+              } */}
+                <Stack spacing={2} direction="row">
+                  <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
+                  <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
+                </Stack>
+              </div>
             </div>
         );
     }
