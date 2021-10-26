@@ -98,8 +98,7 @@ class BoardDetailView extends Component {
                     </Typography>
 
                     <Typography variant="body1">
-                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄보기</Button>
-                    schedule_idddd
+                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
                     </Typography>
                 </Box>
               </Box>
@@ -113,12 +112,17 @@ class BoardDetailView extends Component {
                 return <GuestGreeting />;
                 }
               } */}
-              {sessionStorage.getItem('id') === board.user_id ?
+              {sessionStorage.getItem('id') == board.user_id ?
                 (<Stack spacing={2} direction="row">
                   <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
                   <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
-                </Stack>) : (<div>{sessionStorage.getItem('id')}</div>)
+                </Stack>) : (<div></div>)
               }
+
+{/* {(() => { if (isLogin) { 
+  return <UserGreeting />; } else { 
+    return <GeustGreeting />; } } ) 
+    } */}
               </div>
             </div>
         );

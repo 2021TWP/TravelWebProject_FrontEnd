@@ -140,8 +140,8 @@ class BoardUpdateView extends Component {
     </Box>
 
     <Stack spacing={2} direction="row">
-        <CustomButton onClick={()=>boardModify()}>MODIFY</CustomButton>
-        <CustomButton onClick={()=>init()}>초기화</CustomButton>
+        <CustomButton onClick={()=>boardModify()}>수정하기</CustomButton>
+        <CustomButton onClick={()=>init()}>전부 지우기</CustomButton>
         <CustomButton onClick={() => GoBack()}>뒤로가기</CustomButton>
         <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
 
