@@ -15,7 +15,6 @@ class ScheduleApi{
 
   scheduleCreate(scheduleInfo){
     const schedule ={...scheduleInfo};
-    //josn api stream 변환하는거...
     return axios.post(this.URL + 'create/',schedule)
                 .then((response)=>response.data);
   }
@@ -52,18 +51,13 @@ class ScheduleApi{
   }
 
   contentList(s_id){
-    // return axios.get(this.URL+`content/${s_id}`)
     return axios.get(this.URL+`content/${s_id}/`)
                 .then((response) => response.data);
   }
 
-  // getScheduleByGroup(g_id){
-  //   return axios.get(this.URL+``)
-  // }
   mypagePlan(g_id){
     return axios.get(this.URL + `group/${g_id}/schedule/`).then((response)=>response.data)
   }
-
 
   mypagePlanCreate(scheduleInfo,g_id){
     const schedule ={...scheduleInfo};

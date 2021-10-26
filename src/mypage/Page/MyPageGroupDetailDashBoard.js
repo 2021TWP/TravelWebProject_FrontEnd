@@ -178,7 +178,4 @@ export default function MyPageGroupDetailDashBoard(props) {
   );
 }
 
-//link에서 state 바꾸기
-// export default function Dashboard() {
-//   return <DashboardContent />;
-// }
+

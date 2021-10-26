@@ -17,6 +17,7 @@ class CommentListView extends Component {
                 <GrTrash onClick={()=>commentRemove()}/></div> : <div></div>
 
                 }
+
             </div>
         );
     }

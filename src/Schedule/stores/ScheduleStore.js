@@ -112,7 +112,6 @@ class ScheduleStore {
       this.content.schedule_id = s_id;
 
       await ScheduleApi.contentCreate(this.content);
-      console.log("add test", this.content.content);
     } catch (error) {
       console.log(error)
     }
@@ -158,16 +157,14 @@ class ScheduleStore {
   async getGroupSchedules(g_id) {
     try {
       const schedules_g = await ScheduleApi.mypagePlan(g_id);
-      // console.log(schedules_g)
       runInAction(() => this.scheduleList = schedules_g)
-      // console.log(this.scheduleList)
     } catch (error) {
 
       console.log(error);
     }
   }
 
-  
+
   async createGroupSchedule(g_id) {
     try {
       const data = await ScheduleApi.mypagePlanCreate(this.schedule, g_id);
@@ -181,9 +178,8 @@ class ScheduleStore {
     } catch (error) {
       console.log(error)
     }
-    // this.init();
   }
-  
+
 }
 
 export default new ScheduleStore();

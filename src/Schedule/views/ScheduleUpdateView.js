@@ -27,13 +27,13 @@ class ScheduleUpdateView extends Component {
   scheduleList(g_id) {
     window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
-  deleteAndReturn(){
+  deleteAndReturn(g_id) {
     this.scheduleStore.deleteSchedule(this.props.id);
-    this.scheduleList();
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
-  updateAndReturn(){
+  updateAndReturn(g_id) {
     this.scheduleStore.updateSchedule();
-    this.scheduleList();
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
 
   render() {
@@ -41,9 +41,9 @@ class ScheduleUpdateView extends Component {
       selectAll_content, addContent, deleteContent, updateContent,
       selectContent, addSchedule, updateSchedule, deleteSchedule } = this.scheduleStore;
 
-      const{g_id,id} = this.props;
+    const { g_id, id } = this.props;
     const contents = contentList.map(content => {
-      
+
       return (
         <TextField key={content.id} value={content.content} style={{ width: '40%' }}
           InputProps={{
@@ -56,7 +56,7 @@ class ScheduleUpdateView extends Component {
     return (
       <div>
         <Button onClick={() => this.scheduleList(g_id)}>List</Button>
-        <MapView schedule={schedule}/>
+        <MapView schedule={schedule} />
 
         <Stack
           direction="row"
@@ -64,11 +64,11 @@ class ScheduleUpdateView extends Component {
           alignItems="center"
           spacing={2}
         >
-        <Button onClick={() => this.updateAndReturn()}>수정하기</Button>
-      
-        <Button onClick={() => this.deleteAndReturn(schedule.id)}>삭제하기</Button>
-        
-          
+          <Button onClick={() => this.updateAndReturn(this.props.g_id)}>수정하기</Button>
+
+          <Button onClick={() => this.deleteAndReturn(this.props.g_id)}>삭제하기</Button>
+
+
         </Stack>
         <Stack
           direction="row"
@@ -82,7 +82,6 @@ class ScheduleUpdateView extends Component {
               readOnly
               label="start_date"
               value={schedule.start_date}
-              // value={schedule.start_date}
               onChange={st_date => {
                 this.setState({ st_date });
               }}
@@ -94,7 +93,6 @@ class ScheduleUpdateView extends Component {
               label="end_date"
               readOnly
               value={schedule.end_date}
-              // value={schedule.end_date}
               onChange={ed_date => {
                 this.setState({ ed_date });
               }}
@@ -149,7 +147,7 @@ class ScheduleUpdateView extends Component {
 
             <InputBase
               sx={{ ml: 1, flex: 1 }}
-              
+
               label='content'
               name='content'// 독스 보면서 이벤트 처리 obsrever
               value={content.content}

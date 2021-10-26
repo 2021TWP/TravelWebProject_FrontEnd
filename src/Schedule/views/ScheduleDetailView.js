@@ -32,10 +32,7 @@ class ScheduleDetailView extends Component {
   }
 
   render() {
-    const { schedule, contentList, 
-      selectContent } = this.scheduleStore;
-    console.log("s_lat", schedule.lat);
-    console.log(schedule.lng);
+    const { schedule, contentList, selectContent } = this.scheduleStore;
     const contents = contentList.map(content => {
 
       return (
@@ -48,102 +45,102 @@ class ScheduleDetailView extends Component {
     });
 
     return (
-      
-    <ThemeProvider theme={mdTheme}>
-      <CssBaseline />
 
-      
+      <ThemeProvider theme={mdTheme}>
+        <CssBaseline />
+
+
         <main>
-          
-        <Container >
-          
-        <Button onClick={() => this.scheduleList()}>List</Button>
-        <MapView schedule={schedule} />
+
+          <Container >
+
+            <Button onClick={() => this.scheduleList()}>List</Button>
+            <MapView schedule={schedule} />
 
 
-        <Stack
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="flex-end"
-          spacing={2}
-        >
+            <Stack
+              direction="column"
+              justifyContent="flex-start"
+              alignItems="flex-end"
+              spacing={2}
+            >
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              readOnly
-              label="start_date"
-              value={schedule.start_date}
-              onChange={st_date => {
-                this.setState({ st_date });
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  readOnly
+                  label="start_date"
+                  value={schedule.start_date}
+                  onChange={st_date => {
+                    this.setState({ st_date });
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="end_date"
+                  readOnly
+                  value={schedule.end_date}
+                  onChange={ed_date => {
+                    this.setState({ ed_date });
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </Stack>
+
+            <Stack
+              direction="column"
+              justifyContent="flex-start"
+              alignItems="flex-end"
+              spacing={2}
+            >
+              <TextField
+                required
+                id="outlined-required"
+
+                name='location'
+                placeholder="location"
+                value={schedule.location}
+                InputProps={{
+                  readOnly: true,
+                }} style={{ width: '40%' }}
+              />
+              <TextField
+                required
+                id="outlined-required"
+
+                name='title'
+                placeholder="title"
+                value={schedule.title}
+                InputProps={{
+                  readOnly: true,
+                }} style={{ width: '40%' }}
+              />
+              <TextField
+                required
+                id="outlined-required"
+                name='description'
+                placeholder="description"
+                value={schedule.description}
+                InputProps={{
+                  readOnly: true,
+                }} style={{ width: '40%' }}
+                multiline
+                rows={4}
+              />
+
+              {contents}
+            </Stack>
+            <Box
+              sx={{
+                pt: 8,
+                pb: 6,
               }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="end_date"
-              readOnly
-              value={schedule.end_date}
-              onChange={ed_date => {
-                this.setState({ ed_date });
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Stack>
-
-        <Stack
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="flex-end"
-          spacing={2}
-        >
-          <TextField
-            required
-            id="outlined-required"
-
-            name='location'
-            placeholder="location"
-            value={schedule.location}
-            InputProps={{
-              readOnly: true,
-            }} style={{ width: '40%' }}
-          />
-          <TextField
-            required
-            id="outlined-required"
-
-            name='title'
-            placeholder="title"
-            value={schedule.title}
-            InputProps={{
-              readOnly: true,
-            }} style={{ width: '40%' }}
-          />
-          <TextField
-            required
-            id="outlined-required"
-            name='description'
-            placeholder="description"
-            value={schedule.description}
-            InputProps={{
-              readOnly: true,
-            }} style={{ width: '40%' }}
-            multiline
-            rows={4}
-          />
-
-          {contents}
-        </Stack>
-        <Box
-          sx={{
-            pt: 8,
-            pb: 6,
-          }}
-        ></Box>
-        </Container>
-</main>
-    </ThemeProvider>
+            ></Box>
+          </Container>
+        </main>
+      </ThemeProvider>
     );
   }
 }

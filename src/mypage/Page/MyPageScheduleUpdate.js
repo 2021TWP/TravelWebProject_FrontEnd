@@ -140,8 +140,6 @@ export default function MyPageScheduleUpdate(props) {
             </IconButton>
           </Toolbar>
           <Divider />
-          {/* <List>{mainListItems}</List> */}
-          {/* <Divider /> */}
           <List>{thirdListItems}</List>
           <Divider />
           <List>{secondaryListItems}</List> 
@@ -176,8 +174,3 @@ export default function MyPageScheduleUpdate(props) {
     </ThemeProvider>
   );
 }
-
-//link에서 state 바꾸기
-// export default function Dashboard() {
-//   return <DashboardContent />;
-// }
