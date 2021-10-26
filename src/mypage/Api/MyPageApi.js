@@ -38,19 +38,19 @@ class MyPageApi{
   }
 
 
-  // mypagePlan(id){
-  //   return axios.get(this.URL + `${id}/plan/`).then((response)=>response.data)
-  // }
+  mypagePlan(id){
+    return axios.get(this.URL + 'group/plan/').then((response)=>response.data)
+  }
 
 
-  // mypagePlanCreate(id){
-  //   return axios.post(this.URL + `${id}/plan/create/`).then((response)=>response.data)
-  // }
+  mypagePlanCreate(id){
+    return axios.post(this.URL + 'group/plan/').then((response)=>response.data)
+  }
 
   
-  // mypagePlanUpdate(id,pk){
-  //   return axios.put(this.URL + `${id}/plan/update/${pk}/`).then((response)=>response.data)
-  // }
+  mypagePlanUpdate(id,pk){
+    return axios.put(this.URL + `group/plan/${pk}/`).then((response)=>response.data)
+  }
 
 
   // mypagePlanDelete(id,pk){

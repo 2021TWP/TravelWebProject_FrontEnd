@@ -20,15 +20,15 @@ class ScheduleUpdateView extends Component {
   scheduleStore = ScheduleStore;
 
   componentDidMount() {
-    this.scheduleStore.selectSchedule(this.props.match.params.id);//라우터에서 포함을 하고 있기 때문에(상위 컴포넌트가 router이기 떄문에.)
-    this.scheduleStore.selectAll_content(this.props.match.params.id);
+    this.scheduleStore.selectSchedule(this.props.id);//라우터에서 포함을 하고 있기 때문에(상위 컴포넌트가 router이기 떄문에.)
+    this.scheduleStore.selectAll_content(this.props.id);
   }
 
-  scheduleList() {
-    window.location.href = '/schedules/';
+  scheduleList(g_id) {
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
   deleteAndReturn(){
-    this.scheduleStore.deleteSchedule(this.props.match.params.id);
+    this.scheduleStore.deleteSchedule(this.props.id);
     this.scheduleList();
   }
   updateAndReturn(){
@@ -41,6 +41,7 @@ class ScheduleUpdateView extends Component {
       selectAll_content, addContent, deleteContent, updateContent,
       selectContent, addSchedule, updateSchedule, deleteSchedule } = this.scheduleStore;
 
+      const{g_id,id} = this.props;
     const contents = contentList.map(content => {
       
       return (
@@ -54,7 +55,7 @@ class ScheduleUpdateView extends Component {
 
     return (
       <div>
-        <Button onClick={() => this.scheduleList()}>List</Button>
+        <Button onClick={() => this.scheduleList(g_id)}>List</Button>
         <MapView schedule={schedule}/>
 
         <Stack

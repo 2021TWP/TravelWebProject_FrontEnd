@@ -41,10 +41,12 @@ import Dashboard from './mypage/layout/DashBoard';
 import MyPageBoardDashBoard from './mypage/Page/MyPageBoardDashBoard';
 import MyPageListDashBoard from './mypage/Page/MyPageListDashBoard';
 import MyPageGroupDashBoard from './mypage/Page/MyPageGroupDashBoard';
+import MyPageGroupDetailDashBoard from './mypage/Page/MyPageGroupDetailDashBoard';
 import PasswordChangeContainer from './Authentication/Containers/PasswordChangeContainer';
+import MyPageGroupSchedule from './mypage/Page/MyPageGroupSchedule';
+import MyPageScheduleUpdate from './mypage/Page/MyPageScheduleUpdate';
 
-
-
+import MyPageScheduleDetail from './mypage/Page/MyPageScheduleDetail';
 import MypageListContainer from './mypage/Containers/MyPageListContainer' 
 
 class App extends Component {
@@ -80,13 +82,15 @@ class App extends Component {
           <Route exact path="/group/create/" component={GroupCreateContainer} />
           <Route exact path="/group/myGroup/details/:gid/" component={GroupCreateContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
-          <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
-          <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
-          <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} />
+          {/* <Route exact path="/schedules/create/:g_id" component={ScheduleInputContainer}/> */}
+           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
+          {/* <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} /> */} 
           <Route exact path="/board/list/" component={BoardListContainer}/>
+
           <PrivateRoute exact path="/board/create/" component={BoardInputContainer}/>
           <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
           <Route exact path="/board/update/:id" component={BoardUpdateView}/>
+
           <Route exact path="/board/free/" component={BoardFreeListContainer}/>
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>
@@ -94,6 +98,10 @@ class App extends Component {
           <Route exact path="/mypage/list/" component={MyPageListDashBoard}/>  
           <Route exact path="/mypage/myboard/" component={MyPageBoardDashBoard}/>
           <Route exact path="/mypage/mygroup/" component={MyPageGroupDashBoard}/>
+          <Route exact path="/mypage/mygroup/detail/:id/" component={MyPageGroupDetailDashBoard}/>
+          <Route exact path="/mypage/mygroup/create/:g_id/" component={MyPageGroupSchedule}/>
+          <Route exact path="/mypage/mygroup/detail/:g_id/:id/" component={MyPageScheduleDetail} />
+          <Route exact path="/mypage/mygroup/update/:g_id/:id/" component={MyPageScheduleUpdate} />
 
 
 
