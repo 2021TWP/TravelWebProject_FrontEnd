@@ -48,7 +48,7 @@ class ScheduleListView extends Component {
               
             }}
             //지도 api 수정이 필요함
-            image={"https://maps.googleapis.com/maps/api/staticmap?center="+schedule.lat+","+schedule.lng+"&zoom=12&size=400x400&key="}
+            image={"https://maps.googleapis.com/maps/api/staticmap?center="+schedule.lat+","+schedule.lng+"&zoom=12&size=400x400&key=AIzaSyChXubfqm80enfAcJT8xEqCXcXnhvVRz08"}
           />
           <CardContent onClick={()=>console.log(schedule.id)}  sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">

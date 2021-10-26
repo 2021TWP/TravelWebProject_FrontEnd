@@ -27,13 +27,13 @@ class ScheduleUpdateView extends Component {
   scheduleList(g_id) {
     window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
-  deleteAndReturn(){
+  deleteAndReturn(g_id){
     this.scheduleStore.deleteSchedule(this.props.id);
-    this.scheduleList();
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
-  updateAndReturn(){
+  updateAndReturn(g_id){
     this.scheduleStore.updateSchedule();
-    this.scheduleList();
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
 
   render() {
@@ -64,9 +64,9 @@ class ScheduleUpdateView extends Component {
           alignItems="center"
           spacing={2}
         >
-        <Button onClick={() => this.updateAndReturn()}>수정하기</Button>
+        <Button onClick={() => this.updateAndReturn(this.props.g_id)}>수정하기</Button>
       
-        <Button onClick={() => this.deleteAndReturn(schedule.id)}>삭제하기</Button>
+        <Button onClick={() => this.deleteAndReturn(this.props.g_id)}>삭제하기</Button>
         
           
         </Stack>
