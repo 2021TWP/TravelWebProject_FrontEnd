@@ -18,21 +18,17 @@ function createBoard(e) {
 class BoardFreeListContainer extends Component {
 
   boardStore = BoardStore;
-  // boardStore.selectFree();
 
   componentDidMount() {
     this.boardStore.selectFree();
-    console.log(this.boardStore.selectFree())
 }
 
 
+
 render() {
-  // this.boardStore.selectFree()
-  const { boards, selectBoard, checked, selectFree } = this.boardStore;
-  console.log(boards)
-  selectFree()
+  const { boards, selectBoard, checked } = this.boardStore;
   const boardList = boards.map(board => {
-    console.log(board)
+    // console.log(board)
       return (
           <span onClick={() => seperateBoard(board.id)}><BoardItemView key={board.id} board={board} checked={checked} checked_id={checked.id} selectBoard={()=>selectBoard(board.id)} /></span>
       )

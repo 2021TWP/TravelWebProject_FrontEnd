@@ -22,7 +22,7 @@ class MyPageStore{
 
   boards = [];
   
-  filterText = "";
+  
 
   myPageGroups = [];
 
@@ -79,6 +79,8 @@ class MyPageStore{
     }
 
   }
+
+
 
 }
 

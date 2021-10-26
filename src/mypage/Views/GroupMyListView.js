@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import TableRow from '@mui/material/TableRow';
-import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import moment from 'moment';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+
+import Button from '@mui/material/Button';
 
 /////////////////////////////////Import Account///////////////////////////////////
 
@@ -66,10 +69,10 @@ class GroupMyListView extends Component {
           <TableCell align="left">{this.props.group.id}</TableCell>
           <TableCell component="th" scope="row" align='left'>{this.props.group.group_name}</TableCell>
           <TableCell align="right">{moment(this.props.group.created_date).format(('YYYY. MM. DD.'))}</TableCell>
-        </Link>
-        <TableCell align="right"><CustomButton onClick={() => this.withdrawGroup(this.props.group.id)}>탈퇴</CustomButton></TableCell>
-      </TableRow>
 
+        </Link>
+        <TableCell style={{pedding: '8 px' }} align="center"><Button  fontSize="small" onClick={()=>this.withdrawGroup(this.props.group.id)}>탈퇴</Button></TableCell>
+          </TableRow>
     );
   }
 }

@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems , thirdListItems, HomeItems } from '.
 import MyPageBoardContainer from '../Containers/MyPageBoardListContainer';
 import BoardListContainer from '../../Board/Containers/BoardListContainer'
 import GroupMyListContainer from '../Containers/GroupMyListContainer';
+import SvgIcon from '@mui/material/SvgIcon';
 
 
 function Copyright(props) {
@@ -34,6 +35,18 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
+}
+
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
+
+function GoHome(e) {
+  window.location.href = '/';
 }
 
 const drawerWidth = 240;
@@ -121,11 +134,8 @@ function DashboardContent() {
             >
              {sessionStorage.getItem("username")}의 MY PAGE
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <HomeIcon color="action" fontSize="large"   onClick={() => GoHome()}/>
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

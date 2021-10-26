@@ -9,9 +9,14 @@ import { CardActionArea } from '@mui/material';
 
 class MyPageListView extends Component {
 
-  // componentDidMount(){
-  //   this.props.selectMyInfoAll();
-  // }
+  componentDidMount(){
+   if(!sessionStorage.getItem("id") || 
+   !sessionStorage.getItem("email") ||
+   !sessionStorage.getItem("username") ||
+   !sessionStorage.getItem("name"))
+   {alert("로그인 하세요"); window.location.href = '/authentication/login/'}
+  }
+
   render() {
     return (
       <div>
@@ -23,13 +28,9 @@ class MyPageListView extends Component {
           </Typography><br/>
           <Typography variant="body2" color="text.secondary">
           이름 : {sessionStorage.getItem("name")} <br/><br/>
-          이메일: {sessionStorage.getItem("email")} 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab>
+          이메일: {sessionStorage.getItem("email")} <br/><br/>
+          
+        <EditIcon style={{float:"right"}} onClick={()=>window.location.href='/authentication/password/change/'}/><br/>
           </Typography>
         </CardContent>
       </CardActionArea>

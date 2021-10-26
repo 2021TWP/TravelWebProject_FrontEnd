@@ -25,6 +25,9 @@ import BoardUpdateView from './Board/Views/BoardUpdateView';
 import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
 import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
+import mypage_tabBar from './mypage/layout/mypage_tabBar';
+import PrivateRoute from './PrivateRoute';
+
 
 ///////////////Header, Footer/////////////////////////
 import Header from './layout/Header';
@@ -77,15 +80,17 @@ class App extends Component {
           <Route exact path="/authentication/password/change/" component={PasswordChangeContainer}/>
           <Route exact path="/group/" component={GroupListContainer} />
           <Route exact path="/group/create/" component={GroupCreateContainer} />
-          <Route exact path="/group/create/" component={GroupCreateContainer} />
+          <Route exact path="/group/myGroup/details/:gid/" component={GroupCreateContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           {/* <Route exact path="/schedules/create/:g_id" component={ScheduleInputContainer}/> */}
            <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />
           {/* <Route exact path="/schedules/update/:id" component={ScheduleUpdateView} /> */} 
           <Route exact path="/board/list/" component={BoardListContainer}/>
-          <Route exact path="/board/create/" component={BoardInputContainer}/>
-          <Route exact path= "/board/detail/:id/" component={SeperateBoardList}/>
-          <Route exact path="/board/update/:id/" component={BoardUpdateView}/>
+
+          <PrivateRoute exact path="/board/create/" component={BoardInputContainer}/>
+          <Route exact path= "/board/detail/:id" component={SeperateBoardList}/>
+          <Route exact path="/board/update/:id" component={BoardUpdateView}/>
+
           <Route exact path="/board/free/" component={BoardFreeListContainer}/>
           <Route exact path="/board/review/" component={BoardReviewListContainer}/>
           <Route exact path="/board/impromptu/" component={BoardImpromptuListContainer}/>

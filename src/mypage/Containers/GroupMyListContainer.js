@@ -13,7 +13,6 @@ import { styled } from '@mui/system';
 import AccountStore from '../../Authentication/Stores/AccountStore';
 import GroupMyListView from '../Views/GroupMyListView';
 import GroupMySearchView from '../Views/GroupMySearchView';
-import axios from 'axios';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -22,15 +21,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import GroupMyDetailView from '../Views/GroupMyDetailView';
 /////////////////////////////////////////Design Started/////////////////////////////////////
-function createBoard(e) {
-    window.location.href = '/board/create/';
-}
-
-function GoHome(e) {
-  window.location.href = '/';
-}
-
-
 const CustomButtonRoot = styled('span')(`
   background-color: #007fff;
   padding: 15px 20px;
@@ -76,7 +66,7 @@ class GroupMyListContainer extends Component {
 
     render() {
         const rows = []
-        const {groups, showAllGroups, users, usersInGroup, handleGroupJoinSubmit, showMyGroups, myGroups, handleGroupWithdrawlSubmit} = this.accountStore;
+        const {users, usersInGroup, showMyGroups, myGroups, handleGroupWithdrawlSubmit} = this.accountStore;
         myGroups.forEach(group=>{
           if (group.group_name.indexOf(this.accountStore.search) === -1 && group.id.toString().indexOf(this.accountStore.search) === -1) {
             return;
