@@ -64,13 +64,13 @@ class BoardDetailView extends Component {
         let category_id = this.props.board.category_id
         return (
             <div> 
-              <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+              <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 <Box sx={{ m: 2 }}>
                   <Typography gutterBottom variant="h5" component="div">
                   {board.title}
                   </Typography>
 
-                  <Typography gutterBottom variant="h6" component="div">
+                  <Typography gutterBottom variant="body1" component="div">
                   {category_id === 1 ? 
                   "자유 게시판" : (category_id === 2 ? "여행 일지" : "번개 모임")}
                   </Typography>
@@ -98,28 +98,22 @@ class BoardDetailView extends Component {
                     </Typography>
 
                     <Typography variant="body1">
-                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄보기</Button>
-                    schedule_idddd
+                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
                     </Typography>
+
+                    <div>
+                      <br/>
+                      {sessionStorage.getItem('id') == board.user_id ?
+                        (<Stack spacing={2} direction="row">
+                          <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
+                          <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
+                        </Stack>) : (<div></div>)
+                      }
+                    </div>
                 </Box>
               </Box>
 
-              <div>
-              {/* {function Greeting(props) {
-                const isLoggedIn = props.isLoggedIn;
-                if (isLoggedIn) {
-                  return <UserGreeting />;
-                }
-                return <GuestGreeting />;
-                }
-              } */}
-              {sessionStorage.getItem('id') === board.user_id ?
-                (<Stack spacing={2} direction="row">
-                  <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
-                  <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
-                </Stack>) : (<div>{sessionStorage.getItem('id')}</div>)
-              }
-              </div>
+
             </div>
         );
     }

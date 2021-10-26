@@ -140,7 +140,7 @@ class BoardInputView extends Component {
 
 
             <Stack spacing={2} direction="row">
-                <CustomButton onClick={()=>boardAdd()}>ADD</CustomButton>
+                <CustomButton onClick={()=>boardAdd()}>글쓰기</CustomButton>
                 {/* <CustomButton onClick={()=>init()}>초기화</CustomButton> */}
                 <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
 
