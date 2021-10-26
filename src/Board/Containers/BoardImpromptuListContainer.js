@@ -5,7 +5,6 @@ import BoardDetailContainer from './BoardDetailContainer';
 
 
 function seperateBoard(id) {
-  console.log(id);
   window.location.href =
   `/board/detail/${id}`;
 }

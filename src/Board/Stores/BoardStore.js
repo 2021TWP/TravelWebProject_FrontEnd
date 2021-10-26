@@ -43,6 +43,8 @@ class BoardStore {
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
     }
 
+    
+
     boardSetProps = (name, value) => {
         this.board = {...this.board, [name]:value}
     }
@@ -73,7 +75,7 @@ class BoardStore {
             const results = await boardApi.boardFree();
             // console.log(results)
             runInAction(()=>this.boards = results);
-            console.log(this.boards)
+            // console.log(this.boards)
         }catch(error){
             console.log(error);
         }
