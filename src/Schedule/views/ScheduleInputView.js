@@ -23,7 +23,7 @@ class ScheduleInputView extends Component {
   }
 
   nextSchedule(e) {
-    this.scheduleStore.addSchedule();
+    this.scheduleStore.createGroupSchedule(this.props.g_id);
     this.props.checkHandler();
   }
   //생성자 오버라이딩 해서 state this.state = 
@@ -37,11 +37,9 @@ class ScheduleInputView extends Component {
     schedule.end_date = ed_date;
 
 
-
     return (
       <div>
 
-        {/* 여긴 지도 부르는 부분 */}
         <MapView schedule={schedule} />
 
         <Stack

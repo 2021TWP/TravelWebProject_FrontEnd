@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 import {observer} from 'mobx-react';
 
 import Button from '@mui/material/Button';
@@ -13,30 +15,14 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
-
-
 const theme = createTheme();
 
 
-class ScheduleListView extends Component {
-  
-  
-  componentDidMount(){
-    this.props.selectAll();
-  }
 
-  detailSchedule(id){
-    console.log(id);
-    window.location.href =`/schedules/detail/${id}`;
-  }
-  createSchedule(e){
-    window.location.href ="/schedules/create/"
-  }
-//해야할일 클릭하면 디테일로 넘어가는거 해보기...
+class GroupMySchedules extends Component {
   render() {
     const {scheduleList,selectSchedule} =this.props;
-    // console.log(scheduleList);
+    console.log(scheduleList);
     const schedules = scheduleList.map(schedule =>{
       return ( <Grid item key={schedule.id} xs={12} sm={6} md={4}>
         <Card
@@ -48,7 +34,7 @@ class ScheduleListView extends Component {
               
             }}
             //지도 api 수정이 필요함
-            image={"https://maps.googleapis.com/maps/api/staticmap?center="+schedule.lat+","+schedule.lng+"&zoom=12&size=400x400&key="}
+            image={"https://maps.googleapis.com/maps/api/staticmap?center="+schedule.lat+","+schedule.lng+"&zoom=12&size=400x400&key=AIzaSyChXubfqm80enfAcJT8xEqCXcXnhvVRz08"}
           />
           <CardContent onClick={()=>console.log(schedule.id)}  sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
@@ -84,4 +70,4 @@ class ScheduleListView extends Component {
   }
 }
 
-export default observer(ScheduleListView);
+export default GroupMySchedules;
