@@ -25,7 +25,6 @@ import BoardUpdateView from './Board/Views/BoardUpdateView';
 import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
 import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
-import mypage_tabBar from './mypage/layout/mypage_tabBar';
 import PrivateRoute from './PrivateRoute';
 
 
@@ -44,8 +43,6 @@ import MyPageGroupDashBoard from './mypage/Page/MyPageGroupDashBoard';
 import PasswordChangeContainer from './Authentication/Containers/PasswordChangeContainer';
 
 
-
-import MypageListContainer from './mypage/Containers/MyPageListContainer' 
 
 class App extends Component {
   boardStore = BoardStore

@@ -89,8 +89,11 @@ keywordChange = (e) =>{
         this.props.selectMypageAll()   // id에 맞는 게시글만 가져오기 
   
     }
-
-
+    componentDidUpdate(prevProps) {
+      if (this.props.user !== prevProps.user) {
+        this.props.getAuthor(this.props.board.user_id);
+      }
+    }
 
 
     render() {
@@ -129,7 +132,7 @@ keywordChange = (e) =>{
               {/* <input type="hidden" onload={()=>getAuthor(board.user_id)}/> */}
               {/* <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{board.user_id}</TableCell> */}
               {/* <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{user.id}</TableCell> */}
-              <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{sessionStorage.getItem("username")}</TableCell>
+              <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{user.username}</TableCell>
               {/* <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{user.username}</TableCell> */}
               <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
               <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{board.hit}</TableCell>
