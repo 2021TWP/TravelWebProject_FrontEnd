@@ -51,7 +51,7 @@ class App extends Component {
   boardStore = BoardStore
   render() {
     const sections = [
-      { title: '여행일정', url: '/travel/' },
+      { title: '여행일정', url: '/schedules/' },
       { title: '게시판', url: '/board/list/' },
       { title: '그룹', url: '/group/' },
       { title: '마이페이지', url: '/mypage/list/' },    
@@ -78,7 +78,7 @@ class App extends Component {
           <Route exact path="/authentication/password/change/" component={PasswordChangeContainer}/>
           <Route exact path="/group/" component={GroupListContainer} />
           <Route exact path="/group/create/" component={GroupCreateContainer} />
-          <Route exact path="/group/create/" component={GroupCreateContainer} />
+          <Route exact path="/group/myGroup/details/:gid/" component={GroupCreateContainer} />
           <Route exact path="/schedules" component={ScheduleMainPage}/>
           <Route exact path="/schedules/create/" component={ScheduleInputContainer}/>
           <Route exact path="/schedules/detail/:id" component={ScheduleDetailView} />

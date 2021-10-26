@@ -66,7 +66,9 @@ class AccountApi {
     }
 
     groupCreate(group) {
-        return axios.post(this.URL + 'group/create/', group)
+        return axios.post(this.URL + 'group/create/',   {group_name: group.group_name,
+                                                        pin: group.pin,
+                                                        created_date: group.created_date})
                     .then(response => response.data)
                     .catch(error => error.response.data)
     }
