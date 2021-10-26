@@ -5,9 +5,11 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import AccountStore from '../Authentication/Stores/AccountStore';
 
 function Header(props) {
   const { sections, title } = props;
+  const handleLogoutSubmit = AccountStore.handleLogoutSubmit;
 
   return (
     <React.Fragment>
@@ -25,12 +27,14 @@ function Header(props) {
         </Typography>
         <IconButton>
         </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button> &nbsp;
-        <Button variant="outlined" size="small">
-          Join
-        </Button>
+        {sessionStorage['Authorization']
+          ?<div style={{textAlign:'right'}}>환영합니다 {sessionStorage['name']}({sessionStorage['username']})님/<Button variant="outlined" size="small" onClick={()=>handleLogoutSubmit()}>Sign out</Button></div>
+          :<div><Button variant="outlined" size="small" onClick={()=>window.location.href='/authentication/login/'}>
+            Sign in
+          </Button> &nbsp;
+          <Button variant="outlined" size="small" onClick={()=>window.location.href='/authentication/signup/'}>
+            Join
+          </Button> </div>}
       </Toolbar>
       <Toolbar
         component="nav"

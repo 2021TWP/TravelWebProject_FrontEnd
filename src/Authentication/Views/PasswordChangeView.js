@@ -4,14 +4,14 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+// import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-export default class LoginView extends Component {
+export default class PasswordChangeView extends Component {
     render() {
         function Copyright(props) {
             return (
@@ -28,7 +28,7 @@ export default class LoginView extends Component {
           
         const theme = createTheme();
         
-        const { user, setProps, message, onClickEvent, handlePasswordResetSubmit, test  } = this.props
+        const { user, setProps, message, onClickEvent, handlePasswordChangeSubmit } = this.props
         return (
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -45,46 +45,59 @@ export default class LoginView extends Component {
               <LockOutlinedIcon onClick={()=>window.location.href="/"}/>
             </Avatar>
             <Typography component="h1" variant="h5">
-              비밀번호 초기화
+              비밀번호 변경
             </Typography>
             <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password1"
-                label="비밀번호"
+                name="old_password"
+                label="기존 비밀번호"
                 type="password"
-                id="password1"
-                autoComplete="current-password"
-                value={user.password1} 
+                id="old_password"
+                value={user.old_password} 
                 onChange={(e)=>setProps(e.target.name, e.target.value)}
                 onClick={(e)=>onClickEvent(e.target.name)}
               />
-                {(message.password1 !== "")
-                ? message.password1
+                {(message.old_password !== "")
+                ? message.old_password
                 : null }
-                <TextField
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password1"
+                label="새로운 비밀번호"
+                type="password"
+                id="password1"
+                value={user.password1} 
+                onChange={(e)=>setProps(e.target.name, e.target.value)}
+                onClick={(e)=>onClickEvent('new_password1')}
+              />
+                {(message.new_password1 !== "")
+                ? message.new_password1
+                : null }
+              <TextField
                 margin="normal"
                 required
                 fullWidth
                 name="password2"
-                label="비밀번호 확인"
+                label="새로운 비밀번호 확인"
                 type="password"
                 id="password2"
-                autoComplete="current-password"
                 value={user.password2} 
                 onChange={(e)=>setProps(e.target.name, e.target.value)}
-                onClick={(e)=>onClickEvent('password')}
+                onClick={(e)=>onClickEvent('new_password2')}
               />
-                {(message.password2 !== "")
-                ? message.password2
+                {(message.new_password2 !== "")
+                ? message.new_password2
                 : null }
               <Button
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={()=>handlePasswordResetSubmit()}
+                onClick={()=>handlePasswordChangeSubmit()}
               >
                 변경
               </Button>
