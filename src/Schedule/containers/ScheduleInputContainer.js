@@ -22,6 +22,8 @@ class ScheduleInputContainer extends Component {
       selectAll_content, addContent,deleteContent,updateContent,
       selectContent,addSchedule,updateSchedule,selectSchedule,deleteSchedule}=this.scheduleStore;
     const id =this.scheduleStore.schedule.id;
+    console.log(this.props.g_id);
+    
     return (
       // 삼항 연산자로  하나만 하던지 아님 
       // 조건을 하나 줘서... state를 줘서 default 는 0으로 
@@ -44,8 +46,15 @@ class ScheduleInputContainer extends Component {
                            selectSchedule={selectSchedule}
                            deleteSchedule ={deleteSchedule}
                            id={id}
+                          //  g_id={this.props./match.params.g_id}
+                           g_id={this.props.g_id}
+                           
                             />
-      :<ScheduleInputView checkHandler ={this.checkHandler}/>}
+      :<ScheduleInputView checkHandler ={this.checkHandler}
+      // g_id={this.props.match.params.g_id}
+      g_id={this.props.g_id}
+      />
+    }
 
       </div>
     );

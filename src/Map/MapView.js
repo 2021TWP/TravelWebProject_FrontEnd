@@ -8,9 +8,9 @@ import PlacesAutocomplete, {
 import { Button, Paper, Box, InputBase, Grid, Input,  Stack, InputAdornment, IconButton } from '@material-ui/core'
 
 const mapStyles = {
-  position: 'absolute',
-  width: '50%',
-  height: '50%',
+  position: 'flex',
+  width: '30%',
+  height: '30%',
 };
 
 
@@ -120,5 +120,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('')
+  apiKey: ('AIzaSyChXubfqm80enfAcJT8xEqCXcXnhvVRz08')
 })(MapContainer)

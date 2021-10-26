@@ -5,6 +5,8 @@ import TableCell from '@mui/material/TableCell';
 import moment from 'moment';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 /////////////////////////////////Import Account///////////////////////////////////
 
 
@@ -38,39 +40,50 @@ const CustomButtonRoot = styled('span')(`
 `);
 
 function CustomButton(props) {
-    return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-  }
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+}
 
 
-class GroupMyListView extends Component {  
+class GroupMyListView extends Component {
   withdrawGroup(g_id) {
     this.props.handleGroupWithdrawlSubmit(g_id);
   }
-    render() {  
-      return (
-        <TableRow
-          key={this.props.group.id}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
+  
+  render() {
+    return (
+
+      <TableRow
+        key={this.props.group.id}
+        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      >
+        <Link
+          to={{
+            pathname: `/mypage/mygroup/detail/${this.props.group.id}`,
+            state: {
+              id: this.props.group.id
+            }
+          }}>
           <TableCell align="left">{this.props.group.id}</TableCell>
           <TableCell component="th" scope="row" align='left'>{this.props.group.group_name}</TableCell>
           <TableCell align="right">{moment(this.props.group.created_date).format(('YYYY. MM. DD.'))}</TableCell>
-          <TableCell align="right"><CustomButton onClick={()=>this.withdrawGroup(this.props.group.id)}>탈퇴</CustomButton></TableCell>
-          </TableRow>
-      );
-    }
+        </Link>
+        <TableCell align="right"><CustomButton onClick={() => this.withdrawGroup(this.props.group.id)}>탈퇴</CustomButton></TableCell>
+      </TableRow>
+
+    );
+  }
 }
 
 export default GroupMyListView;
 
 
 // class MyPageBoardContainer extends Component {
-    
+
 //     render() {
-        
+
 //         return (
 //             <div>
-            
+
 //             </div>
 //         );
 //     }

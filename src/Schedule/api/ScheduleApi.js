@@ -57,6 +57,22 @@ class ScheduleApi{
                 .then((response) => response.data);
   }
 
+  // getScheduleByGroup(g_id){
+  //   return axios.get(this.URL+``)
+  // }
+  mypagePlan(g_id){
+    return axios.get(this.URL + `group/${g_id}/schedule/`).then((response)=>response.data)
+  }
+
+
+  mypagePlanCreate(scheduleInfo,g_id){
+    const schedule ={...scheduleInfo};
+    return axios.post(this.URL + `group/${g_id}/schedule/create/`,schedule)
+                  .then((response)=>response.data)
+  }
+
+  
+  
 
 }
 export default new ScheduleApi();

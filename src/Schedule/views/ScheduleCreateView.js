@@ -18,9 +18,9 @@ import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
 class ScheduleUpdateView extends Component {
   
 
-  updateAndReturn(){
+  updateAndReturn(g_id){
     this.props.updateSchedule();
-    window.location.href = '/schedules/';
+    window.location.href = `/mypage/mygroup/detail/${g_id}`;
   }
   
   render() {
@@ -150,7 +150,7 @@ class ScheduleUpdateView extends Component {
           {contents}
 
               
-              <Button onClick={() =>  this.updateAndReturn()}>SAVE</Button>
+              <Button onClick={() =>  this.updateAndReturn(this.props.g_id)}>SAVE</Button>
 
         </Stack>
         <Box
