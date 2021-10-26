@@ -9,9 +9,14 @@ import { CardActionArea } from '@mui/material';
 
 class MyPageListView extends Component {
 
-  // componentDidMount(){
-  //   this.props.selectMyInfoAll();
-  // }
+  componentDidMount(){
+   if(!sessionStorage.getItem("id") || 
+   !sessionStorage.getItem("email") ||
+   !sessionStorage.getItem("username") ||
+   !sessionStorage.getItem("name"))
+   {alert("로그인 하세요"); window.location.href = '/authentication/login/'}
+  }
+
   render() {
     return (
       <div>
