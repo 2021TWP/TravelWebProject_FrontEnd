@@ -4,7 +4,6 @@ import BoardStore from '../Stores/BoardStore';
 import BoardDetailView from '../Views/BoardDetailView';
 import CommentInputContainer from './CommentInputContainer';
 import CommentListContainer from './CommentListContainer';
-import {GiReturnArrow} from 'react-icons/gi'
 
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
@@ -60,7 +59,6 @@ class BoardDetailContainer extends Component {
         const {board, boardRemove, boardLike ,  boardModify , boardSetProps} = this.boardStore;
         return (
             <div>
-                <h3>게시글 상세</h3>
                 <BoardDetailView 
                 board={board}
                 boardModify = {boardModify}

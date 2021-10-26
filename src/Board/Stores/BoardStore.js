@@ -1,5 +1,4 @@
 import {makeAutoObservable, runInAction} from 'mobx'
-// import Cookies from 'js-cookie';
 import boardApi from '../Api/BoardApi'
 
 function goBoardList(e) {
@@ -43,11 +42,6 @@ class BoardStore {
         this.board = {id:"", user_id:"", schedule_id:"", category_id:"1", 
             title:"", imgUrl:"", date:"",board_content:"", hit:"", like:""}
     }
-
-
-    // isLogin = () => !!Cookies.get('token')
-    isLogin = () => !!sessionStorage.getItem('id')
-
 
     boardSetProps = (name, value) => {
         this.board = {...this.board, [name]:value}
@@ -111,23 +105,11 @@ class BoardStore {
             runInAction(()=>this.board.hit += 1)
             const result = await boardApi.boardHit(this.board);
             runInAction(()=>this.board = result);
-            console.log(this.board.id)
             this.selectAll();
         }catch(error){
             console.log(error);
         }
     }
-
-    // async boardLike(){
-    //     try{
-    //         // runInAction(()=>this.board.like += 1)
-    //         const result = await boardApi.boardLike(this.board);
-    //         runInAction(()=>this.board = result);
-    //         // this.selectAll();
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
 
     async boardAdd() {
         try{
@@ -161,7 +143,7 @@ class BoardStore {
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
-            // goBoardList();
+            goBoardList();
         }catch(error){
             this.message = error.message;
         }
