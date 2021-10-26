@@ -70,7 +70,7 @@ class BoardDetailView extends Component {
                   {board.title}
                   </Typography>
 
-                  <Typography gutterBottom variant="h6" component="div">
+                  <Typography gutterBottom variant="body1" component="div">
                   {category_id === 1 ? 
                   "자유 게시판" : (category_id === 2 ? "여행 일지" : "번개 모임")}
                   </Typography>
