@@ -23,13 +23,9 @@ class MyPageListView extends Component {
           </Typography><br/>
           <Typography variant="body2" color="text.secondary">
           이름 : {sessionStorage.getItem("name")} <br/><br/>
-          이메일: {sessionStorage.getItem("email")} 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab>
+          이메일: {sessionStorage.getItem("email")} <br/><br/>
+          
+        <EditIcon style={{float:"right"}} onClick={()=>window.location.href='/authentication/password/change/'}/><br/>
           </Typography>
         </CardContent>
       </CardActionArea>

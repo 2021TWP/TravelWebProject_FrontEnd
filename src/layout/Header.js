@@ -14,7 +14,6 @@ function Header(props) {
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Button size="small">Subscribe</Button>
         <Typography
           component="h2"
           variant="h5"
@@ -28,11 +27,11 @@ function Header(props) {
         <IconButton>
         </IconButton>
         {sessionStorage['Authorization']
-          ?<div style={{textAlign:'right'}}>환영합니다 {sessionStorage['name']}({sessionStorage['username']})님/<Button variant="outlined" size="small" onClick={()=>handleLogoutSubmit()}>Sign out</Button></div>
-          :<div><Button variant="outlined" size="small" onClick={()=>window.location.href='/authentication/login/'}>
+          ?<div style={{textAlign:'right'}}>환영합니다 {sessionStorage['name']}({sessionStorage['username']})님/<Button size="small" onClick={()=>handleLogoutSubmit()}>Sign out</Button></div>
+          :<div><Button size="small" onClick={()=>window.location.href='/authentication/login/'}>
             Sign in
           </Button> &nbsp;
-          <Button variant="outlined" size="small" onClick={()=>window.location.href='/authentication/signup/'}>
+          <Button size="small" onClick={()=>window.location.href='/authentication/signup/'}>
             Join
           </Button> </div>}
       </Toolbar>

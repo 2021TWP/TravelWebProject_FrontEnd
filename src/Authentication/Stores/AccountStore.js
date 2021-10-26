@@ -42,12 +42,40 @@ class AccountStore {
         name: null,
     };
     
+    group_error_message = {
+        group_name: "",
+        pin: "",
+        schedules: "",
+        created_date: "",
+    }
+
+
     token_header = {}
 
     csrftoken = CSRFToken
     
     search = "";
 
+    init_user() {
+        this.user = {
+            username: "",
+            password1: "",
+            password2: "",
+            old_password: "",
+            email: "",
+            name: "", 
+            g_id: null,
+        }
+    }
+
+    init_group() {
+        this.group = {
+            group_name: "",
+            pin: "",
+            schedules: [],
+            created_date: "",
+        }
+    }
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind:true})
@@ -67,6 +95,7 @@ class AccountStore {
             runInAction(() => this.message = error.message)
             // console.log(this.message)
         }
+        this.init_users();
     }
 
     async handleEmailConfirm(key) {
@@ -119,6 +148,7 @@ class AccountStore {
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
+        this.init_users();
     }
 
     async handlePasswordResetConfirmSubmit(uid, token) {
@@ -139,7 +169,7 @@ class AccountStore {
             runInAction(() => this.message = error.message)
             alert(this.message)
         }
-        console.log(this.error_message.password1)
+        this.init_users();
     }
 
     async handlePasswordChangeSubmit() {
@@ -150,7 +180,7 @@ class AccountStore {
             runInAction(() => this.message = error.message)
             alert(this.message)
         }
-        console.log(this.error_message.password1)
+        this.init_users();
     }
 
     async handleLogoutSubmit() {
@@ -173,36 +203,29 @@ class AccountStore {
 
     async handleCreateGroupSubmit() {
         try {
-            this.group.created_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19);
-            await accountApi.groupCreate(this.group);
+            this.group = {
+                ...this.group,
+                created_date: (new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19))
+            }
+            const data = await accountApi.groupCreate(this.group);
+            if ("success" in data) {
+                alert(data.success)
+                this.showAllGroups();
+                this.showMyGroups();
+                this.init_group();
+                window.location.href='javascript:history.back()'
+            } else if ("pin" in data && "group_name" in data) {
+                alert(`${data.group_name}\n${data.pin}`)
+
+            } else {
+                if ('pin' in data) {
+                    alert(data.pin)
+                } else {
+                    alert(data.group_name)
+                }
+            }
         }catch(error) {
             runInAction(() => this.message = error.message)
-        }
-    }
-
-    
-    async handleJoinGroupSubmit() {
-        try {
-            await accountApi.joinCreate(this.group);
-        }catch(error) {
-            runInAction(() => this.message = error.message)
-        }
-    }
-
-
-    async onClickEvent(name) {
-        // runInAction(() => this.user = {...this.user, [name]:""}) //클릭시 인풋값 사라지게 했는데 불필요 할 듯.
-        runInAction(() => this.error_message = {...this.error_message, [name]:null})
-    }
-
-    async setProps(name, value) {
-        if (name === 'group_name' || name === 'pin') {
-            runInAction(() => this.group = {...this.group, [name]: value});
-        } else if (name === 'search') {
-            runInAction(() => this.search = value)
-            console.log(name, value)
-        }else {
-            runInAction(() => this.user = {...this.user, [name]: value});
         }
     }
 
@@ -263,8 +286,26 @@ class AccountStore {
                 }
             }catch(error) {
             runInAction(() => this.message = error.message)
+    
+            }
+        }
+    
+    async onClickEvent(name) {
+        // runInAction(() => this.user = {...this.user, [name]:""}) //클릭시 인풋값 사라지게 했는데 불필요 할 듯.
+        runInAction(() => this.error_message = {...this.error_message, [name]:null})
+    }
+
+    async setProps(name, value) {
+        if (name === 'group_name' || name === 'pin') {
+            runInAction(() => this.group = {...this.group, [name]: value});
+        } else if (name === 'search') {
+            runInAction(() => this.search = value)
+            console.log(name, value)
+        }else {
+            runInAction(() => this.user = {...this.user, [name]: value});
         }
     }
+
     // async schedulesInGroup(g_id) {
     //     try {
     //         const data = await accountApi.getGroupSchedules(g_id);
