@@ -95,7 +95,6 @@ class AccountStore {
             runInAction(() => this.message = error.message)
             // console.log(this.message)
         }
-        this.init_users();
     }
 
     async handleEmailConfirm(key) {
@@ -141,14 +140,13 @@ class AccountStore {
             const data = await accountApi.resetPw(this.user.email);
             if ('detail' in data){
                 alert(data.detail)
-            }
-            else {
+                window.location.href='/'
+            }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
-        this.init_users();
     }
 
     async handlePasswordResetConfirmSubmit(uid, token) {
@@ -169,18 +167,20 @@ class AccountStore {
             runInAction(() => this.message = error.message)
             alert(this.message)
         }
-        this.init_users();
     }
 
     async handlePasswordChangeSubmit() {
         try {
             const data = await accountApi.changePassword(this.user)
-            alert(data)
+            if ('detail' in data) {
+                alert(data.detail);
+            }else{
+                runInAction(() => this.error_message = {...this.error_message, ...data})
+            }
         }catch(error) {
             runInAction(() => this.message = error.message)
             alert(this.message)
         }
-        this.init_users();
     }
 
     async handleLogoutSubmit() {
@@ -305,16 +305,7 @@ class AccountStore {
             runInAction(() => this.user = {...this.user, [name]: value});
         }
     }
-
-    // async schedulesInGroup(g_id) {
-    //     try {
-    //         const data = await accountApi.getGroupSchedules(g_id);
-    //         runInAction(() => this.users = data)
-    //         console.log(this.users)
-    //     }catch(error) {
-    //         runInAction(() => this.message = error.message)
-    //     }
-    // }
 }
+
 
 export default new AccountStore();
