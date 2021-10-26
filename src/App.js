@@ -25,7 +25,6 @@ import BoardUpdateView from './Board/Views/BoardUpdateView';
 import BoardFreeListContainer from './Board/Containers/BoardFreeListContainer';
 import BoardReviewListContainer from './Board/Containers/BoardReviewListContainer';
 import BoardImpromptuListContainer from './Board/Containers/BoardImpromptuListContainer';
-import mypage_tabBar from './mypage/layout/mypage_tabBar';
 import PrivateRoute from './PrivateRoute';
 
 
