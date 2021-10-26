@@ -16,14 +16,7 @@ import CardMedia from '@mui/material/CardMedia';
 
 import ScheduleStore from "../../Schedule/stores/ScheduleStore";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
+
 
 const CustomButtonRoot = styled('span')(`
   background-color: #007fff;
@@ -54,9 +47,7 @@ const CustomButtonRoot = styled('span')(`
   }
 `);
 
-function CustomButton(props) {
-    return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-  }
+
 
 class GroupMyDetailView extends Component {
   scheduleStore = ScheduleStore;
@@ -103,19 +94,19 @@ class GroupMyDetailView extends Component {
 
     return (
       <div>
-        <Card sx={{ minWidth: 275 }}>
+        {/* <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h5" component="div">
-        {/* {this.props.group.group_name} */}
+        {this.props.group.group_name}
         </Typography>
-        {/* <Typography variant="body2">
+        <Typography variant="body2">
           well meaning and kindly.
           <br />
           {'"a benevolent smile"'}
-        </Typography> */}
+        </Typography>
       </CardContent>
       
-    </Card>
+    </Card> */}
 
     <Container sx={{ py: 8 }} maxWidth="md">
     <Button onClick={() => this.createSchedule(g_id)}>스케줄 생성</Button>
