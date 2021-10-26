@@ -192,13 +192,13 @@ async commentAdd() {
         runInAction(this.message = error.message);
     }
     this.selectBoardComment(this.board.id);
-    // this.comment_init();
+    this.comment_init();
 }
 
-async commentRemove() {
+async commentRemove(id) {
     try{
-        await boardApi.commentDelete(this.comment.id);
-        this.selectBoardComment(this.board.id);
+        await boardApi.commentDelete(id);
+        // this.selectBoardComment(this.board.id);
    
     }catch(error){
         this.message = error.message;
