@@ -71,13 +71,8 @@ class BoardDetailView extends Component {
                   </Typography>
 
                   <Typography gutterBottom variant="h6" component="div">
-                  {function(){
-                    if (category_id === 1) return ("자유게시판");
-                    if (category_id === 2) return ("여행 일지");
-                    if (category_id === 3) return ("번개모임");
-                    }
-                  } 
-                  자유게시판
+                  {category_id === 1 ? 
+                  "자유 게시판" : (category_id === 2 ? "여행 일지" : "번개 모임")}
                   </Typography>
 
                   <Typography variant="body1">
@@ -97,7 +92,6 @@ class BoardDetailView extends Component {
                     imagesss 
                     </Typography>
 
-
                     <Typography variant="body1">
                     <br/>
                     {board.board_content}
@@ -110,17 +104,6 @@ class BoardDetailView extends Component {
                 </Box>
               </Box>
 
-                {
-                (function() {
-                  if (category_id === 1) return ("자유게시판");
-                  if (category_id === 2) return ("여행 일지");
-                  if (category_id === 3) return ("번개모임");
-                })
-                } 
-
-                {/* <button>좋아요 {board.like} </button>  &nbsp;&nbsp; */}
-                {/* onClick={()=>boardLike()} */}
-
               <div>
               {/* {function Greeting(props) {
                 const isLoggedIn = props.isLoggedIn;
@@ -130,10 +113,12 @@ class BoardDetailView extends Component {
                 return <GuestGreeting />;
                 }
               } */}
-                <Stack spacing={2} direction="row">
+              {sessionStorage.getItem('id') === board.user_id ?
+                (<Stack spacing={2} direction="row">
                   <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
                   <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
-                </Stack>
+                </Stack>) : (<div>{sessionStorage.getItem('id')}</div>)
+              }
               </div>
             </div>
         );
