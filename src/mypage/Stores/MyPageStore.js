@@ -54,7 +54,6 @@ class MyPageStore{
     }catch(error){
         console.log(error);
     }
-    this.getAuthor();
   }
 
 
