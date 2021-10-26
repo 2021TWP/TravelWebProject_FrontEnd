@@ -77,10 +77,10 @@ class BoardInputView extends Component {
 
 
 
-            <Box
+            <Box 
             component="form"
             sx={{
-                '& > :not(style)': { m: 1, width: '50ch' },
+                '& > :not(style)': { m: 1, width: '50ch', height: '75%' },
             }}
             noValidate
             autoComplete="off"
@@ -97,23 +97,7 @@ class BoardInputView extends Component {
             <Box
             component="form"
             sx={{
-                '& > :not(style)': { m: 1, width: '100ch' },
-            }}
-            noValidate
-            autoComplete="off"
-            >
-            <TextField
-                id="outlined-uncontrolled"
-                name="board_content"
-                value={board.board_content} 
-                onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                label="내용"/> <br/>
-            </Box>
-            
-            <Box
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '100ch' },
+                '& > :not(style)': { m: 1, width: '50ch' },
             }}
             noValidate
             autoComplete="off"
@@ -125,6 +109,35 @@ class BoardInputView extends Component {
                 onChange={(e)=>boardChange(e.target.name, e.target.value)}
                 label="사진"/> 
             </Box>
+
+            <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '100ch', height: '50ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            >
+            <TextField
+                id="outlined-multiline-flexible"
+                multiline
+                maxRows={4}
+                name="board_content"
+                value={board.board_content} 
+                onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                label="내용"/> <br/>
+{/* 
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Multiline"
+              multiline
+              maxRows={4}
+              value={value}
+              onChange={handleChange}
+            /> */}
+            </Box>
+            
+
 
             <Stack spacing={2} direction="row">
                 <CustomButton onClick={()=>boardAdd()}>ADD</CustomButton>
