@@ -104,6 +104,7 @@ class BoardStore {
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19);
             this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
+            alert('게시글이 성공적으로 등록되었습니다!')
             this.selectAll();
             this.goBoardList();
             console.log(this.board);
@@ -117,6 +118,7 @@ class BoardStore {
     async boardRemove() {
         try{
             await boardApi.boardDelete(this.board.id);
+            alert('게시글이 성공적으로 삭제되었습니다!')
             this.selectAll();
             this.goBoardList();
         }catch(error){
@@ -130,6 +132,7 @@ class BoardStore {
             console.log(this.board.id)
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
+            alert('게시글이 성공적으로 수정되었습니다!')
             this.selectAll();
             this.goBoardList();
         }catch(error){
