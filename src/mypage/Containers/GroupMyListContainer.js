@@ -19,6 +19,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import GroupMyDetailView from '../Views/GroupMyDetailView';
 /////////////////////////////////////////Design Started/////////////////////////////////////
 const CustomButtonRoot = styled('span')(`
   background-color: #007fff;
@@ -62,6 +63,7 @@ class GroupMyListContainer extends Component {
     
     accountStore = AccountStore
 
+
     render() {
         const rows = []
         const {users, usersInGroup, showMyGroups, myGroups, handleGroupWithdrawlSubmit} = this.accountStore;
@@ -70,13 +72,15 @@ class GroupMyListContainer extends Component {
             return;
           }
           rows.push(
-            <GroupMyListView  group={group}
-                            key={group.id}
-                            usersInGroup={usersInGroup}
-                            users={users}
-                            showMyGroups={showMyGroups}
-                            myGroups={myGroups}
-                            handleGroupWithdrawlSubmit={handleGroupWithdrawlSubmit}/>
+            
+           <GroupMyListView group={group}
+            key={group.id}
+            usersInGroup={usersInGroup}
+            users={users}
+            showMyGroups={showMyGroups}
+            myGroups={myGroups}
+            handleGroupWithdrawlSubmit={handleGroupWithdrawlSubmit}
+             />
           )
         })
 

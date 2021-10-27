@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import ScheduleApi from '../api/ScheduleApi'
-
+import AccountStore from '../../Authentication/Stores/AccountStore';
 
 class ScheduleStore {
 
@@ -10,8 +10,8 @@ class ScheduleStore {
     description: "",
     start_date: "",
     end_date: "",
-    lat:"",
-    lng:""
+    lat: "",
+    lng: ""
   };
   scheduleList = [];
   content = { id: "", schedule_id: "", content: "" };
@@ -102,7 +102,7 @@ class ScheduleStore {
     try {
       const result = await ScheduleApi.contentList(s_id);
       runInAction(() => this.contentList = result);
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -110,9 +110,8 @@ class ScheduleStore {
   async addContent(s_id) {
     try {
       this.content.schedule_id = s_id;
-      
+
       await ScheduleApi.contentCreate(this.content);
-      console.log("add test", this.content.content);
     } catch (error) {
       console.log(error)
     }
@@ -143,6 +142,7 @@ class ScheduleStore {
     }
     this.init_content();
   }
+
   async selectContent(id) {
     try {
       console.log(id);
@@ -154,6 +154,31 @@ class ScheduleStore {
     }
   }
 
+  async getGroupSchedules(g_id) {
+    try {
+      const schedules_g = await ScheduleApi.mypagePlan(g_id);
+      runInAction(() => this.scheduleList = schedules_g)
+    } catch (error) {
+
+      console.log(error);
+    }
+  }
+
+
+  async createGroupSchedule(g_id) {
+    try {
+      const data = await ScheduleApi.mypagePlanCreate(this.schedule, g_id);
+      if ('id' in data) {
+        runInAction(() => this.schedule = data);
+      }
+      else {
+        console.log("failed");
+      }
+      this.selectAll();
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 }
 

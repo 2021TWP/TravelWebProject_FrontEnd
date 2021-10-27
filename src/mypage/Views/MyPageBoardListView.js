@@ -114,7 +114,6 @@ keywordChange = (e) =>{
             <TableCell align="right">글쓴이</TableCell>
             <TableCell align="right">작성 날짜</TableCell>
             <TableCell align="right">조회수</TableCell>
-            <TableCell align="right">좋아요</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -133,7 +132,6 @@ keywordChange = (e) =>{
               {/* <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{user.username}</TableCell> */}
               <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
               <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{board.hit}</TableCell>
-              <TableCell align="right" onClick={()=>boardStore.selectBoard(board.id)}>{board.like}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -164,7 +162,7 @@ keywordChange = (e) =>{
 
         
                 <div>
-                    {(boardStore.board.id !== undefined && boardStore.board.id > 0) && <BoardDetailContainer/>}
+                    {/* {(boardStore.board.id !== undefined && boardStore.board.id > 0) && <BoardDetailContainer/>} */}
                 </div>
             </div>
 

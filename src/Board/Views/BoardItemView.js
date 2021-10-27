@@ -10,7 +10,7 @@ class BoardItemView extends Component {
             <div>
                 <div onClick={()=>selectBoard(board.id)}>
                 {board.title} &nbsp; &nbsp;
-                {board.user_id} &nbsp; &nbsp;
+                {board.user_id}  &nbsp; &nbsp;
                 {moment(board_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;
                 조회수 {board.hit} &nbsp; &nbsp;
                 좋아요 {board.like}

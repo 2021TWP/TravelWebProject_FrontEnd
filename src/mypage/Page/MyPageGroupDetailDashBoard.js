@@ -20,8 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems , thirdListItems, HomeItems } from '../layout/listItems';
 import MyPageBoardContainer from '../Containers/MyPageBoardListContainer';
 import BoardListContainer from '../../Board/Containers/BoardListContainer'
-import GroupMyListContainer from '../Containers/GroupMyListContainer';
-import SvgIcon from '@mui/material/SvgIcon';
+import GroupMyDetailContainer from '../Containers/GroupMyDetailContainer';
 
 
 function Copyright(props) {
@@ -35,18 +34,6 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
-
-function HomeIcon(props) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-    </SvgIcon>
-  );
-}
-
-function GoHome(e) {
-  window.location.href = '/';
 }
 
 const drawerWidth = 240;
@@ -97,7 +84,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+export default function MyPageGroupDetailDashBoard(props) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -134,8 +121,11 @@ function DashboardContent() {
             >
              {sessionStorage.getItem("username")}의 MY PAGE
             </Typography>
-            <HomeIcon color="action" fontSize="large"   onClick={() => GoHome()}/>
-
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -177,8 +167,9 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
 
-          <GroupMyListContainer />
-
+          <GroupMyDetailContainer g_id ={props.match.params.id} />
+          
+          
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
@@ -187,6 +178,4 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+

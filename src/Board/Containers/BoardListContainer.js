@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import BoardStore from '../Stores/BoardStore';
-import BoardItemView from '../Views/BoardItemView';
-import BoardDetailContainer from './BoardDetailContainer';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -16,7 +14,6 @@ import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled'
 import { styled } from '@mui/system';
 
 function seperateBoard(id) {
-    console.log(id);
     window.location.href =
     `/board/detail/${id}`;
 }
@@ -28,7 +25,6 @@ function createBoard(e) {
 function GoHome(e) {
   window.location.href = '/';
 }
-
 
 const CustomButtonRoot = styled('span')(`
   background-color: #007fff;
@@ -71,7 +67,7 @@ class BoardListContainer extends Component {
     }
 
     render() {
-        const { boards, selectBoard, checked , selectAll} = this.boardStore;
+        const { boards, selectBoard } = this.boardStore;
         // selectAll()
         
         // const boardList = boards.map(board => { 
@@ -81,10 +77,10 @@ class BoardListContainer extends Component {
         // });
         return (
             <div>
-                  <a href = "/board/free"> 자유게시판 </a> &nbsp; 
-                    <a href = "/board/review"> 후기게시판 </a> &nbsp;
-                    <a href = "/board/impromptu/"> 번개모임 </a>
-                <h3>게시글 목록</h3>
+                  <a href = "/board/free"> 자유 게시판 </a> &nbsp; 
+                    <a href = "/board/review"> 여행 일지 </a> &nbsp;
+                    <a href = "/board/impromptu/"> 번개 모임 </a>
+
         <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -93,7 +89,7 @@ class BoardListContainer extends Component {
             <TableCell align="right">글쓴이</TableCell>
             <TableCell align="right">작성 날짜</TableCell>
             <TableCell align="right">조회수</TableCell>
-            <TableCell align="right">좋아요</TableCell>
+            {/* <TableCell align="right">좋아요</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -104,36 +100,21 @@ class BoardListContainer extends Component {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => seperateBoard(board.id)}>
               <TableCell component="th" scope="row" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.title}</TableCell>
               {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell> */}
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell>
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.hit}</TableCell>
-              <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.like}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.user_id}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
+              <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.hit}</TableCell>
+              {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.like}</TableCell> */}
             </TableRow>
           ))}
         </TableBody>
         </Table>
             </TableContainer> <br/>
-            <div>
                 <div>
-                    {/* <a href = "/board/free"> 자유게시판 </a> &nbsp;  */}
-                    {/* <a href = "/board/review"> 후기게시판 </a> &nbsp; */}
-                    {/* <a href = "/board/impromptu/"> 번개모임 </a> */}
-                    {/* <h3>게시글 목록</h3> */}
-                    {/* {boardList} */}
                     <Stack spacing={2} direction="row">
-                        <CustomButton onClick={() => createBoard()}>글쓰기</CustomButton> &nbsp; 
+                        <CustomButton onClick={() => createBoard()}>글쓰기</CustomButton> &nbsp;
                         <CustomButton onClick={() => GoHome()}>홈</CustomButton>
-
                     </Stack>
-
-                    {/* <button type="button" onClick={() => createBoard()}>글쓰기</button> */}
                 </div>
-            
-                <div>
-                    {(this.boardStore.board.id !== undefined && this.boardStore.board.id > 0) && <BoardDetailContainer/>}
-                </div>
-            </div>
-
             </div>
         );
     }

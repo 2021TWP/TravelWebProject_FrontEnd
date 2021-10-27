@@ -73,7 +73,7 @@ class BoardStore {
             const results = await boardApi.boardFree();
             // console.log(results)
             runInAction(()=>this.boards = results);
-            console.log(this.boards)
+            // console.log(this.boards)
         }catch(error){
             console.log(error);
         }
@@ -105,23 +105,11 @@ class BoardStore {
             runInAction(()=>this.board.hit += 1)
             const result = await boardApi.boardHit(this.board);
             runInAction(()=>this.board = result);
-            console.log(this.board.id)
             this.selectAll();
         }catch(error){
             console.log(error);
         }
     }
-
-    // async boardLike(){
-    //     try{
-    //         // runInAction(()=>this.board.like += 1)
-    //         const result = await boardApi.boardLike(this.board);
-    //         runInAction(()=>this.board = result);
-    //         // this.selectAll();
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
 
     async boardAdd() {
         try{
@@ -155,7 +143,7 @@ class BoardStore {
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
-            // goBoardList();
+            goBoardList();
         }catch(error){
             this.message = error.message;
         }
@@ -204,13 +192,13 @@ async commentAdd() {
         runInAction(this.message = error.message);
     }
     this.selectBoardComment(this.board.id);
-    // this.comment_init();
+    this.comment_init();
 }
 
-async commentRemove() {
+async commentRemove(id) {
     try{
-        await boardApi.commentDelete(this.comment.id);
-        this.selectBoardComment(this.board.id);
+        await boardApi.commentDelete(id);
+        // this.selectBoardComment(this.board.id);
    
     }catch(error){
         this.message = error.message;
