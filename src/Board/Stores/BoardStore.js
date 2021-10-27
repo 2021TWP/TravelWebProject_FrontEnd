@@ -175,6 +175,7 @@ async commentAdd() {
 async commentRemove(id) {
     try{
         await boardApi.commentDelete(id);
+        alert('댓글이 성공적으로 삭제되었습니다!')
     }catch(error){
         this.message = error.message;
     }
@@ -186,6 +187,7 @@ async commentModify() {
     try{
         await boardApi.commentUpdate(this.comment.id, this.comment);
         this.selectBoardComment(this.board.id);
+        alert('댓글이 성공적으로 수정되었습니다!')
     }catch(error){
         this.message = error.message;
     }

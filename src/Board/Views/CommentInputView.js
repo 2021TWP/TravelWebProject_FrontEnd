@@ -47,27 +47,21 @@ function CustomButton(props) {
 
 class CommentInputView extends Component {
   render() {
-    const {comment, commentAdd, commentChange, init} = this.props;
+    const {comment, commentAdd, commentChange} = this.props;
     return (
       <div>
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '100ch' },
-          }}
-          noValidate
-          autoComplete="off"> <br/> 
+        <Box sx={{m:1}}>
           <TextField
+            style ={{width: '50%'}}
             id="outlined-name"
             name="comment_content"
             value={comment.comment_content} 
             onChange={(e)=>commentChange(e.target.name, e.target.value)}
-            label="댓글 내용"/> <br/>
+            label="댓글 내용"/>
+            <Stack m={1} direction="row">
+            <CustomButton onClick={()=>commentAdd()}>등록</CustomButton>
+            </Stack>
         </Box>
-        <Stack spacing={2} direction="row">
-            <CustomButton onClick={()=>commentAdd()}>ADD</CustomButton>
-            <CustomButton onClick={()=>init()}>초기화</CustomButton>
-        </Stack>
       </div>
     );
   }
