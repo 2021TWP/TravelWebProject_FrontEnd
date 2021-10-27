@@ -49,7 +49,7 @@ class AccountApi {
     }
 
     resetPwConfirm(user, uid, token) {
-        return axios.post(this.URL+ `password/reset/confirm/${uid}/${token}/`, { new_password1: `${user.password1}`,
+        return axios.post(this.URL+ `password/reset/confirm/`, { new_password1: `${user.password1}`,
                                                                             new_password2: `${user.password2}`,
                                                                             uid: `${uid}`,
                                                                             token: `${token}`})

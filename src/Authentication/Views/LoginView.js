@@ -89,12 +89,12 @@ export default class LoginView extends Component {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/authentication/password/reset" variant="body2">
+                  <Link href="/authentication/password/reset/" variant="body2">
                     비밀번호 찾기
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/authentication/signup" variant="body2">
+                  <Link href="/authentication/signup/" variant="body2">
                     {"회원가입"}
                   </Link>
                 </Grid>

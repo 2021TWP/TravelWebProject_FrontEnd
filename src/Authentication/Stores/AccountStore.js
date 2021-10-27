@@ -56,26 +56,6 @@ class AccountStore {
     
     search = "";
 
-    init_user() {
-        this.user = {
-            username: "",
-            password1: "",
-            password2: "",
-            old_password: "",
-            email: "",
-            name: "", 
-            g_id: null,
-        }
-    }
-
-    init_group() {
-        this.group = {
-            group_name: "",
-            pin: "",
-            schedules: [],
-            created_date: "",
-        }
-    }
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind:true})
@@ -93,9 +73,7 @@ class AccountStore {
             }
         }catch(error) {
             runInAction(() => this.message = error.message)
-            // console.log(this.message)
         }
-        this.init_users();
     }
 
     async handleEmailConfirm(key) {
@@ -112,7 +90,6 @@ class AccountStore {
             }
         }catch(error) {
             runInAction(() => this.message = error.message)
-            // console.log(this.message)
         }
     }
 
@@ -126,7 +103,9 @@ class AccountStore {
                 sessionStorage.setItem('id', `${userData.id}`)
                 sessionStorage.setItem('email', `${userData.email}`)
                 sessionStorage.setItem('username', `${userData.username}`)
-                window.location.href='javascript:history.back()'
+                window.location.href='/'
+            }else if ('non_field_errors' in data) {
+                alert("아이디와 비밀번호를 확인해 주세요")
             }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
@@ -141,6 +120,7 @@ class AccountStore {
             const data = await accountApi.resetPw(this.user.email);
             if ('detail' in data){
                 alert(data.detail)
+                window.location.href='/'
             }
             else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
@@ -148,7 +128,6 @@ class AccountStore {
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
-        this.init_users();
     }
 
     async handlePasswordResetConfirmSubmit(uid, token) {
@@ -167,20 +146,21 @@ class AccountStore {
             }
         }catch(error) {
             runInAction(() => this.message = error.message)
-            alert(this.message)
         }
-        this.init_users();
     }
 
     async handlePasswordChangeSubmit() {
         try {
             const data = await accountApi.changePassword(this.user)
-            alert(data)
+            if ('detail' in data) {
+                alert(data.detail);
+            }else{
+                runInAction(() => this.error_message = {...this.error_message, ...data})
+            }
+            window.location.href='/'
         }catch(error) {
             runInAction(() => this.message = error.message)
-            alert(this.message)
         }
-        this.init_users();
     }
 
     async handleLogoutSubmit() {
@@ -188,14 +168,6 @@ class AccountStore {
             await accountApi.logout();
             sessionStorage.clear()
             window.location.href='/'
-        }catch(error) {
-            runInAction(() => this.message = error.message)
-        }
-    }
-
-    async testAccount() {
-        try {
-            await accountApi.test();
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
@@ -212,7 +184,6 @@ class AccountStore {
                 alert(data.success)
                 this.showAllGroups();
                 this.showMyGroups();
-                this.init_group();
                 window.location.href='javascript:history.back()'
             } else if ("pin" in data && "group_name" in data) {
                 alert(`${data.group_name}\n${data.pin}`)
@@ -305,16 +276,6 @@ class AccountStore {
             runInAction(() => this.user = {...this.user, [name]: value});
         }
     }
-
-    // async schedulesInGroup(g_id) {
-    //     try {
-    //         const data = await accountApi.getGroupSchedules(g_id);
-    //         runInAction(() => this.users = data)
-    //         console.log(this.users)
-    //     }catch(error) {
-    //         runInAction(() => this.message = error.message)
-    //     }
-    // }
 }
 
 export default new AccountStore();
