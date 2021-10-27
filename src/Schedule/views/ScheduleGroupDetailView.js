@@ -1,46 +1,60 @@
-import React, { useEffect, Component } from 'react';
+import { TextField } from '@material-ui/core';
+import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 
 import MapView from '../../Map/MapView';
-import { Button, Paper, Box, InputBase, Grid, Input, TextField, Stack, InputAdornment, IconButton } from '@material-ui/core'
+import { Button, Paper, Box, Stack } from '@material-ui/core'
 
-import SearchIcon from '@material-ui/icons/Search'
-import { getPlaceData } from '../api/getApi'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePicker } from '@mui/lab';
 import ScheduleStore from '../stores/ScheduleStore';
-import { observer } from 'mobx-react';
 
 
-class ScheduleInputView extends Component {
+class ScheduleDetailView extends Component {
   scheduleStore = ScheduleStore;
-  constructor() {
-    super();
-    this.state = {
-      st_date: new Date(),
-      ed_date: new Date()
-    };
+
+
+  createSchedule(g_id) {
+    window.location.href = `/mypage/mygroup/create/${g_id}/`;
+  }
+  updateSchedule(g_id, id) {
+    window.location.href = `/mypage/mygroup/update/${g_id}/${id}/`;
+  }
+  scheduleList(g_id) {
+    window.location.href = `/mypage/mygroup/detail/${g_id}/`;
   }
 
-  nextSchedule(e) {
-    this.scheduleStore.createGroupSchedule(this.props.g_id);
-    this.props.checkHandler();
-  }
-  //생성자 오버라이딩 해서 state this.state = 
 
+
+  componentDidMount() {
+    this.scheduleStore.selectSchedule(this.props.id);//라우터에서 포함을 하고 있기 때문에(상위 컴포넌트가 router이기 떄문에.)
+    this.scheduleStore.selectAll_content(this.props.id);
+  }
 
   render() {
-    const { st_date, ed_date } = this.state;
-    const { schedule, handlerSetProps_schedule } = this.scheduleStore;
+    const { schedule, contentList,
+      selectContent } = this.scheduleStore;
+    const { g_id, id } = this.props;
+    const contents = contentList.map(content => {
 
-    schedule.start_date = st_date;
-    schedule.end_date = ed_date;
-
+      return (
+        <TextField key={content.id} value={content.content} style={{ width: '40%' }}
+          InputProps={{
+            readOnly: true,
+          }}
+          onClick={() => selectContent()} />
+      )
+    });
 
     return (
       <div>
+        <Button onClick={() => this.createSchedule(g_id)}>create</Button>
+        <Button onClick={() => this.updateSchedule(g_id, schedule.id)}>modify</Button>
+        <Button onClick={() => this.scheduleList(g_id)}>List</Button>
 
         <MapView schedule={schedule} />
+
 
         <Stack
           direction="row"
@@ -51,8 +65,9 @@ class ScheduleInputView extends Component {
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+              readOnly
               label="start_date"
-              value={st_date}
+              value={schedule.start_date}
               onChange={st_date => {
                 this.setState({ st_date });
               }}
@@ -62,9 +77,8 @@ class ScheduleInputView extends Component {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="end_date"
-
-              value={ed_date}
-              // value={schedule.end_date}
+              readOnly
+              value={schedule.end_date}
               onChange={ed_date => {
                 this.setState({ ed_date });
               }}
@@ -73,7 +87,6 @@ class ScheduleInputView extends Component {
           </LocalizationProvider>
         </Stack>
 
-        {/* 여행 일정 추가 하는 부분 끝에 날짜 기록하면 좋을듯?? */}
         <Stack
           direction="column"
           justifyContent="flex-start"
@@ -87,8 +100,9 @@ class ScheduleInputView extends Component {
             name='location'
             placeholder="location"
             value={schedule.location}
-            onChange={(e) => handlerSetProps_schedule(e.target.name, e.target.value)}
-            style={{ width: '40%' }}
+            InputProps={{
+              readOnly: true,
+            }} style={{ width: '40%' }}
           />
           <TextField
             required
@@ -97,25 +111,24 @@ class ScheduleInputView extends Component {
             name='title'
             placeholder="title"
             value={schedule.title}
-            onChange={(e) => handlerSetProps_schedule(e.target.name, e.target.value)}
-            style={{ width: '40%' }}
+            InputProps={{
+              readOnly: true,
+            }} style={{ width: '40%' }}
           />
           <TextField
             required
             id="outlined-required"
-
             name='description'
             placeholder="description"
             value={schedule.description}
-            onChange={(e) => handlerSetProps_schedule(e.target.name, e.target.value)}
-            style={{ width: '40%' }}
+            InputProps={{
+              readOnly: true,
+            }} style={{ width: '40%' }}
             multiline
             rows={4}
           />
 
-          <Button onClick={() => this.nextSchedule()}>Next</Button>
-
-
+          {contents}
         </Stack>
         <Box
           sx={{
@@ -123,9 +136,10 @@ class ScheduleInputView extends Component {
             pb: 6,
           }}
         ></Box>
+
       </div>
     );
   }
 }
 
-export default observer(ScheduleInputView);
+export default observer(ScheduleDetailView);

@@ -32,8 +32,6 @@ class ScheduleDetailContainer extends Component {
       selectContent,addSchedule,updateSchedule,selectSchedule}=this.scheduleStore;
     return (
       <div>
-        
-        {console.log("test=container",schedule.id)}
         <ScheduleDetailView
                           schedule ={schedule}
                           contentList ={contentList}

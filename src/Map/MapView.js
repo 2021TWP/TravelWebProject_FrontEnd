@@ -5,12 +5,12 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 
-import { Button, Paper, Box, InputBase, Grid, Input,  Stack, InputAdornment, IconButton } from '@material-ui/core'
+import {  Input } from '@material-ui/core'
 
 const mapStyles = {
-  position: 'absolute',
-  width: '50%',
-  height: '50%',
+  position: 'flex',
+  width: '30%',
+  height: '30%',
 };
 
 
@@ -43,11 +43,9 @@ export class MapContainer extends Component {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        console.log('Success', latLng);
         this.props.schedule.lat=latLng.lat;
         this.props.schedule.lng=latLng.lng;
-        console.log(latLng.lng);
-        // update center state
+        
         this.setState({ mapCenter: latLng });
       })
       .catch(error => console.error('Error', error));
@@ -120,5 +118,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('')
+  apiKey: ('AIzaSyChXubfqm80enfAcJT8xEqCXcXnhvVRz08')
 })(MapContainer)

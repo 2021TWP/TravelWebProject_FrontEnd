@@ -121,8 +121,7 @@ class AccountStore {
             if ('detail' in data){
                 alert(data.detail)
                 window.location.href='/'
-            }
-            else {
+            }else {
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
         }catch(error) {
@@ -157,7 +156,8 @@ class AccountStore {
             }else{
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
-            window.location.href='/'
+            window.location.href='javascript:history.back()'
+
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
@@ -277,5 +277,6 @@ class AccountStore {
         }
     }
 }
+
 
 export default new AccountStore();
