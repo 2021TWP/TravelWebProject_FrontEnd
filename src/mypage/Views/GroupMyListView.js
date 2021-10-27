@@ -51,26 +51,24 @@ class GroupMyListView extends Component {
   withdrawGroup(g_id) {
     this.props.handleGroupWithdrawlSubmit(g_id);
   }
+  moveToDetail(g_id){
+    window.location.href =`/mypage/mygroup/detail/${g_id}`
+  }
   
   render() {
     return (
 
       <TableRow
+      onClick ={()=> this.moveToDetail(this.props.group.id)}
         key={this.props.group.id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
-        <Link
-          to={{
-            pathname: `/mypage/mygroup/detail/${this.props.group.id}`,
-            state: {
-              id: this.props.group.id
-            }
-          }}>
+        
           <TableCell align="left">{this.props.group.id}</TableCell>
           <TableCell component="th" scope="row" align='left'>{this.props.group.group_name}</TableCell>
           <TableCell align="right">{moment(this.props.group.created_date).format(('YYYY. MM. DD.'))}</TableCell>
 
-        </Link>
+        
         <TableCell style={{pedding: '8 px' }} align="center"><Button  fontSize="small" onClick={()=>this.withdrawGroup(this.props.group.id)}>탈퇴</Button></TableCell>
           </TableRow>
     );
