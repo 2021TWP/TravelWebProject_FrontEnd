@@ -6,17 +6,18 @@ import BoardInputView from '../Views/BoardInputView';
 class BoardInputContainer extends Component {
 
     render() {
-        const {board, boardAdd, boardModify, boardSetProps, init} = boardStore;
+        const {board, boardAdd, boardModify, boardSetProps, init, goBoardList} = boardStore;
 
         return (
             <div>
-                <h3>게시글 입력</h3>
+                <h3>게시판 글쓰기</h3>
                 <BoardInputView 
                 board={board}
                 boardAdd={boardAdd}
                 boardModify={boardModify}
                 boardChange={boardSetProps}
-                init={init}/>
+                init={init}
+                goBoardList={goBoardList}/>
             </div>
         );
     }

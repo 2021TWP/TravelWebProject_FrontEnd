@@ -7,14 +7,11 @@ class SeperateBoardList extends Component {
     boardStore = BoardStore
     
     componentDidMount(){
-        // console.log(this.props.match.params.id)
         this.boardStore.selectBoard(this.props.match.params.id);
         this.boardStore.selectBoardComment(this.props.match.params.id);
     }
 
     render() {
-    
-        const {board, onSelect} = this.boardStore; 
         
         return (
             <div>

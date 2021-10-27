@@ -47,19 +47,10 @@ function CustomButton(props) {
     return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
   }
 
-function updateBoard(id) {
-  window.location.href = `/board/update/${id}`;
-}
-
-
 class BoardDetailView extends Component {
-  detailSchedule(id){
-    console.log(id);
-    window.location.href =`/schedules/detail/${id}`;
-  }
-
+  
     render() {
-        const {board, boardRemove, boardSetProps } = this.props;
+        const {board, boardRemove, boardSetProps, goUpdateBoard, goDetailSchedule } = this.props;
         let board_date = this.props.board.date;
         let category_id = this.props.board.category_id
         return (
@@ -89,7 +80,7 @@ class BoardDetailView extends Component {
                 <Box sx={{ m: 2 }}>
                     <Typography variant="body1">
                     {/* {board.imgUrl} */}
-                    imagesss 
+                    images
                     </Typography>
 
                     <Typography variant="body1">
@@ -98,14 +89,14 @@ class BoardDetailView extends Component {
                     </Typography>
 
                     <Typography variant="body1">
-                    <Button size="small" onClick={()=>this.detailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
+                    <Button size="small" onClick={()=>goDetailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
                     </Typography>
 
                     <div>
                       <br/>
                       {sessionStorage.getItem('id') == board.user_id ?
                         (<Stack spacing={2} direction="row">
-                          <CustomButton onClick={() => updateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
+                          <CustomButton onClick={() => goUpdateBoard(board.id)} boardSetProps={boardSetProps()} board = {board}>수정</CustomButton>
                           <CustomButton onClick={()=>boardRemove()}>삭제</CustomButton>
                         </Stack>) : (<div></div>)
                       }

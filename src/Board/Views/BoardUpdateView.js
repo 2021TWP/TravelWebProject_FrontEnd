@@ -10,7 +10,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useHistory } from "react-router-dom";
 
 const CustomButtonRoot = styled('span')(`
   background-color: #007fff;
@@ -49,29 +48,18 @@ function CustomButton(props) {
     return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
   }
 
-function GoBoardList(e) {
-    window.location.href = '/board/list/';
-}
-
-function GoBack(e) {
-    window.history.go(-1);
-}
-
 class BoardUpdateView extends Component {
   
   boardStore = BoardStore
 
   componentDidMount(){
-    // console.log(this.props.match.params.id)
-    // this.boardStore.selectBoard(this.props.match.params.id);
     this.boardStore.boardSetProps("id", this.props.match.params.id);
     this.boardStore.selectBoard(this.props.match.params.id);
     console.log(this.boardStore.board.board_content)
 }
   
   render() {
-    const { board, boardSetProps , boardModify , init} = this.boardStore;
-    let history = useHistory;
+    const { board, boardSetProps, boardModify, init, goBoardList, goBack} = this.boardStore;
     return (
         <div>
              <Box sx={{ minWidth: 50}}>
@@ -140,12 +128,12 @@ class BoardUpdateView extends Component {
         label="사진"/> 
     </Box>
 
+    <br/>
     <Stack spacing={2} direction="row">
         <CustomButton onClick={()=>boardModify()}>수정하기</CustomButton>
         <CustomButton onClick={()=>init()}>전부 지우기</CustomButton>
-        <CustomButton onClick={() => GoBack()}>뒤로가기</CustomButton>
-        <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
-
+        <CustomButton onClick={() => goBack()}>뒤로 가기</CustomButton>
+        <CustomButton onClick={() => goBoardList()}>목록으로</CustomButton>
     </Stack>
         <br/><br/><br/><br/>
         </div>

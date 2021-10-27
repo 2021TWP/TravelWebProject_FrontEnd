@@ -46,107 +46,69 @@ function CustomButton(props) {
     return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
   }
 
-  function GoBoardList(e) {
-    window.location.href = '/board/list/';
-}
-
 class BoardInputView extends Component {
     render() {
-        const {board, boardAdd, boardChange} = this.props;
+        const {board, boardAdd, boardChange, init, goBoardList} = this.props;
 
         return (
         <div>
-
-            <Box sx={{ minWidth: 50}}>
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">category</InputLabel>
-                <Select 
-                name="category_id"
-                onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="category"
-                >
-                <MenuItem value="1">자유 게시판</MenuItem>
-                <MenuItem value="2">여행 일지</MenuItem>
-                <MenuItem value="3">번개 모임</MenuItem>
-                </Select>
-            </FormControl>
+          <Box sx={{m:1}}>
+            <Box sx={{ width: '30%'}}>
+              <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">게시판을 선택하세요</InputLabel>
+                  <Select 
+                  name="category_id"
+                  onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="category"
+                  >
+                  <MenuItem value="1">자유 게시판</MenuItem>
+                  <MenuItem value="2">여행 일지</MenuItem>
+                  <MenuItem value="3">번개 모임</MenuItem>
+                  </Select>
+              </FormControl>
             </Box>
 
-
-
-
-            <Box 
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '50ch', height: '75%' },
-            }}
-            noValidate
-            autoComplete="off"
-            > <br/> 
-            <TextField
-                id="outlined-name"
-                name="title"
-                value={board.title} 
-                onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                label="제목"/> <br/>
-
+            <br/> 
+            <Box>
+              <TextField 
+                  style ={{width: '50%'}}
+                  id="outlined-name"
+                  name="title"
+                  value={board.title} 
+                  onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                  label="제목"/> 
             </Box>
 
-            <Box
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '50ch' },
-            }}
-            noValidate
-            autoComplete="off"
-            >
-            <TextField
-                id="outlined-uncontrolled"
-                name="imgUrl"
-                value={board.imgUrl} 
-                onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                label="사진"/> 
-            </Box>
-
-            <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '100ch', height: '50ch' },
-            }}
-            noValidate
-            autoComplete="off"
-            >
-            <TextField
-                id="outlined-multiline-flexible"
-                multiline
-                maxRows={4}
-                name="board_content"
-                value={board.board_content} 
-                onChange={(e)=>boardChange(e.target.name, e.target.value)}
-                label="내용"/> <br/>
-{/* 
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Multiline"
-              multiline
-              maxRows={4}
-              value={value}
-              onChange={handleChange}
-            /> */}
+            <br/>
+            <Box>
+              <TextField
+                  style ={{width: '50%'}}
+                  id="outlined-uncontrolled"
+                  name="imgUrl"
+                  value={board.imgUrl} 
+                  onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                  label="사진"/> 
             </Box>
             
-
-
-            <Stack spacing={2} direction="row">
-                <CustomButton onClick={()=>boardAdd()}>글쓰기</CustomButton>
-                {/* <CustomButton onClick={()=>init()}>초기화</CustomButton> */}
-                <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
-
-            </Stack>
-            <br/><br/><br/><br/>
-
+            <br/>
+              <TextField
+                  style ={{width: '50%'}}
+                  id="outlined-multiline-static"
+                  multiline
+                  maxRows={10}
+                  value={board.board_content} 
+                  onChange={(e)=>boardChange(e.target.name, e.target.value)}
+                  label="내용"/> <br/>
+          </Box>
+          <br/>
+          <Stack m={1} spacing={2} direction="row" >
+              <CustomButton onClick={()=>boardAdd()}>글쓰기</CustomButton>
+              <CustomButton onClick={()=>init()}>전부 지우기</CustomButton>
+              <CustomButton onClick={() => goBoardList()}>뒤로 가기</CustomButton>
+          </Stack>
+          <br/><br/><br/><br/>
         </div>
         );
     }
