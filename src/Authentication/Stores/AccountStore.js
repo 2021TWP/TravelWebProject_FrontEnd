@@ -154,10 +154,10 @@ class AccountStore {
             const data = await accountApi.changePassword(this.user)
             if ('detail' in data) {
                 alert(data.detail);
+                window.location.href='javascript:history.back()'
             }else{
                 runInAction(() => this.error_message = {...this.error_message, ...data})
             }
-            window.location.href='/'
         }catch(error) {
             runInAction(() => this.message = error.message)
         }
