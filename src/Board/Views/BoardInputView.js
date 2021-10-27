@@ -93,14 +93,15 @@ class BoardInputView extends Component {
             </Box>
             
             <br/>
+            <Box>
               <TextField
                   style ={{width: '50%'}}
-                  id="outlined-multiline-static"
-                  multiline
-                  maxRows={10}
+                  id="outlined-name"
+                  name="board_content"
                   value={board.board_content} 
                   onChange={(e)=>boardChange(e.target.name, e.target.value)}
                   label="내용"/> <br/>
+            </Box>
           </Box>
           <br/>
           <Stack m={1} spacing={2} direction="row" >
