@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -50,7 +49,7 @@ function CustomButton(props) {
 class BoardDetailView extends Component {
   
     render() {
-        const {board, boardRemove, boardSetProps, goUpdateBoard, goDetailSchedule } = this.props;
+        const {board, boardRemove, boardSetProps, goUpdateBoard} = this.props;
         let board_date = this.props.board.date;
         let category_id = this.props.board.category_id
         return (
@@ -89,7 +88,8 @@ class BoardDetailView extends Component {
                     </Typography>
 
                     <Typography variant="body1">
-                    <Button size="small" onClick={()=>goDetailSchedule(board.schedule_id)}>스케줄 보러가기</Button>
+                    {/* <Button size="small" onClick={()=>goDetailSchedule(board.schedule_id)}>스케줄 보러가기</Button> */}
+                    스케줄 보러가기
                     </Typography>
 
                     <div>
