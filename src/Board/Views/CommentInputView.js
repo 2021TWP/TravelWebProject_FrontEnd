@@ -47,7 +47,7 @@ function CustomButton(props) {
 
 class CommentInputView extends Component {
   render() {
-    const {comment, commentAdd, commentModify, commentChange, init} = this.props;
+    const {comment, commentAdd, commentChange, init} = this.props;
     return (
       <div>
         <Box
@@ -66,7 +66,6 @@ class CommentInputView extends Component {
         </Box>
         <Stack spacing={2} direction="row">
             <CustomButton onClick={()=>commentAdd()}>ADD</CustomButton>
-            {/* <CustomButton onClick={()=>commentModify()}>MODIFY</CustomButton> */}
             <CustomButton onClick={()=>init()}>초기화</CustomButton>
         </Stack>
       </div>

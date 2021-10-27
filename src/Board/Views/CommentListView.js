@@ -10,11 +10,11 @@ class CommentListView extends Component {
         return (
             <div onClick={()=>onSelect(comment)}>
                 {comment.comment_content} &nbsp; &nbsp;
-                {moment(comment_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;
                 {comment.user_id} &nbsp; &nbsp;
+                {moment(comment_date).format(('YYYY. MM. DD.'))} &nbsp; &nbsp;
                 {sessionStorage.getItem('id') == comment.user_id ?
-                <div><BsPen onClick={()=>commentModify()}/>
-                <GrTrash onClick={()=>commentRemove()}/></div> : <div></div>
+                <span><BsPen onClick={()=>commentModify()}/> &nbsp;
+                <GrTrash onClick={()=>commentRemove()}/></span> : <div></div>
 
                 }
 

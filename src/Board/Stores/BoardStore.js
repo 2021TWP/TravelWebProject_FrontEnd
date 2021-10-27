@@ -1,11 +1,6 @@
 import {makeAutoObservable, runInAction} from 'mobx'
 import boardApi from '../Api/BoardApi'
 
-function goBoardList(e) {
-    window.location.href = '/board/list/';
-}
-
-
 class BoardStore {
     board = {id:"",
             user_id:"", 
@@ -35,8 +30,7 @@ class BoardStore {
         makeAutoObservable(this, {}, {autoBind:true})
     }
 
-    // onCheckToggle = (id) => {this.boards.map(board =>(board.id === id) ? {...board, checked : !this.checked } : board ) }
-     onCheckToggle = (id) => {this.checked = "false" ? !this.checked : this.checked}
+    onCheckToggle = (id) => {this.checked = "false" ? !this.checked : this.checked}
 
     init = () => {
         this.board = {id:"", user_id:"", schedule_id:"", category_id:"1", 
@@ -47,7 +41,6 @@ class BoardStore {
         this.board = {...this.board, [name]:value}
     }
 
-    //action
     async selectBoard(id){
         try{
             const result = await boardApi.boardDetail(id);
@@ -71,14 +64,11 @@ class BoardStore {
     async selectFree(){
         try{
             const results = await boardApi.boardFree();
-            // console.log(results)
             runInAction(()=>this.boards = results);
-            // console.log(this.boards)
         }catch(error){
             console.log(error);
         }
     }
-
 
     async selectReview(){
         try{
@@ -88,8 +78,6 @@ class BoardStore {
             console.log(error);
         }
     }
-
-
 
     async selectImpromptu(){
         try{
@@ -117,7 +105,7 @@ class BoardStore {
             this.board.user_id = sessionStorage.getItem("id")
             await boardApi.boardCreate(this.board);
             this.selectAll();
-            goBoardList();
+            this.goBoardList();
             console.log(this.board);
         }catch(error){
             console.log(error);
@@ -130,7 +118,7 @@ class BoardStore {
         try{
             await boardApi.boardDelete(this.board.id);
             this.selectAll();
-            goBoardList();
+            this.goBoardList();
         }catch(error){
             this.message = error.message;
         }
@@ -143,7 +131,7 @@ class BoardStore {
             this.board.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
             await boardApi.boardUpdate(this.board.id, this.board);
             this.selectAll();
-            goBoardList();
+            this.goBoardList();
         }catch(error){
             this.message = error.message;
         }
@@ -157,17 +145,6 @@ class BoardStore {
     this.comment = {...this.comment, [name]:value}
 }
 
-
-// async selectComment(comment){
-//     try{
-//         const result = await boardApi.boardDetail(comment.id);   // boardDetail 맞는지 확인 
-//         runInAction(()=>this.comment = result);
-//     }catch(error){
-//         console.log(error);
-//     }
-// }
-
-
 async selectComment(comment){
     try{
         const result = await boardApi.commentDetail(comment.id);   //
@@ -177,16 +154,13 @@ async selectComment(comment){
     }
 }
 
-
 async commentAdd() {
     try{
         this.comment.comment_date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().replace('T', ' ').substring(0, 19)
         ;
         this.comment.board_id = this.board.id;
         this.comment.user_id = sessionStorage.getItem("id")
-        // await boardApi.commentCreate({...this.comment},this.comment.board_id, this.comment.comment_date );
         await boardApi.commentCreate(this.comment);
-        // this.selectBoardComment();
     }catch(error){
         console.log(error);
         runInAction(this.message = error.message);
@@ -198,8 +172,6 @@ async commentAdd() {
 async commentRemove(id) {
     try{
         await boardApi.commentDelete(id);
-        // this.selectBoardComment(this.board.id);
-   
     }catch(error){
         this.message = error.message;
     }
@@ -238,14 +210,53 @@ async selectCommentAll(){
 async selectBoardComment(id){
     //일단 아이디를 인자로 주었기 떄문에 호출 되는 다른 부분들에선 this.board.id로 호출하게 함 문제생김 여기서 해결해야함.
     try{
-        // console.log(this.board.id);
         const results = await boardApi.commentList(id);
-        // console.log(results);
         runInAction(()=>this.comments = results);
     }catch(error){
         console.log(error);
     }
 }
+
+// 이동
+    goBoardList(e){
+        window.location.href = '/board/list/';
+    }
+
+    goFree(e) {
+        window.location.href = '/board/free/';
+    }
+
+    goImpromptu(e) {
+        window.location.href = '/board/impromptu/';
+    }
+
+    goReview(e) {
+        window.location.href = '/board/review/';
+    }
+
+    goHome(e) {
+        window.location.href = '/';
+    }
+
+    goCreateBoard(e) {
+        window.location.href = '/board/create/';
+    }
+
+    goUpdateBoard(id) {
+        window.location.href = `/board/update/${id}`;
+    }
+
+    goDetailSchedule(id){
+        window.location.href =`/schedules/detail/${id}`;
+    }
+
+    goBack(e) {
+        window.history.go(-1);
+    }
+
+    seperateBoard(id) {
+        window.location.href = `/board/detail/${id}`;
+    }
 
 }
 

@@ -30,17 +30,7 @@ class BoardApi{
     }
 
     boardCreate(board){
-        return axios.post(this.URL+'create/', board
-        // {
-        //     user_id: `${board.user_id}`,
-        //     category_id: `${board.category_id}`,
-        //     schedule_id: `${board.schedule_id}`,
-        //     imgUrl: `${board.imgUrl}`,
-        //     title:`${board.title}`,
-        //     date: `${board.date}`,
-        //     board_content: `${board.board_content}`
-        // }
-        )
+        return axios.post(this.URL+'create/', board)
       .then((response)=>response.data);
     }
 
@@ -59,11 +49,6 @@ class BoardApi{
                 .then((response)=>response.data)
     }
 
-    // boardLike(board){
-    //     return axios.put(this.URL+`update/like/${board.id}/`, board)
-    //             .then((response)=>response.data)
-    // }
-
     // board id에 해당하는 comment목록 호출 
     commentList(bid){
         return axios.get(this.URL+`comment/list/${bid}/`)
@@ -81,13 +66,6 @@ class BoardApi{
                 .then((response)=>response.data);
     }
 
-    // commentCreate(comment){
-    //     return axios.post(this.URL+'comment/create/', comment)
-    //             .then((response)=>response.data);
-    // }
-
-
-
     commentUpdate(id, comment){
         console.log(comment.board_id, comment.comment_content)
         return axios.put(this.URL+`comment/update/${id}/`,
@@ -96,8 +74,6 @@ class BoardApi{
             id : `${comment.id}`,
             user_id: `${comment.user_id}`,
             comment_content: `${comment.comment_content}`,
-            // comment_date: `${comment.comment_date}`
-            // comment_date: Date.now(),
             comment_date: new Date(),
         }
         )

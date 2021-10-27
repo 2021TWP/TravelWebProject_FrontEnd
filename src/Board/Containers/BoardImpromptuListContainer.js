@@ -12,23 +12,8 @@ import Stack from '@mui/material/Stack';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
 import BoardStore from '../Stores/BoardStore';
+import Button from '@mui/material/Button';
 
-function seperateBoard(id) {
-  window.location.href =
-  `/board/detail/${id}`;
-}
-
-function createBoard(e) {
-  window.location.href = '/board/create/';
-}
-
-function GoHome(e) {
-window.location.href = '/';
-}
-
-function goList(e) {
-  window.location.href = '/board/list/';
-}
 
 const CustomButtonRoot = styled('span')(`
 background-color: #007fff;
@@ -72,29 +57,26 @@ class BoardImpromptuListContainer extends Component {
 }
 
 render() {
-  const { boards, selectBoard } = this.boardStore;
-  // selectAll()
-  
-  // const boardList = boards.map(board => { 
-  //     return (
-  //         <span onClick={() => seperateBoard(board.id)}><BoardItemView key={board.id} board={board} checked={checked} checked_id={checked.id} selectBoard={()=>selectBoard(board.id)} /></span>
-  //     )
-  // });
+  const { boards, selectBoard, goBoardList, goHome, goCreateBoard, seperateBoard, goFree, goReview, goImpromptu } = this.boardStore;
+
   return (
       <div>
-            <a href = "/board/free"> 자유게시판 </a> &nbsp; 
-              <a href = "/board/review"> 후기게시판 </a> &nbsp;
-              <a href = "/board/impromptu/"> 번개모임 </a>
+          <br/>
+          <Stack m={1} spacing={3} justifyContent="center" alignItems="center" direction="row">
+          <Button size="large" onClick={() => goFree()}> 자유 게시판 </Button> &nbsp; 
+          <Button size="large" onClick={() => goReview()}> 여행 일지 </Button> &nbsp;
+          <Button size="large" onClick={() => goImpromptu()}> 번개 모임 </Button> 
+          </Stack>
+
 
   <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ width: '80%', margin: 'auto' }} aria-label="simple table">
           <TableHead>
     <TableRow>
       <TableCell>제목</TableCell>
       <TableCell align="right">글쓴이</TableCell>
       <TableCell align="right">작성 날짜</TableCell>
       <TableCell align="right">조회수</TableCell>
-      {/* <TableCell align="right">좋아요</TableCell> */}
     </TableRow>
   </TableHead>
   <TableBody>
@@ -104,21 +86,19 @@ render() {
         key={board.id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => seperateBoard(board.id)}>
         <TableCell component="th" scope="row" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.title}</TableCell>
-        {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.user_id}</TableCell> */}
         <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.user_id}</TableCell>
         <TableCell align="right" onClick={()=>selectBoard(board.id)}>{moment(board.date).format(('YYYY. MM. DD.'))}</TableCell>
         <TableCell align="right" onClick={()=>selectBoard(board.id)}>{board.hit}</TableCell>
-        {/* <TableCell align="right" onClick={()=>this.boardStore.selectBoard(board.id)}>{board.like}</TableCell> */}
       </TableRow>
     ))}
   </TableBody>
   </Table>
   </TableContainer> <br/>
       <div>
-          <Stack spacing={2} direction="row">
-              <CustomButton onClick={() => createBoard()}>글쓰기</CustomButton> &nbsp;
-              <CustomButton onClick={() => goList()}>전체 게시판으로</CustomButton> &nbsp;
-              <CustomButton onClick={() => GoHome()}>홈</CustomButton>
+          <Stack m={1} spacing={2} direction="row">
+              <CustomButton onClick={() => goCreateBoard()}>글쓰기</CustomButton> &nbsp;
+              <CustomButton onClick={() => goBoardList()}>전체 게시판으로</CustomButton> &nbsp;
+              <CustomButton onClick={() => goHome()}>홈으로</CustomButton>
           </Stack>
       </div>
 

@@ -4,7 +4,6 @@ import BoardStore from '../Stores/BoardStore';
 import BoardDetailView from '../Views/BoardDetailView';
 import CommentInputContainer from './CommentInputContainer';
 import CommentListContainer from './CommentListContainer';
-
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
 
@@ -48,15 +47,10 @@ function CustomButton(props) {
   }
 
 
-function GoBoardList(e) {
-    window.location.href = '/board/list/';
-}
-
-
 class BoardDetailContainer extends Component {
     boardStore = BoardStore;
     render() {
-        const {board, boardRemove, boardLike ,  boardModify , boardSetProps} = this.boardStore;
+        const {board, boardRemove, boardLike,  boardModify , boardSetProps, goBoardList, goUpdateBoard, goDetailSchedule } = this.boardStore;
         return (
             <div>
                 <BoardDetailView 
@@ -64,17 +58,15 @@ class BoardDetailContainer extends Component {
                 boardModify = {boardModify}
                 boardRemove={boardRemove}
                 boardLike={boardLike} 
-                boardSetProps={boardSetProps}/>
+                boardSetProps={boardSetProps}
+                goUpdateBoard={goUpdateBoard}
+                goDetailSchedule={goDetailSchedule}/>
 
                         <br/><br/>
                 <CommentInputContainer/>
-                {/* {comment.length > 0 && <CommentListContainer />} */}
-                {/* {board.id === comment.board_id ? <CommentListContainer /> : ""} */}
-                <CommentListContainer /> <br/>
-                {/* <GiReturnArrow onClick={() => GoBoardList()}/> */} <br/><br/><br/>
-                
-                <CustomButton onClick={() => GoBoardList()}>목록으로</CustomButton>
-                {/* <button type="button" onClick={() => GoBoardList()}>목록으로</button> */}
+                <CommentListContainer /> <br/><br/><br/>
+                <CustomButton onClick={() => goBoardList()}>목록으로</CustomButton>
+
             </div>
         );
     }
